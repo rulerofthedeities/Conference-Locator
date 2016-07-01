@@ -9,28 +9,22 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
-var hotel_model_1 = require('./models/hotel.model');
-var sights_component_1 = require('./sights.component');
-var HotelRow = (function () {
-    function HotelRow() {
+var sight_model_1 = require('./models/sight.model');
+var SightRow = (function () {
+    function SightRow() {
     }
     __decorate([
         core_1.Input(), 
-        __metadata('design:type', hotel_model_1.Hotel)
-    ], HotelRow.prototype, "hotel", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Boolean)
-    ], HotelRow.prototype, "isSelected", void 0);
-    HotelRow = __decorate([
+        __metadata('design:type', sight_model_1.Sight)
+    ], SightRow.prototype, "sight", void 0);
+    SightRow = __decorate([
         core_1.Component({
-            selector: 'hotel-row',
-            directives: [sights_component_1.Sights],
-            template: "<li>\n\t\t\t\t<div>{{hotel.name}}</div>\n\t\t\t\t<sights \n\t\t\t\t\t*ngIf=\"isSelected\"\n\t\t\t\t\t[hotelLocation]=\"hotel.location\">\n\t\t\t\t</sights>\n\t\t\t\t{{hotel.location.longitude}}\n\t\t\t\t</li>"
+            'selector': 'sight-row',
+            'template': "<li>{{sight.name}}</li>"
         }), 
         __metadata('design:paramtypes', [])
-    ], HotelRow);
-    return HotelRow;
+    ], SightRow);
+    return SightRow;
 }());
-exports.HotelRow = HotelRow;
-//# sourceMappingURL=hotel-row.component.js.map
+exports.SightRow = SightRow;
+//# sourceMappingURL=sight-row.component.js.map

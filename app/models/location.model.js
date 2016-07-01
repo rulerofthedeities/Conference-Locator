@@ -10,4 +10,4 @@ var Location = (function () {
     return Location;
 }());
 exports.Location = Location;
-//# sourceMappingURL=location.js.map
+//# sourceMappingURL=location.model.js.map

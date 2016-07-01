@@ -1,6 +1,6 @@
-import {Conference} from '../model/conference';
-import {Hotel} from '../model/hotel';
-import {Sight} from '../model/sight';
+import {Conference} from '../models/conference.model';
+import {Hotel} from '../models/hotel.model';
+import {Sight} from '../models/sight.model';
 
 //http://www.pragueconvention.cz/plan-your-event/conference-facilities/
 export const CONFERENCESITES: Conference[] = [

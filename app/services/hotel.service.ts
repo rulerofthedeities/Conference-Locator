@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HOTELS } from '../data/locations';
-import {Location} from '../model/location';
+import {Location} from '../models/location.model';
 
 @Injectable()
 export class HotelService {

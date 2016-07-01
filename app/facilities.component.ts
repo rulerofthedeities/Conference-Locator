@@ -1,5 +1,5 @@
 import {Input, Component} from '@angular/core';
-import {Conference} from './model/conference';
+import {Conference} from './models/conference.model';
 import {FacilityRow} from './facility-row.component';
 
 @Component({

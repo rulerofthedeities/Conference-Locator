@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 
-import {Conference} from './model/conference';
+import {Conference} from './models/conference.model';
 import {Facilities} from './facilities.component';
 import {ConferenceService} from './services/conference.service';
 

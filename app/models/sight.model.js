@@ -4,13 +4,13 @@ var __extends = (this && this.__extends) || function (d, b) {
     function __() { this.constructor = d; }
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
-var site_1 = require('./site');
+var site_model_1 = require('./site.model');
 var Sight = (function (_super) {
     __extends(Sight, _super);
     function Sight(name, longitude, latitude) {
         _super.call(this, name, longitude, latitude);
     }
     return Sight;
-}(site_1.Site));
+}(site_model_1.Site));
 exports.Sight = Sight;
-//# sourceMappingURL=sight.js.map
+//# sourceMappingURL=sight.model.js.map
