@@ -10,9 +10,18 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('@angular/core');
 var location_1 = require('./model/location');
+var hotel_service_1 = require('./services/hotel.service');
 var Hotels = (function () {
-    function Hotels() {
+    function Hotels(hotelService) {
+        this.hotelService = hotelService;
     }
+    Hotels.prototype.ngOnInit = function () {
+        this.getHotels();
+    };
+    Hotels.prototype.getHotels = function () {
+        var _this = this;
+        this.hotelService.getNearbyHotels(this.facilityLocation).then(function (hotels) { return _this.hotels = hotels; });
+    };
     __decorate([
         core_1.Input(), 
         __metadata('design:type', location_1.Location)
@@ -20,9 +29,10 @@ var Hotels = (function () {
     Hotels = __decorate([
         core_1.Component({
             selector: 'hotels',
-            template: "<div>hotels near location {{facilityLocation.longitude}},{{facilityLocation.latitude}}</div>"
+            providers: [hotel_service_1.HotelService],
+            template: "<div>\n\t\t\t\thotels near location {{facilityLocation.longitude}},{{facilityLocation.latitude}}\n\t\t\t\t<ul>\n\t\t\t\t\t<li *ngFor=\"let hotel of hotels\">{{hotel.name}}</li>\n\t\t\t\t</ul>\n\t\t\t</div>"
         }), 
-        __metadata('design:paramtypes', [])
+        __metadata('design:paramtypes', [hotel_service_1.HotelService])
     ], Hotels);
     return Hotels;
 }());
