@@ -11,8 +11,8 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('@angular/core');
 var facilities_component_1 = require('./facilities.component');
 var city_filter_component_1 = require('./city-filter.component');
-var conference_service_1 = require('./services/conference.service');
-var city_service_1 = require('./services/city.service');
+var conference_service_1 = require('../services/conference.service');
+var city_service_1 = require('../services/city.service');
 var ConferenceApp = (function () {
     function ConferenceApp(conferenceService, cityService) {
         this.conferenceService = conferenceService;
@@ -34,7 +34,6 @@ var ConferenceApp = (function () {
         });
     };
     ConferenceApp.prototype.onSelectedCity = function (cityAlias) {
-        console.log('parent', cityAlias);
         this.getConferenceSites(cityAlias);
     };
     ConferenceApp = __decorate([

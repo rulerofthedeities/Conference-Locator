@@ -9,8 +9,8 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
-var location_model_1 = require('./models/location.model');
-var hotel_service_1 = require('./services/hotel.service');
+var location_model_1 = require('../models/location.model');
+var hotel_service_1 = require('../services/hotel.service');
 var hotel_row_component_1 = require('./hotel-row.component');
 var Hotels = (function () {
     function Hotels(hotelService) {

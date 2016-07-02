@@ -1,7 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {SightService} from './services/sight.service';
-import {Location} from './models/location.model';
-import {Sight} from './models/sight.model';
+import {SightService} from '../services/sight.service';
+import {Location} from '../models/location.model';
+import {Sight} from '../models/sight.model';
 import {SightRow} from './sight-row.component';
 
 @Component({

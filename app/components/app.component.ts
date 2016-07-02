@@ -1,11 +1,11 @@
 import {Component, OnInit} from '@angular/core';
 
-import {Conference} from './models/conference.model';
-import {City} from './models/city.model';
+import {Conference} from '../models/conference.model';
+import {City} from '../models/city.model';
 import {Facilities} from './facilities.component';
 import {CityFilter} from './city-filter.component';
-import {ConferenceService} from './services/conference.service';
-import {CityService} from './services/city.service';
+import {ConferenceService} from '../services/conference.service';
+import {CityService} from '../services/city.service';
 
 
 @Component({
@@ -54,7 +54,6 @@ export class ConferenceApp {
   }
 
   onSelectedCity(cityAlias: string) {
-    console.log('parent', cityAlias);
     this.getConferenceSites(cityAlias);
   }
 }

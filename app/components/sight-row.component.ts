@@ -1,5 +1,5 @@
 import {Component, Input} from '@angular/core';
-import {Sight} from './models/sight.model';
+import {Sight} from '../models/sight.model';
 
 @Component({
 	'selector': 'sight-row',

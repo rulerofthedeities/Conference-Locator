@@ -1,5 +1,5 @@
 import {Component, Input} from '@angular/core';
-import {Hotel} from './models/hotel.model';
+import {Hotel} from '../models/hotel.model';
 import {Sights} from './sights.component';
 
 @Component({

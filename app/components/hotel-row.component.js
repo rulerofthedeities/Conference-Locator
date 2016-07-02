@@ -9,7 +9,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
-var hotel_model_1 = require('./models/hotel.model');
+var hotel_model_1 = require('../models/hotel.model');
 var sights_component_1 = require('./sights.component');
 var HotelRow = (function () {
     function HotelRow() {

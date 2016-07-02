@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
-import {City} from './models/city.model';
+import {City} from '../models/city.model';
 
 @Component({
 	'selector': 'city-filter',

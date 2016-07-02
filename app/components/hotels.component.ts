@@ -1,7 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Location} from './models/location.model';
-import {Hotel} from './models/hotel.model';
-import {HotelService} from './services/hotel.service';
+import {Location} from '../models/location.model';
+import {Hotel} from '../models/hotel.model';
+import {HotelService} from '../services/hotel.service';
 import {HotelRow} from './hotel-row.component';
 
 @Component({

@@ -9,8 +9,8 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
-var sight_service_1 = require('./services/sight.service');
-var location_model_1 = require('./models/location.model');
+var sight_service_1 = require('../services/sight.service');
+var location_model_1 = require('../models/location.model');
 var sight_row_component_1 = require('./sight-row.component');
 var Sights = (function () {
     function Sights(sightService) {
