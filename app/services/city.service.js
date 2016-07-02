@@ -9,18 +9,18 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
-var locations_1 = require('../data/locations');
-var ConferenceService = (function () {
-    function ConferenceService() {
+var cities_1 = require('../data/cities');
+var CityService = (function () {
+    function CityService() {
     }
-    ConferenceService.prototype.getConferenceSites = function (cityAlias) {
-        return Promise.resolve(locations_1.CONFERENCESITES[cityAlias]);
+    CityService.prototype.getCities = function () {
+        return Promise.resolve(cities_1.CITIES);
     };
-    ConferenceService = __decorate([
+    CityService = __decorate([
         core_1.Injectable(), 
         __metadata('design:paramtypes', [])
-    ], ConferenceService);
-    return ConferenceService;
+    ], CityService);
+    return CityService;
 }());
-exports.ConferenceService = ConferenceService;
-//# sourceMappingURL=conference.service.js.map
+exports.CityService = CityService;
+//# sourceMappingURL=city.service.js.map

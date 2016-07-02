@@ -10,7 +10,7 @@ import {FacilityRow} from './facility-row.component';
     <facility-row 
       [facility]="facility" 
       [isSelected]="isSelected(facility)"
-      (click)='onSelect(facility)'
+      (click)="onSelect(facility)"
       *ngFor="let facility of facilities"
       [class.selected]="isSelected(facility)">
     </facility-row>
@@ -30,6 +30,7 @@ export class Facilities {
 	@Input() facilities: Conference[];
 	selectedFacility: Conference;
 
+
 	onSelect(facility: Conference): void {
 		this.selectedFacility = facility;
 	}
@@ -37,4 +38,5 @@ export class Facilities {
 	isSelected(facility: Conference): boolean {
 		return facility === this.selectedFacility;
 	}
+
 }

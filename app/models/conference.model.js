@@ -7,8 +7,8 @@ var __extends = (this && this.__extends) || function (d, b) {
 var site_model_1 = require('./site.model');
 var Conference = (function (_super) {
     __extends(Conference, _super);
-    function Conference(name, longitude, latitude) {
-        _super.call(this, name, longitude, latitude);
+    function Conference(longitude, latitude) {
+        _super.call(this, longitude, latitude);
     }
     return Conference;
 }(site_model_1.Site));

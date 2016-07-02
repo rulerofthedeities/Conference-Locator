@@ -1,11 +1,11 @@
 import {Location} from './location.model';
 
 export class Site {
-  name: string;
   location: Location;
+  name: string;
+  cityAlias: string;
 
-  constructor(name: string, longitude: number, latitude: number) {
-    this.name = name;
+  constructor(longitude: number, latitude: number) {
     this.location = new Location(longitude, latitude);
   }
 }

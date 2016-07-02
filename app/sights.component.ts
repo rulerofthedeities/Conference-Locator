@@ -26,7 +26,7 @@ export class Sights {
 
 	ngOnInit() {
 		this.sightService.getNearbySights(this.hotelLocation).then(
-			sights => this.sights = sights;
+			sights => this.sights = sights
 		);
 	}
 }

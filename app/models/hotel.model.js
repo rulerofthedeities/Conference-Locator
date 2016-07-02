@@ -7,8 +7,8 @@ var __extends = (this && this.__extends) || function (d, b) {
 var site_model_1 = require('./site.model');
 var Hotel = (function (_super) {
     __extends(Hotel, _super);
-    function Hotel(name, longitude, latitude) {
-        _super.call(this, name, longitude, latitude);
+    function Hotel(longitude, latitude) {
+        _super.call(this, longitude, latitude);
     }
     return Hotel;
 }(site_model_1.Site));

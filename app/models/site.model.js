@@ -1,8 +1,7 @@
 "use strict";
 var location_model_1 = require('./location.model');
 var Site = (function () {
-    function Site(name, longitude, latitude) {
-        this.name = name;
+    function Site(longitude, latitude) {
         this.location = new location_model_1.Location(longitude, latitude);
     }
     return Site;

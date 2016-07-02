@@ -19,7 +19,6 @@ var Sights = (function () {
     Sights.prototype.ngOnInit = function () {
         var _this = this;
         this.sightService.getNearbySights(this.hotelLocation).then(function (sights) { return _this.sights = sights; });
-        ;
     };
     __decorate([
         core_1.Input(), 
