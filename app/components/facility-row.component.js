@@ -26,7 +26,7 @@ var FacilityRow = (function () {
         core_1.Component({
             selector: 'facility-row',
             directives: [hotels_component_1.Hotels],
-            template: "\n    <li>\n      <div>{{facility.name}} {{facility.location.getLongLat()}}</div>\n      <hotels \n        *ngIf=\"isSelected\"\n        [facilityLocation]=\"facility.location\">\n      </hotels>\n    </li>\n  ",
+            template: "\n    <li>\n      <div>{{facility.name}} {{facility.location.getLongLat()}}</div>\n      <hotels \n        *ngIf=\"isSelected\"\n        [facilityLocation]=\"facility.location\"\n        >\n      </hotels>\n    </li>\n  ",
             styles: ["\n\t\tli{\n\t\t\tcursor:pointer;\n\t\t}\n    "]
         }), 
         __metadata('design:paramtypes', [])

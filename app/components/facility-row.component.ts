@@ -10,7 +10,8 @@ import {Hotels} from './hotels.component';
       <div>{{facility.name}} {{facility.location.getLongLat()}}</div>
       <hotels 
         *ngIf="isSelected"
-        [facilityLocation]="facility.location">
+        [facilityLocation]="facility.location"
+        >
       </hotels>
     </li>
   `,
@@ -24,5 +25,4 @@ import {Hotels} from './hotels.component';
 export class FacilityRow {
 	@Input() facility: Conference;
   @Input() isSelected: boolean;
-
 }
