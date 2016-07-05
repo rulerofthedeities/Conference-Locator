@@ -17,6 +17,9 @@ var Sights = (function () {
         this.sightService = sightService;
     }
     Sights.prototype.ngOnInit = function () {
+        this.getSights();
+    };
+    Sights.prototype.getSights = function () {
         var _this = this;
         this.sightService.getNearbySights(this.hotelLocation).then(function (sights) { return _this.sights = sights; });
     };
@@ -29,7 +32,7 @@ var Sights = (function () {
             'selector': 'sights',
             'providers': [sight_service_1.SightService],
             'directives': [sight_row_component_1.SightRow],
-            'template': "<div>Sights near {{hotelLocation.longitude}}, {{hotelLocation.latitude}}</div>\n\t\t\t\t<ul>\n\t\t\t\t<sight-row\n\t\t\t\t\t*ngFor=\"let sight of sights\"\n\t\t\t\t\t[sight]=\"sight\"\n\t\t\t\t>\n\t\t\t\t</sight-row>\n\t\t\t\t</ul>"
+            'template': "<div>Sights near {{hotelLocation.getLongLat()}}</div>\n\t\t\t\t<ul>\n\t\t\t\t<sight-row\n\t\t\t\t\t*ngFor=\"let sight of sights\"\n\t\t\t\t\t[sight]=\"sight\"\n\t\t\t\t>\n\t\t\t\t</sight-row>\n\t\t\t\t</ul>\n        "
         }), 
         __metadata('design:paramtypes', [sight_service_1.SightService])
     ], Sights);

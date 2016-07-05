@@ -1,39 +1,45 @@
-import {Component, OnInit} from '@angular/core';
-
+import {Component, OnInit, OnDestroy} from '@angular/core';
 import {Conference} from '../models/conference.model';
 import {City} from '../models/city.model';
 import {Facilities} from './facilities.component';
 import {CityFilter} from './city-filter.component';
 import {ConferenceService} from '../services/conference.service';
 import {CityService} from '../services/city.service';
+import {CityStateService} from '../services/city-state.service';
+import {Subscription}   from 'rxjs/Subscription';
 
 
 @Component({
 	selector: 'conferences',
 	directives: [Facilities, CityFilter],
-	providers: [ConferenceService, CityService],
+	providers: [ConferenceService, CityService, CityStateService],
 	template: `
     <city-filter 
       [cities]="cities"
-      [defaultCity]="defaultCity"
       (selectedCity)="onSelectedCity($event)">
     </city-filter>
     <conference-list 
       [facilities]="conferenceSites"
-    ></conference-list>
-    {{selectedCity}}`
+    ></conference-list>`
 })
 
-export class ConferenceApp {
+export class ConferenceApp implements OnInit, OnDestroy {
 	public conferenceSites: Conference[];
   public cities: City[];
-  public defaultCity: string;
   selectedCity: string;
+  subscription: Subscription;
 
-	constructor(private conferenceService: ConferenceService,
-    private cityService: CityService) {}
+	constructor(
+    private conferenceService: ConferenceService,
+    private cityService: CityService,
+    private cityStateService: CityStateService) {
+  }
 
 	ngOnInit() {
+    this.subscription = this.cityStateService.cityAlias$.subscribe(
+      city => {
+        this.selectedCity = city;
+      });
     this.getCities();
 	}
 
@@ -47,13 +53,18 @@ export class ConferenceApp {
     this.cityService.getCities().then(
       cities => {
         this.cities = cities;
-        this.defaultCity = cities[0].alias;
-        this.getConferenceSites(this.defaultCity);
       }
     );
   }
 
   onSelectedCity(cityAlias: string) {
+    this.cityStateService.setCity(cityAlias);
     this.getConferenceSites(cityAlias);
   }
+
+  ngOnDestroy() {
+    // prevent memory leak when component destroyed
+    this.subscription.unsubscribe();
+  }
+
 }

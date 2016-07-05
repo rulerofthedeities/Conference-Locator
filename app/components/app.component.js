@@ -13,12 +13,18 @@ var facilities_component_1 = require('./facilities.component');
 var city_filter_component_1 = require('./city-filter.component');
 var conference_service_1 = require('../services/conference.service');
 var city_service_1 = require('../services/city.service');
+var city_state_service_1 = require('../services/city-state.service');
 var ConferenceApp = (function () {
-    function ConferenceApp(conferenceService, cityService) {
+    function ConferenceApp(conferenceService, cityService, cityStateService) {
         this.conferenceService = conferenceService;
         this.cityService = cityService;
+        this.cityStateService = cityStateService;
     }
     ConferenceApp.prototype.ngOnInit = function () {
+        var _this = this;
+        this.subscription = this.cityStateService.cityAlias$.subscribe(function (city) {
+            _this.selectedCity = city;
+        });
         this.getCities();
     };
     ConferenceApp.prototype.getConferenceSites = function (cityAlias) {
@@ -29,21 +35,24 @@ var ConferenceApp = (function () {
         var _this = this;
         this.cityService.getCities().then(function (cities) {
             _this.cities = cities;
-            _this.defaultCity = cities[0].alias;
-            _this.getConferenceSites(_this.defaultCity);
         });
     };
     ConferenceApp.prototype.onSelectedCity = function (cityAlias) {
+        this.cityStateService.setCity(cityAlias);
         this.getConferenceSites(cityAlias);
+    };
+    ConferenceApp.prototype.ngOnDestroy = function () {
+        // prevent memory leak when component destroyed
+        this.subscription.unsubscribe();
     };
     ConferenceApp = __decorate([
         core_1.Component({
             selector: 'conferences',
             directives: [facilities_component_1.Facilities, city_filter_component_1.CityFilter],
-            providers: [conference_service_1.ConferenceService, city_service_1.CityService],
-            template: "\n    <city-filter \n      [cities]=\"cities\"\n      [defaultCity]=\"defaultCity\"\n      (selectedCity)=\"onSelectedCity($event)\">\n    </city-filter>\n    <conference-list \n      [facilities]=\"conferenceSites\"\n    ></conference-list>\n    {{selectedCity}}"
+            providers: [conference_service_1.ConferenceService, city_service_1.CityService, city_state_service_1.CityStateService],
+            template: "\n    <city-filter \n      [cities]=\"cities\"\n      (selectedCity)=\"onSelectedCity($event)\">\n    </city-filter>\n    <conference-list \n      [facilities]=\"conferenceSites\"\n    ></conference-list>"
         }), 
-        __metadata('design:paramtypes', [conference_service_1.ConferenceService, city_service_1.CityService])
+        __metadata('design:paramtypes', [conference_service_1.ConferenceService, city_service_1.CityService, city_state_service_1.CityStateService])
     ], ConferenceApp);
     return ConferenceApp;
 }());

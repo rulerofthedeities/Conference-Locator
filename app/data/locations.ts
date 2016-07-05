@@ -24,7 +24,7 @@ CONFERENCESITES['prague'][1].name = 'City Conference Center';
 CONFERENCESITES['prague'][2].name = 'Conference Centre u Hájků';
 
 //Hotels
-export const HOTELS: Hotels[] = [
+export const HOTELS: Hotel[] = [
 	new Hotel(14.43973, 50.09260),
 	new Hotel(14.43630, 50.07060),
 	new Hotel(14.39375, 50.10937),
@@ -41,7 +41,7 @@ HOTELS[4].name = 'Hôtel Elysées-Opéra';
 HOTELS[5].name = 'QUALYS-HOTEL Apolonia Paris';
 
 //Sights
-export const SIGHTS: Sights[] = [
+export const SIGHTS: Sight[] = [
 	new Sight(14.356539845466614, 50.0849726539924),
 	new Sight(14.411466121673584, 50.0865009145791),
 	new Sight(14.420725107192993, 50.087554146889936),

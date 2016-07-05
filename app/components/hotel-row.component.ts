@@ -6,17 +6,28 @@ import {Sights} from './sights.component';
 	selector: 'hotel-row',
 	directives: [Sights],
 	template: `<li>
-				<div>{{hotel.name}}</div>
+				<div (click)="selectHotel()">
+          {{hotel.name}}
+        </div>
 				<sights 
 					*ngIf="isSelected"
-					[hotelLocation]="hotel.location">
+					[hotelLocation]="hotel.location"
+          [class.selected]="isSelected"
+					>
 				</sights>
-				{{hotel.location.longitude}}
-				</li>`
+				</li>`,
+  styles: [`
+     .selected {color: green;}
+  `]
 })
 
 export class HotelRow {
 	@Input() hotel: Hotel;
-	@Input() isSelected: boolean;
+  isSelected: boolean = false;
+
+  selectHotel() {
+    this.isSelected = !this.isSelected;
+  }
+
 }
 

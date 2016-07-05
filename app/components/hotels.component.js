@@ -23,9 +23,6 @@ var Hotels = (function () {
         var _this = this;
         this.hotelService.getNearbyHotels(this.facilityLocation).then(function (hotels) { return _this.hotels = hotels; });
     };
-    Hotels.prototype.selectHotel = function (hotel) {
-        this.selectedHotel = hotel;
-    };
     Hotels.prototype.isSelected = function (hotel) {
         return (this.selectedHotel === hotel);
     };
@@ -38,7 +35,8 @@ var Hotels = (function () {
             selector: 'hotels',
             providers: [hotel_service_1.HotelService],
             directives: [hotel_row_component_1.HotelRow],
-            template: "<div>\n\t\t\t\thotels near location {{facilityLocation.longitude}},{{facilityLocation.latitude}}\n\t\t\t\t<ul>\n\t\t\t\t\t<hotel-row \n\t\t\t\t\t\t*ngFor=\"let hotel of hotels\"\n\t\t\t\t\t\t[hotel]=\"hotel\"\n\t\t\t\t\t\t[isSelected]=\"isSelected(hotel)\"\n\t\t\t\t\t\t(click)=\"selectHotel(hotel)\">\n\t\t\t\t\t</hotel-row>\n\t\t\t\t</ul>\n\t\t\t</div>"
+            template: "<div>\n\t\t\t\thotels near location {{facilityLocation.getLongLat()}}\n\t\t\t\t<ul>\n\t\t\t\t\t<hotel-row \n\t\t\t\t\t\t*ngFor=\"let hotel of hotels\"\n\t\t\t\t\t\t[hotel]=\"hotel\">\n\t\t\t\t\t</hotel-row>\n\t\t\t\t</ul>\n\t\t\t</div>",
+            styles: ["\n   \t\t.selected {color: green;}\n    "]
         }), 
         __metadata('design:paramtypes', [hotel_service_1.HotelService])
     ], Hotels);

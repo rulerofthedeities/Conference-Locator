@@ -3,32 +3,34 @@ import {Location} from '../models/location.model';
 import {Hotel} from '../models/hotel.model';
 import {HotelService} from '../services/hotel.service';
 import {HotelRow} from './hotel-row.component';
+import {Subscription} from 'rxjs/Subscription';
 
 @Component({
 	selector: 'hotels',
 	providers: [HotelService],
 	directives: [HotelRow],
 	template: `<div>
-				hotels near location {{facilityLocation.longitude}},{{facilityLocation.latitude}}
+				hotels near location {{facilityLocation.getLongLat()}}
 				<ul>
 					<hotel-row 
 						*ngFor="let hotel of hotels"
-						[hotel]="hotel"
-						[isSelected]="isSelected(hotel)"
-						(click)="selectHotel(hotel)">
+						[hotel]="hotel">
 					</hotel-row>
 				</ul>
-			</div>`
+			</div>`,
+    styles: [`
+   		.selected {color: green;}
+    `]
 })
 
-export class Hotels {
+export class Hotels implements OnInit {
 	@Input() facilityLocation: Location;
-	public hotels: Hotel[];
+	hotels: Hotel[];
 	selectedHotel: Hotel;
+	selectedCity: string;
+	subscription: Subscription;
 
-	constructor(private hotelService: HotelService) {
-
-	}
+	constructor(private hotelService: HotelService) {}
 
 	ngOnInit() {
 		this.getHotels();
@@ -40,12 +42,9 @@ export class Hotels {
 		);
 	}
 
-	selectHotel(hotel: Hotel) {
-		this.selectedHotel = hotel;
-	}
-
 	isSelected(hotel: Hotel) {
 		return (this.selectedHotel === hotel);
 	}
+
 }
 

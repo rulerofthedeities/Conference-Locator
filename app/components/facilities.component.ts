@@ -9,21 +9,13 @@ import {FacilityRow} from './facility-row.component';
   <ul>
     <facility-row 
       [facility]="facility" 
-      [isSelected]="isSelected(facility)"
-      (click)="onSelect(facility)"
-      *ngFor="let facility of facilities"
-      [class.selected]="isSelected(facility)">
+      *ngFor="let facility of facilities">
     </facility-row>
   </ul>
   <div *ngIf="selectedFacility">
   	{{selectedFacility.name}}
   </div>
-   `,
-    styles: [`
-   		.selected {
-		    color: blue;
-		}
-    `]
+   `
 })
 
 export class Facilities {

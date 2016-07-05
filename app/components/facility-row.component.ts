@@ -7,22 +7,28 @@ import {Hotels} from './hotels.component';
   directives: [Hotels],
   template: `
     <li>
-      <div>{{facility.name}} {{facility.location.getLongLat()}}</div>
+      <div (click)="selectFacility()">
+        {{facility.name}}
+      </div>
       <hotels 
         *ngIf="isSelected"
         [facilityLocation]="facility.location"
+        [class.selected]="isSelected"
         >
       </hotels>
     </li>
   `,
-    styles: [`
-		li{
-			cursor:pointer;
-		}
+  styles: [`
+		li {cursor: pointer;}
+    .selected {color: blue;}
     `]
 })
 
 export class FacilityRow {
 	@Input() facility: Conference;
-  @Input() isSelected: boolean;
+  isSelected: boolean = false;
+
+  selectFacility() {
+    this.isSelected = !this.isSelected;
+  }
 }

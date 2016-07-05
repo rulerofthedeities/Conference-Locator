@@ -13,21 +13,21 @@ var conference_model_1 = require('../models/conference.model');
 var hotels_component_1 = require('./hotels.component');
 var FacilityRow = (function () {
     function FacilityRow() {
+        this.isSelected = false;
     }
+    FacilityRow.prototype.selectFacility = function () {
+        this.isSelected = !this.isSelected;
+    };
     __decorate([
         core_1.Input(), 
         __metadata('design:type', conference_model_1.Conference)
     ], FacilityRow.prototype, "facility", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Boolean)
-    ], FacilityRow.prototype, "isSelected", void 0);
     FacilityRow = __decorate([
         core_1.Component({
             selector: 'facility-row',
             directives: [hotels_component_1.Hotels],
-            template: "\n    <li>\n      <div>{{facility.name}} {{facility.location.getLongLat()}}</div>\n      <hotels \n        *ngIf=\"isSelected\"\n        [facilityLocation]=\"facility.location\"\n        >\n      </hotels>\n    </li>\n  ",
-            styles: ["\n\t\tli{\n\t\t\tcursor:pointer;\n\t\t}\n    "]
+            template: "\n    <li>\n      <div (click)=\"selectFacility()\">\n        {{facility.name}}\n      </div>\n      <hotels \n        *ngIf=\"isSelected\"\n        [facilityLocation]=\"facility.location\"\n        [class.selected]=\"isSelected\"\n        >\n      </hotels>\n    </li>\n  ",
+            styles: ["\n\t\tli {cursor: pointer;}\n    .selected {color: blue;}\n    "]
         }), 
         __metadata('design:paramtypes', [])
     ], FacilityRow);

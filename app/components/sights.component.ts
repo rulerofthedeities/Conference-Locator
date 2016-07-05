@@ -8,25 +8,31 @@ import {SightRow} from './sight-row.component';
 	'selector': 'sights',
 	'providers': [SightService],
 	'directives': [SightRow],
-	'template': `<div>Sights near {{hotelLocation.longitude}}, {{hotelLocation.latitude}}</div>
+	'template': `<div>Sights near {{hotelLocation.getLongLat()}}</div>
 				<ul>
 				<sight-row
 					*ngFor="let sight of sights"
 					[sight]="sight"
 				>
 				</sight-row>
-				</ul>`
+				</ul>
+        `
 })
 
-export class Sights {
+export class Sights implements OnInit {
 	@Input() hotelLocation: Location;
 	sights: Sight[];
 
 	constructor(private sightService: SightService) {}
 
 	ngOnInit() {
+		this.getSights();
+	}
+
+	getSights() {
 		this.sightService.getNearbySights(this.hotelLocation).then(
 			sights => this.sights = sights
 		);
 	}
+
 }

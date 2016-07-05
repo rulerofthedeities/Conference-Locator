@@ -27,8 +27,7 @@ var Facilities = (function () {
         core_1.Component({
             selector: 'conference-list',
             directives: [facility_row_component_1.FacilityRow],
-            template: "\n  <ul>\n    <facility-row \n      [facility]=\"facility\" \n      [isSelected]=\"isSelected(facility)\"\n      (click)=\"onSelect(facility)\"\n      *ngFor=\"let facility of facilities\"\n      [class.selected]=\"isSelected(facility)\">\n    </facility-row>\n  </ul>\n  <div *ngIf=\"selectedFacility\">\n  \t{{selectedFacility.name}}\n  </div>\n   ",
-            styles: ["\n   \t\t.selected {\n\t\t    color: blue;\n\t\t}\n    "]
+            template: "\n  <ul>\n    <facility-row \n      [facility]=\"facility\" \n      *ngFor=\"let facility of facilities\">\n    </facility-row>\n  </ul>\n  <div *ngIf=\"selectedFacility\">\n  \t{{selectedFacility.name}}\n  </div>\n   "
         }), 
         __metadata('design:paramtypes', [])
     ], Facilities);
