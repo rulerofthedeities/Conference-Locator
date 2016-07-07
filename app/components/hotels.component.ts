@@ -4,23 +4,23 @@ import {Hotel} from '../models/hotel.model';
 import {HotelService} from '../services/hotel.service';
 import {HotelRow} from './hotel-row.component';
 import {Subscription} from 'rxjs/Subscription';
+import {LoadingIndicator} from './common/loading-indicator.component';
 
 @Component({
 	selector: 'hotels',
 	providers: [HotelService],
-	directives: [HotelRow],
-	template: `<div>
-				hotels near location {{facilityLocation.getLongLat()}}
-				<ul>
-					<hotel-row 
-						*ngFor="let hotel of hotels"
-						[hotel]="hotel">
-					</hotel-row>
-				</ul>
-			</div>`,
-    styles: [`
-   		.selected {color: green;}
-    `]
+	directives: [HotelRow, LoadingIndicator],
+	template: `
+    <div>
+			hotels near location {{facilityLocation.getLongLat()}}
+      <loading-indicator [isLoading]="loading"></loading-indicator>
+			<ul>
+				<hotel-row 
+					*ngFor="let hotel of hotels"
+					[hotel]="hotel">
+				</hotel-row>
+			</ul>
+		</div>`
 })
 
 export class Hotels implements OnInit {
@@ -29,6 +29,7 @@ export class Hotels implements OnInit {
 	selectedHotel: Hotel;
 	selectedCity: string;
 	subscription: Subscription;
+	loading: boolean = false;
 
 	constructor(private hotelService: HotelService) {}
 
@@ -37,8 +38,12 @@ export class Hotels implements OnInit {
 	}
 
 	getHotels() {
+		this.loading = true;
 		this.hotelService.getNearbyHotels(this.facilityLocation).then(
-			hotels => this.hotels = hotels
+			hotels => {
+				this.hotels = hotels;
+				this.loading = false;
+			}
 		);
 	}
 

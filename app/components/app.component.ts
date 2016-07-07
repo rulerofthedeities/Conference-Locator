@@ -3,6 +3,7 @@ import {Conference} from '../models/conference.model';
 import {City} from '../models/city.model';
 import {Facilities} from './facilities.component';
 import {CityFilter} from './city-filter.component';
+import {LoadingIndicator} from './common/loading-indicator.component';
 import {ConferenceService} from '../services/conference.service';
 import {CityService} from '../services/city.service';
 import {CityStateService} from '../services/city-state.service';
@@ -11,16 +12,18 @@ import {Subscription}   from 'rxjs/Subscription';
 
 @Component({
 	selector: 'conferences',
-	directives: [Facilities, CityFilter],
+	directives: [Facilities, CityFilter, LoadingIndicator],
 	providers: [ConferenceService, CityService, CityStateService],
 	template: `
     <city-filter 
       [cities]="cities"
       (selectedCity)="onSelectedCity($event)">
     </city-filter>
+    <loading-indicator [isLoading]="loading"></loading-indicator>
     <conference-list 
       [facilities]="conferenceSites"
-    ></conference-list>`
+    ></conference-list>
+    `
 })
 
 export class ConferenceApp implements OnInit, OnDestroy {
@@ -28,6 +31,7 @@ export class ConferenceApp implements OnInit, OnDestroy {
   public cities: City[];
   selectedCity: string;
   subscription: Subscription;
+  loading: boolean = false;
 
 	constructor(
     private conferenceService: ConferenceService,
@@ -44,8 +48,12 @@ export class ConferenceApp implements OnInit, OnDestroy {
 	}
 
   getConferenceSites(cityAlias) {
+    this.loading = true;
     this.conferenceService.getConferenceSites(cityAlias).then(
-      conferences => this.conferenceSites = conferences
+      conferences => {
+        this.conferenceSites = conferences;
+        this.loading = false;
+      }
     );
   }
 

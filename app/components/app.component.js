@@ -11,6 +11,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('@angular/core');
 var facilities_component_1 = require('./facilities.component');
 var city_filter_component_1 = require('./city-filter.component');
+var loading_indicator_component_1 = require('./common/loading-indicator.component');
 var conference_service_1 = require('../services/conference.service');
 var city_service_1 = require('../services/city.service');
 var city_state_service_1 = require('../services/city-state.service');
@@ -19,6 +20,7 @@ var ConferenceApp = (function () {
         this.conferenceService = conferenceService;
         this.cityService = cityService;
         this.cityStateService = cityStateService;
+        this.loading = false;
     }
     ConferenceApp.prototype.ngOnInit = function () {
         var _this = this;
@@ -29,7 +31,11 @@ var ConferenceApp = (function () {
     };
     ConferenceApp.prototype.getConferenceSites = function (cityAlias) {
         var _this = this;
-        this.conferenceService.getConferenceSites(cityAlias).then(function (conferences) { return _this.conferenceSites = conferences; });
+        this.loading = true;
+        this.conferenceService.getConferenceSites(cityAlias).then(function (conferences) {
+            _this.conferenceSites = conferences;
+            _this.loading = false;
+        });
     };
     ConferenceApp.prototype.getCities = function () {
         var _this = this;
@@ -48,9 +54,9 @@ var ConferenceApp = (function () {
     ConferenceApp = __decorate([
         core_1.Component({
             selector: 'conferences',
-            directives: [facilities_component_1.Facilities, city_filter_component_1.CityFilter],
+            directives: [facilities_component_1.Facilities, city_filter_component_1.CityFilter, loading_indicator_component_1.LoadingIndicator],
             providers: [conference_service_1.ConferenceService, city_service_1.CityService, city_state_service_1.CityStateService],
-            template: "\n    <city-filter \n      [cities]=\"cities\"\n      (selectedCity)=\"onSelectedCity($event)\">\n    </city-filter>\n    <conference-list \n      [facilities]=\"conferenceSites\"\n    ></conference-list>"
+            template: "\n    <city-filter \n      [cities]=\"cities\"\n      (selectedCity)=\"onSelectedCity($event)\">\n    </city-filter>\n    <loading-indicator [isLoading]=\"loading\"></loading-indicator>\n    <conference-list \n      [facilities]=\"conferenceSites\"\n    ></conference-list>\n    "
         }), 
         __metadata('design:paramtypes', [conference_service_1.ConferenceService, city_service_1.CityService, city_state_service_1.CityStateService])
     ], ConferenceApp);

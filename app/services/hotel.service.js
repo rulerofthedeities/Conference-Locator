@@ -14,7 +14,12 @@ var HotelService = (function () {
     function HotelService() {
     }
     HotelService.prototype.getNearbyHotels = function (location) {
-        return Promise.resolve(locations_1.HOTELS);
+        //return Promise.resolve(HOTELS);
+        return new Promise(function (resolve) {
+            return setTimeout(function () { return resolve(locations_1.HOTELS); }, 2000);
+        } // 2 seconds
+         // 2 seconds
+        );
     };
     HotelService = __decorate([
         core_1.Injectable(), 

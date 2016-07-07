@@ -9,22 +9,21 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
-var locations_1 = require('../data/locations');
-var ConferenceService = (function () {
-    function ConferenceService() {
+var LoadingIndicator = (function () {
+    function LoadingIndicator() {
     }
-    ConferenceService.prototype.getConferenceSites = function (cityAlias) {
-        return new Promise(function (resolve) {
-            return setTimeout(function () { return resolve(locations_1.CONFERENCESITES[cityAlias]); }, 2000);
-        } // 2 seconds
-         // 2 seconds
-        );
-    };
-    ConferenceService = __decorate([
-        core_1.Injectable(), 
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Boolean)
+    ], LoadingIndicator.prototype, "isLoading", void 0);
+    LoadingIndicator = __decorate([
+        core_1.Component({
+            selector: 'loading-indicator',
+            template: '<div *ngIf="isLoading">Loading...</div>'
+        }), 
         __metadata('design:paramtypes', [])
-    ], ConferenceService);
-    return ConferenceService;
+    ], LoadingIndicator);
+    return LoadingIndicator;
 }());
-exports.ConferenceService = ConferenceService;
-//# sourceMappingURL=conference.service.js.map
+exports.LoadingIndicator = LoadingIndicator;
+//# sourceMappingURL=loading-indicator.component.js.map

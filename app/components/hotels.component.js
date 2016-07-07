@@ -12,16 +12,22 @@ var core_1 = require('@angular/core');
 var location_model_1 = require('../models/location.model');
 var hotel_service_1 = require('../services/hotel.service');
 var hotel_row_component_1 = require('./hotel-row.component');
+var loading_indicator_component_1 = require('./common/loading-indicator.component');
 var Hotels = (function () {
     function Hotels(hotelService) {
         this.hotelService = hotelService;
+        this.loading = false;
     }
     Hotels.prototype.ngOnInit = function () {
         this.getHotels();
     };
     Hotels.prototype.getHotels = function () {
         var _this = this;
-        this.hotelService.getNearbyHotels(this.facilityLocation).then(function (hotels) { return _this.hotels = hotels; });
+        this.loading = true;
+        this.hotelService.getNearbyHotels(this.facilityLocation).then(function (hotels) {
+            _this.hotels = hotels;
+            _this.loading = false;
+        });
     };
     Hotels.prototype.isSelected = function (hotel) {
         return (this.selectedHotel === hotel);
@@ -34,9 +40,8 @@ var Hotels = (function () {
         core_1.Component({
             selector: 'hotels',
             providers: [hotel_service_1.HotelService],
-            directives: [hotel_row_component_1.HotelRow],
-            template: "<div>\n\t\t\t\thotels near location {{facilityLocation.getLongLat()}}\n\t\t\t\t<ul>\n\t\t\t\t\t<hotel-row \n\t\t\t\t\t\t*ngFor=\"let hotel of hotels\"\n\t\t\t\t\t\t[hotel]=\"hotel\">\n\t\t\t\t\t</hotel-row>\n\t\t\t\t</ul>\n\t\t\t</div>",
-            styles: ["\n   \t\t.selected {color: green;}\n    "]
+            directives: [hotel_row_component_1.HotelRow, loading_indicator_component_1.LoadingIndicator],
+            template: "\n    <div>\n\t\t\thotels near location {{facilityLocation.getLongLat()}}\n      <loading-indicator [isLoading]=\"loading\"></loading-indicator>\n\t\t\t<ul>\n\t\t\t\t<hotel-row \n\t\t\t\t\t*ngFor=\"let hotel of hotels\"\n\t\t\t\t\t[hotel]=\"hotel\">\n\t\t\t\t</hotel-row>\n\t\t\t</ul>\n\t\t</div>"
         }), 
         __metadata('design:paramtypes', [hotel_service_1.HotelService])
     ], Hotels);

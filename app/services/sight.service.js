@@ -14,7 +14,12 @@ var SightService = (function () {
     function SightService() {
     }
     SightService.prototype.getNearbySights = function (location) {
-        return Promise.resolve(locations_1.SIGHTS);
+        //return Promise.resolve(SIGHTS);
+        return new Promise(function (resolve) {
+            return setTimeout(function () { return resolve(locations_1.SIGHTS); }, 2000);
+        } // 2 seconds
+         // 2 seconds
+        );
     };
     SightService = __decorate([
         core_1.Injectable(), 
