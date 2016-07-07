@@ -9,17 +9,23 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
+var DEFAULTMESSAGE = 'Loading...';
 var LoadingIndicator = (function () {
     function LoadingIndicator() {
+        this.message = this.message || DEFAULTMESSAGE;
     }
     __decorate([
         core_1.Input(), 
         __metadata('design:type', Boolean)
     ], LoadingIndicator.prototype, "isLoading", void 0);
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', String)
+    ], LoadingIndicator.prototype, "message", void 0);
     LoadingIndicator = __decorate([
         core_1.Component({
             selector: 'loading-indicator',
-            template: '<div *ngIf="isLoading">Loading...</div>'
+            template: '<div *ngIf="isLoading">{{message}}</div>'
         }), 
         __metadata('design:paramtypes', [])
     ], LoadingIndicator);

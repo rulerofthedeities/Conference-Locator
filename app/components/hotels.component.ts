@@ -7,49 +7,51 @@ import {Subscription} from 'rxjs/Subscription';
 import {LoadingIndicator} from './common/loading-indicator.component';
 
 @Component({
-	selector: 'hotels',
-	providers: [HotelService],
-	directives: [HotelRow, LoadingIndicator],
-	template: `
+  selector: 'hotels',
+  providers: [HotelService],
+  directives: [HotelRow, LoadingIndicator],
+  template: `
     <div>
-			hotels near location {{facilityLocation.getLongLat()}}
-      <loading-indicator [isLoading]="loading"></loading-indicator>
-			<ul>
-				<hotel-row 
-					*ngFor="let hotel of hotels"
-					[hotel]="hotel">
-				</hotel-row>
-			</ul>
-		</div>`
+      hotels near location {{facilityLocation.getLongLat()}}
+      <loading-indicator 
+        [isLoading]="loading"
+        message="Loading hotels...">
+      </loading-indicator>
+      <ul>
+        <hotel-row 
+          *ngFor="let hotel of hotels"
+          [hotel]="hotel">
+        </hotel-row>
+      </ul>
+    </div>`
 })
 
 export class Hotels implements OnInit {
-	@Input() facilityLocation: Location;
-	hotels: Hotel[];
-	selectedHotel: Hotel;
-	selectedCity: string;
-	subscription: Subscription;
-	loading: boolean = false;
+  @Input() facilityLocation: Location;
+  hotels: Hotel[];
+  selectedHotel: Hotel;
+  selectedCity: string;
+  subscription: Subscription;
+  loading: boolean = false;
+   message: string = 'hotels';
 
-	constructor(private hotelService: HotelService) {}
+  constructor(private hotelService: HotelService) {}
 
-	ngOnInit() {
-		this.getHotels();
-	}
+  ngOnInit() {
+    this.getHotels();
+  }
 
-	getHotels() {
-		this.loading = true;
-		this.hotelService.getNearbyHotels(this.facilityLocation).then(
-			hotels => {
-				this.hotels = hotels;
-				this.loading = false;
-			}
-		);
-	}
+  getHotels() {
+    this.loading = true;
+    this.hotelService.getNearbyHotels(this.facilityLocation).then(
+      hotels => {
+        this.hotels = hotels;
+        this.loading = false;
+      }
+    );
+  }
 
-	isSelected(hotel: Hotel) {
-		return (this.selectedHotel === hotel);
-	}
-
+  isSelected(hotel: Hotel) {
+    return (this.selectedHotel === hotel);
+  }
 }
-

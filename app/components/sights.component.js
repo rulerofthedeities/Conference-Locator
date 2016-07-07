@@ -38,7 +38,7 @@ var Sights = (function () {
             'selector': 'sights',
             'providers': [sight_service_1.SightService],
             'directives': [sight_row_component_1.SightRow, loading_indicator_component_1.LoadingIndicator],
-            'template': "\n\t\t<div>Sights near {{hotelLocation.getLongLat()}}</div>\n    <loading-indicator [isLoading]=\"loading\"></loading-indicator>\n\t\t<ul>\n  \t\t<sight-row\n  \t\t\t*ngFor=\"let sight of sights\"\n  \t\t\t[sight]=\"sight\"\n  \t\t>\n  \t\t</sight-row>\n\t\t</ul>\n        "
+            'template': "\n    <div>Sights near {{hotelLocation.getLongLat()}}</div>\n    <loading-indicator \n      [isLoading]=\"loading\"\n      message=\"Loading sights...\"\n    ></loading-indicator>\n    <ul>\n      <sight-row\n        *ngFor=\"let sight of sights\"\n        [sight]=\"sight\"\n      >\n      </sight-row>\n    </ul>"
         }), 
         __metadata('design:paramtypes', [sight_service_1.SightService])
     ], Sights);
