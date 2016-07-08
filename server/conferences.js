@@ -20,9 +20,9 @@ var loadConferences = function(db, options, callback) {
 
 module.exports = {
   load: function(req, res){
-    let cityAlias = req.params.city;
+    var cityAlias = req.params.city;
     if (cityAlias) {
-      loadConferences(mongo.DB, {cityAlias}, function(docs){
+      loadConferences(mongo.DB, {cityAlias: cityAlias}, function(docs){
         res.status(200).send({"conferences": docs});
       });
     }

@@ -1,3 +1,5 @@
+'use strict';
+
 var express = require('express'),
     app = express(),
     bodyParser = require('body-parser'),
@@ -5,7 +7,14 @@ var express = require('express'),
     db = require('./server/db');
 
 //config
-app.set('port', process.env.PORT || 2999);
+app.set('port', process.env.PORT || 3000);
+app.set('env', process.env.NODE_ENV || 'development');
+
+if (app.get('env') == 'development') {
+  // All code depending on the environment here
+  // You can put morgan here for example
+}
+
 app.use(express.static(__dirname + '/public'));
 app.use(bodyParser.json());
 

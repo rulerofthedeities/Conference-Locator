@@ -23,6 +23,7 @@ import {Subscription}   from 'rxjs/Subscription';
     <conference-list 
       [facilities]="conferenceSites"
     ></conference-list>
+    {{error}}
     `
 })
 
@@ -32,6 +33,7 @@ export class ConferenceApp implements OnInit, OnDestroy {
   selectedCity: string;
   subscription: Subscription;
   loading: boolean = false;
+  error: string;
 
 	constructor(
     private conferenceService: ConferenceService,
@@ -50,11 +52,11 @@ export class ConferenceApp implements OnInit, OnDestroy {
   getConferenceSites(cityAlias) {
     this.loading = true;
     this.conferenceService.getConferenceSites(cityAlias).then(
-      conferences => {
-        this.conferenceSites = conferences;
+      conference => {
+        this.conferenceSites = conference;
         this.loading = false;
       }
-    );
+    ).catch(error => this.error = error);
   }
 
   getCities() {
