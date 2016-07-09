@@ -19,13 +19,13 @@ import {Hotels} from './hotels.component';
     </li>
   `,
   styles: [`
-		li {cursor: pointer;}
+    li {cursor: pointer;}
     .selected {color: blue;}
     `]
 })
 
 export class FacilityRow {
-	@Input() facility: Conference;
+  @Input() facility: Conference;
   isSelected: boolean = false;
 
   selectFacility() {

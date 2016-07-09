@@ -9,20 +9,25 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
-var locations_1 = require('../data/locations');
+var http_1 = require('@angular/http');
+require('rxjs/add/operator/toPromise');
 var ConferenceService = (function () {
-    function ConferenceService() {
+    function ConferenceService(http) {
+        this.http = http;
     }
     ConferenceService.prototype.getConferenceSites = function (cityAlias) {
-        return new Promise(function (resolve) {
-            return setTimeout(function () { return resolve(locations_1.CONFERENCESITES[cityAlias]); }, 2000);
-        } // 2 seconds
-         // 2 seconds
-        );
+        return this.http.get('/conferences/' + cityAlias)
+            .toPromise()
+            .then(function (response) { return response.json().conferences; })
+            .catch(this.handleError);
+    };
+    ConferenceService.prototype.handleError = function (error) {
+        console.error('An error occurred', error);
+        return Promise.reject(error.message || error);
     };
     ConferenceService = __decorate([
         core_1.Injectable(), 
-        __metadata('design:paramtypes', [])
+        __metadata('design:paramtypes', [http_1.Http])
     ], ConferenceService);
     return ConferenceService;
 }());

@@ -1,1 +1,1 @@
-{"version":3,"file":"conference.model.js","sourceRoot":"","sources":["conference.model.ts"],"names":[],"mappings":";;;;;;AAAA,2BAAmB,cAAc,CAAC,CAAA;AAElC;IAAgC,8BAAI;IAEnC,oBAAY,SAAiB,EAAE,QAAgB;QAC9C,kBAAM,SAAS,EAAE,QAAQ,CAAC,CAAC;IAC5B,CAAC;IACF,iBAAC;AAAD,CAAC,AALD,CAAgC,iBAAI,GAKnC;AALY,kBAAU,aAKtB,CAAA"}
+{"version":3,"file":"conference.model.js","sourceRoot":"","sources":["conference.model.ts"],"names":[],"mappings":";;;;;;AAAA,2BAAmB,cAAc,CAAC,CAAA;AAElC;IAAgC,8BAAI;IAApC;QAAgC,8BAAI;IAEpC,CAAC;IAAD,iBAAC;AAAD,CAAC,AAFD,CAAgC,iBAAI,GAEnC;AAFY,kBAAU,aAEtB,CAAA"}

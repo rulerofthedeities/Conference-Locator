@@ -1,4 +1,6 @@
 var conferences = require('../server/conferences'),
+    hotels = require('../server/hotels'),
+    sights = require('../server/sights'),
     path = require("path");
 
 module.exports.initialize = function(app, router) {
@@ -9,6 +11,8 @@ module.exports.initialize = function(app, router) {
   });
 
   router.get('/conferences/:city', conferences.load);
+  router.get('/hotels', hotels.load);
+  router.get('/sights', sights.load);
 
   app.use(router);
 };

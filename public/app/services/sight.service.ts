@@ -1,14 +1,21 @@
 import {Injectable} from '@angular/core';
-import {SIGHTS} from '../data/locations';
 import {Location} from '../models/location.model';
-import {Sight} from '../models/sight.model';
+import {Http} from '@angular/http';
+import 'rxjs/add/operator/toPromise';
 
 @Injectable()
 export class SightService {
-	getNearbySights(location: Location) {
-		//return Promise.resolve(SIGHTS);
-	  return new Promise<Sight[]>(resolve =>
-      setTimeout(() => resolve(SIGHTS), 2000) // 2 seconds
-    );
-	}
+  constructor(private http: Http) { }
+
+  getNearbySights(location: Location) {
+    return this.http.get('/sights?lon=' + location.longitude + '&lat=' + location.latitude)
+      .toPromise()
+      .then(response => response.json().sights)
+      .catch(this.handleError);
+    }
+
+  private handleError(error: any) {
+    console.error('An error occurred', error);
+    return Promise.reject(error.message || error);
+  }
 }

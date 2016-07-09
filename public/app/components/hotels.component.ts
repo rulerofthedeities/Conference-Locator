@@ -12,7 +12,7 @@ import {LoadingIndicator} from './common/loading-indicator.component';
   directives: [HotelRow, LoadingIndicator],
   template: `
     <div>
-      hotels near location {{facilityLocation.getLongLat()}}
+      hotels near location {{facilityLocation | json}}
       <loading-indicator 
         [isLoading]="loading"
         message="Loading hotels...">
@@ -33,7 +33,6 @@ export class Hotels implements OnInit {
   selectedCity: string;
   subscription: Subscription;
   loading: boolean = false;
-   message: string = 'hotels';
 
   constructor(private hotelService: HotelService) {}
 

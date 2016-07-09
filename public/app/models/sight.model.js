@@ -7,8 +7,8 @@ var __extends = (this && this.__extends) || function (d, b) {
 var site_model_1 = require('./site.model');
 var Sight = (function (_super) {
     __extends(Sight, _super);
-    function Sight(longitude, latitude) {
-        _super.call(this, longitude, latitude);
+    function Sight() {
+        _super.apply(this, arguments);
     }
     return Sight;
 }(site_model_1.Site));

@@ -26,7 +26,7 @@ var HotelRow = (function () {
         core_1.Component({
             selector: 'hotel-row',
             directives: [sights_component_1.Sights],
-            template: "<li>\n\t\t\t\t<div (click)=\"selectHotel()\">\n          {{hotel.name}}\n        </div>\n\t\t\t\t<sights \n\t\t\t\t\t*ngIf=\"isSelected\"\n\t\t\t\t\t[hotelLocation]=\"hotel.location\"\n          [class.selected]=\"isSelected\"\n\t\t\t\t\t>\n\t\t\t\t</sights>\n\t\t\t\t</li>",
+            template: "<li>\n        <div (click)=\"selectHotel()\">\n          {{hotel.name}}\n        </div>\n        <sights \n          *ngIf=\"isSelected\"\n          [hotelLocation]=\"hotel.location\"\n          [class.selected]=\"isSelected\"\n          >\n        </sights>\n        </li>",
             styles: ["\n     .selected {color: green;}\n  "]
         }), 
         __metadata('design:paramtypes', [])

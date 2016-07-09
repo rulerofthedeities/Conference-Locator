@@ -13,6 +13,9 @@ var sight_model_1 = require('../models/sight.model');
 var SightRow = (function () {
     function SightRow() {
     }
+    SightRow.prototype.ngOnInit = function () {
+        this.distance = Math.round(this.sight.distance / 10) * 10;
+    };
     __decorate([
         core_1.Input(), 
         __metadata('design:type', sight_model_1.Sight)
@@ -20,7 +23,7 @@ var SightRow = (function () {
     SightRow = __decorate([
         core_1.Component({
             'selector': 'sight-row',
-            'template': "<li>{{sight.name}}</li>"
+            'template': "<li>{{sight.name}} ({{distance}}m)</li>"
         }), 
         __metadata('design:paramtypes', [])
     ], SightRow);

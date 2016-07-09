@@ -10,7 +10,8 @@ import {LoadingIndicator} from './common/loading-indicator.component';
   'providers': [SightService],
   'directives': [SightRow, LoadingIndicator],
   'template': `
-    <div>Sights near {{hotelLocation.getLongLat()}}</div>
+    <div *ngIf="hasSights">Sights near {{hotelLocation | json}}</div>
+    <div *ngIf="!hasSights">Sorry, no sights found nearby</div>
     <loading-indicator 
       [isLoading]="loading"
       message="Loading sights..."
@@ -28,6 +29,7 @@ export class Sights implements OnInit {
   @Input() hotelLocation: Location;
   sights: Sight[];
   loading: boolean = false;
+  hasSights: boolean = true;
 
   constructor(private sightService: SightService) {}
 
@@ -41,6 +43,7 @@ export class Sights implements OnInit {
       sights => {
         this.sights = sights;
         this.loading = false;
+        this.hasSights = sights.length > 0;
       }
     );
   }

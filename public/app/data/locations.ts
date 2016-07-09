@@ -6,6 +6,7 @@ import {Sight} from '../models/sight.model';
 //http://en.convention.parisinfo.com/events/our-members/conference-and-exhibition-centres
 
 //Conference centers
+/*
 export const CONFERENCESITES: { [city: string]: Conference[]; } = { };
 CONFERENCESITES['paris'] = [
     new Conference(2.2883641719818115, 48.831746813763154),
@@ -39,17 +40,16 @@ HOTELS[2].name = 'Hotel International Prague';
 HOTELS[3].name = 'Hotel Cordelia';
 HOTELS[4].name = 'Hôtel Elysées-Opéra';
 HOTELS[5].name = 'QUALYS-HOTEL Apolonia Paris';
-
 //Sights
-export const SIGHTS: Sight[] = [
-	new Sight(14.356539845466614, 50.0849726539924),
+export const SIGHTS: Sight[] = [];
+
+SIGHTS[0].location = {longitude: '14.356539845466614', latitude: '50.0849726539924'};
 	new Sight(14.411466121673584, 50.0865009145791),
 	new Sight(14.420725107192993, 50.087554146889936),
 	new Sight(14.400640726089478, 50.09085825491626),
 	new Sight(2.294415235519409, 48.85831994216277),
 	new Sight(2.2950536012649536, 48.87373917228756),
 	new Sight(2.3358741402626038, 48.86062810043568)
-];
 
 SIGHTS[0].name = 'Břevnov Monastery';
 SIGHTS[1].name = 'Charles Bridge';
@@ -58,3 +58,7 @@ SIGHTS[3].name = 'St. Vitus Cathedral';
 SIGHTS[4].name = 'Eiffel Tower';
 SIGHTS[5].name = 'Arc de Triomphe';
 SIGHTS[6].name = 'Louvre Museum';
+*/
+
+export const HOTELS: Hotel[] = [];
+export const SIGHTS: Sight[] = [];

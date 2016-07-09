@@ -17,6 +17,7 @@ var Sights = (function () {
     function Sights(sightService) {
         this.sightService = sightService;
         this.loading = false;
+        this.hasSights = true;
     }
     Sights.prototype.ngOnInit = function () {
         this.getSights();
@@ -27,6 +28,7 @@ var Sights = (function () {
         this.sightService.getNearbySights(this.hotelLocation).then(function (sights) {
             _this.sights = sights;
             _this.loading = false;
+            _this.hasSights = sights.length > 0;
         });
     };
     __decorate([
@@ -38,7 +40,7 @@ var Sights = (function () {
             'selector': 'sights',
             'providers': [sight_service_1.SightService],
             'directives': [sight_row_component_1.SightRow, loading_indicator_component_1.LoadingIndicator],
-            'template': "\n    <div>Sights near {{hotelLocation.getLongLat()}}</div>\n    <loading-indicator \n      [isLoading]=\"loading\"\n      message=\"Loading sights...\"\n    ></loading-indicator>\n    <ul>\n      <sight-row\n        *ngFor=\"let sight of sights\"\n        [sight]=\"sight\"\n      >\n      </sight-row>\n    </ul>"
+            'template': "\n    <div *ngIf=\"hasSights\">Sights near {{hotelLocation | json}}</div>\n    <div *ngIf=\"!hasSights\">Sorry, no sights found nearby</div>\n    <loading-indicator \n      [isLoading]=\"loading\"\n      message=\"Loading sights...\"\n    ></loading-indicator>\n    <ul>\n      <sight-row\n        *ngFor=\"let sight of sights\"\n        [sight]=\"sight\"\n      >\n      </sight-row>\n    </ul>"
         }), 
         __metadata('design:paramtypes', [sight_service_1.SightService])
     ], Sights);

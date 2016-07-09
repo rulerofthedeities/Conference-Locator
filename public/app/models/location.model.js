@@ -1,8 +1,6 @@
 "use strict";
 var Location = (function () {
-    function Location(longitude, latitude) {
-        this.longitude = longitude;
-        this.latitude = latitude;
+    function Location() {
     }
     Location.prototype.getLongLat = function () {
         return this.longitude + ', ' + this.latitude;

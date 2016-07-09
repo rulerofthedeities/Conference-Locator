@@ -27,7 +27,7 @@ var FacilityRow = (function () {
             selector: 'facility-row',
             directives: [hotels_component_1.Hotels],
             template: "\n    <li>\n      <div (click)=\"selectFacility()\">\n        {{facility.name}}\n      </div>\n      <hotels \n        *ngIf=\"isSelected\"\n        [facilityLocation]=\"facility.location\"\n        [class.selected]=\"isSelected\"\n        >\n      </hotels>\n    </li>\n  ",
-            styles: ["\n\t\tli {cursor: pointer;}\n    .selected {color: blue;}\n    "]
+            styles: ["\n    li {cursor: pointer;}\n    .selected {color: blue;}\n    "]
         }), 
         __metadata('design:paramtypes', [])
     ], FacilityRow);
