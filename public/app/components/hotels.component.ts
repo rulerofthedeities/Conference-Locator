@@ -12,7 +12,7 @@ import {LoadingIndicator} from './common/loading-indicator.component';
   directives: [HotelRow, LoadingIndicator],
   template: `
     <div>
-      hotels nearby:
+      <div *ngIf="!hasHotels">Sorry, no hotels found nearby</div>
       <loading-indicator 
         [isLoading]="loading"
         message="Loading hotels...">
@@ -34,6 +34,7 @@ export class Hotels implements OnInit {
   selectedCity: string;
   subscription: Subscription;
   loading: boolean = false;
+  hasHotels: boolean = true;
 
   constructor(private hotelService: HotelService) {}
 
@@ -47,6 +48,7 @@ export class Hotels implements OnInit {
       hotels => {
         this.hotels = hotels;
         this.loading = false;
+        this.hasHotels = hotels.length > 0;
       }
     );
   }

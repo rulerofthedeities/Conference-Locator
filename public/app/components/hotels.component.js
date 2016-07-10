@@ -17,6 +17,7 @@ var Hotels = (function () {
     function Hotels(hotelService) {
         this.hotelService = hotelService;
         this.loading = false;
+        this.hasHotels = true;
     }
     Hotels.prototype.ngOnInit = function () {
         this.getHotels();
@@ -27,6 +28,7 @@ var Hotels = (function () {
         this.hotelService.getNearbyHotels(this.facilityLocation).then(function (hotels) {
             _this.hotels = hotels;
             _this.loading = false;
+            _this.hasHotels = hotels.length > 0;
         });
     };
     Hotels.prototype.isSelected = function (hotel) {
@@ -41,7 +43,7 @@ var Hotels = (function () {
             selector: 'hotels',
             providers: [hotel_service_1.HotelService],
             directives: [hotel_row_component_1.HotelRow, loading_indicator_component_1.LoadingIndicator],
-            template: "\n    <div>\n      hotels nearby:\n      <loading-indicator \n        [isLoading]=\"loading\"\n        message=\"Loading hotels...\">\n      </loading-indicator>\n      <ul class=\"list-unstyled\">\n        <hotel-row \n          *ngFor=\"let hotel of hotels;let num=index\"\n          [hotel]=\"hotel\"\n          [no]=\"num+1\">\n        </hotel-row>\n      </ul>\n    </div>"
+            template: "\n    <div>\n      <div *ngIf=\"!hasHotels\">Sorry, no hotels found nearby</div>\n      <loading-indicator \n        [isLoading]=\"loading\"\n        message=\"Loading hotels...\">\n      </loading-indicator>\n      <ul class=\"list-unstyled\">\n        <hotel-row \n          *ngFor=\"let hotel of hotels;let num=index\"\n          [hotel]=\"hotel\"\n          [no]=\"num+1\">\n        </hotel-row>\n      </ul>\n    </div>"
         }), 
         __metadata('design:paramtypes', [hotel_service_1.HotelService])
     ], Hotels);

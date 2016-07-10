@@ -10,7 +10,6 @@ import {LoadingIndicator} from './common/loading-indicator.component';
   'providers': [SightService],
   'directives': [SightRow, LoadingIndicator],
   'template': `
-    <div *ngIf="hasSights">Sights nearby</div>
     <div *ngIf="!hasSights">Sorry, no sights found nearby</div>
     <loading-indicator 
       [isLoading]="loading"

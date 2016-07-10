@@ -10,7 +10,6 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('@angular/core');
 var hotel_model_1 = require('../models/hotel.model');
-var sights_component_1 = require('./sights.component');
 var item_component_1 = require('./common/item.component');
 var HotelRow = (function () {
     function HotelRow() {
@@ -30,9 +29,8 @@ var HotelRow = (function () {
     HotelRow = __decorate([
         core_1.Component({
             selector: 'hotel-row',
-            directives: [sights_component_1.Sights, item_component_1.Item],
-            template: "\n    <li>\n      <item (click)=\"selectHotel()\"\n        [no]=\"no\"\n        [img]=\"hotel.thumb\"\n        [name]=\"hotel.name\"\n        [distance]=\"hotel.distance\">\n      </item>\n      <sights \n        *ngIf=\"isSelected\"\n        [hotelLocation]=\"hotel.location\"\n        [class.selected]=\"isSelected\"\n        >\n      </sights>\n    </li>",
-            styles: ["\n     .selected {color: green;}\n  "]
+            directives: [item_component_1.Item],
+            template: "\n    <li>\n      <item (click)=\"selectHotel()\"\n        [no]=\"no\"\n        [img]=\"hotel.thumb\"\n        [name]=\"hotel.name\"\n        [distance]=\"hotel.distance\">\n      </item>\n    </li>"
         }), 
         __metadata('design:paramtypes', [])
     ], HotelRow);

@@ -1,11 +1,10 @@
 import {Component, Input} from '@angular/core';
 import {Hotel} from '../models/hotel.model';
-import {Sights} from './sights.component';
 import {Item} from './common/item.component';
 
 @Component({
   selector: 'hotel-row',
-  directives: [Sights, Item],
+  directives: [Item],
   template: `
     <li>
       <item (click)="selectHotel()"
@@ -14,16 +13,7 @@ import {Item} from './common/item.component';
         [name]="hotel.name"
         [distance]="hotel.distance">
       </item>
-      <sights 
-        *ngIf="isSelected"
-        [hotelLocation]="hotel.location"
-        [class.selected]="isSelected"
-        >
-      </sights>
-    </li>`,
-  styles: [`
-     .selected {color: green;}
-  `]
+    </li>`
 })
 
 export class HotelRow {
