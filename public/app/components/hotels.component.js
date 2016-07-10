@@ -41,7 +41,7 @@ var Hotels = (function () {
             selector: 'hotels',
             providers: [hotel_service_1.HotelService],
             directives: [hotel_row_component_1.HotelRow, loading_indicator_component_1.LoadingIndicator],
-            template: "\n    <div>\n      hotels near location {{facilityLocation | json}}\n      <loading-indicator \n        [isLoading]=\"loading\"\n        message=\"Loading hotels...\">\n      </loading-indicator>\n      <ul>\n        <hotel-row \n          *ngFor=\"let hotel of hotels\"\n          [hotel]=\"hotel\">\n        </hotel-row>\n      </ul>\n    </div>"
+            template: "\n    <div>\n      hotels nearby:\n      <loading-indicator \n        [isLoading]=\"loading\"\n        message=\"Loading hotels...\">\n      </loading-indicator>\n      <ul class=\"list-unstyled\">\n        <hotel-row \n          *ngFor=\"let hotel of hotels;let num=index\"\n          [hotel]=\"hotel\"\n          [no]=\"num+1\">\n        </hotel-row>\n      </ul>\n    </div>"
         }), 
         __metadata('design:paramtypes', [hotel_service_1.HotelService])
     ], Hotels);

@@ -1,1 +1,1 @@
-{"version":3,"file":"sight.model.js","sourceRoot":"","sources":["sight.model.ts"],"names":[],"mappings":";;;;;;AAAA,2BAAmB,cAAc,CAAC,CAAA;AAElC;IAA2B,yBAAI;IAA/B;QAA2B,8BAAI;IAC/B,CAAC;IAAD,YAAC;AAAD,CAAC,AADD,CAA2B,iBAAI,GAC9B;AADY,aAAK,QACjB,CAAA"}
+{"version":3,"file":"sight.model.js","sourceRoot":"","sources":["sight.model.ts"],"names":[],"mappings":";;;;;;AAAA,2BAAmB,cAAc,CAAC,CAAA;AAElC;IAA2B,yBAAI;IAA/B;QAA2B,8BAAI;IAE/B,CAAC;IAAD,YAAC;AAAD,CAAC,AAFD,CAA2B,iBAAI,GAE9B;AAFY,aAAK,QAEjB,CAAA"}

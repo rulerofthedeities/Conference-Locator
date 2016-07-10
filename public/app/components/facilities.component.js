@@ -27,7 +27,7 @@ var Facilities = (function () {
         core_1.Component({
             selector: 'conference-list',
             directives: [facility_row_component_1.FacilityRow],
-            template: "\n  <ul>\n    <facility-row \n      [facility]=\"facility\" \n      *ngFor=\"let facility of facilities\">\n    </facility-row>\n  </ul>\n  <div *ngIf=\"selectedFacility\">\n  \t{{selectedFacility.name}}\n  </div>\n   "
+            template: "\n  <ul class=\"list-unstyled\">\n    <facility-row \n      [facility]=\"facility\" \n      *ngFor=\"let facility of facilities\">\n    </facility-row>\n  </ul>\n  <div *ngIf=\"selectedFacility\">\n  \t{{selectedFacility.name}}\n  </div>\n   "
         }), 
         __metadata('design:paramtypes', [])
     ], Facilities);

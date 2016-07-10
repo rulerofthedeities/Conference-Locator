@@ -15,15 +15,21 @@ import {Subscription}   from 'rxjs/Subscription';
 	directives: [Facilities, CityFilter, LoadingIndicator],
 	providers: [ConferenceService, CityService, CityStateService],
 	template: `
-    <city-filter 
-      [cities]="cities"
-      (selectedCity)="onSelectedCity($event)">
-    </city-filter>
-    <loading-indicator [isLoading]="loading"></loading-indicator>
-    <conference-list 
-      [facilities]="conferenceSites"
-    ></conference-list>
-    {{error}}
+    <div class="container">
+      <div class="row">
+        <city-filter 
+          [cities]="cities"
+          (selectedCity)="onSelectedCity($event)">
+        </city-filter>
+      </div>
+      <div class="row">
+        <loading-indicator [isLoading]="loading"></loading-indicator>
+        <conference-list 
+          [facilities]="conferenceSites"
+        ></conference-list>
+        {{error}}
+      </div>
+    </div>
     `
 })
 

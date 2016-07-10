@@ -10,16 +10,17 @@ import {LoadingIndicator} from './common/loading-indicator.component';
   'providers': [SightService],
   'directives': [SightRow, LoadingIndicator],
   'template': `
-    <div *ngIf="hasSights">Sights near {{hotelLocation | json}}</div>
+    <div *ngIf="hasSights">Sights nearby</div>
     <div *ngIf="!hasSights">Sorry, no sights found nearby</div>
     <loading-indicator 
       [isLoading]="loading"
       message="Loading sights..."
     ></loading-indicator>
-    <ul>
+    <ul class="list-unstyled">
       <sight-row
-        *ngFor="let sight of sights"
+        *ngFor="let sight of sights;let num=index"
         [sight]="sight"
+        [no]="num+1"
       >
       </sight-row>
     </ul>`

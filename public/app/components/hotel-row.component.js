@@ -11,6 +11,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('@angular/core');
 var hotel_model_1 = require('../models/hotel.model');
 var sights_component_1 = require('./sights.component');
+var item_component_1 = require('./common/item.component');
 var HotelRow = (function () {
     function HotelRow() {
         this.isSelected = false;
@@ -22,11 +23,15 @@ var HotelRow = (function () {
         core_1.Input(), 
         __metadata('design:type', hotel_model_1.Hotel)
     ], HotelRow.prototype, "hotel", void 0);
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Number)
+    ], HotelRow.prototype, "no", void 0);
     HotelRow = __decorate([
         core_1.Component({
             selector: 'hotel-row',
-            directives: [sights_component_1.Sights],
-            template: "<li>\n        <div (click)=\"selectHotel()\">\n          {{hotel.name}}\n        </div>\n        <sights \n          *ngIf=\"isSelected\"\n          [hotelLocation]=\"hotel.location\"\n          [class.selected]=\"isSelected\"\n          >\n        </sights>\n        </li>",
+            directives: [sights_component_1.Sights, item_component_1.Item],
+            template: "\n    <li>\n      <item (click)=\"selectHotel()\"\n        [no]=\"no\"\n        [img]=\"hotel.thumb\"\n        [name]=\"hotel.name\"\n        [distance]=\"hotel.distance\">\n      </item>\n      <sights \n        *ngIf=\"isSelected\"\n        [hotelLocation]=\"hotel.location\"\n        [class.selected]=\"isSelected\"\n        >\n      </sights>\n    </li>",
             styles: ["\n     .selected {color: green;}\n  "]
         }), 
         __metadata('design:paramtypes', [])

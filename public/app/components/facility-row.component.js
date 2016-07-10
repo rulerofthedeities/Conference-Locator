@@ -26,7 +26,7 @@ var FacilityRow = (function () {
         core_1.Component({
             selector: 'facility-row',
             directives: [hotels_component_1.Hotels],
-            template: "\n    <li>\n      <div (click)=\"selectFacility()\">\n        {{facility.name}}\n      </div>\n      <hotels \n        *ngIf=\"isSelected\"\n        [facilityLocation]=\"facility.location\"\n        [class.selected]=\"isSelected\"\n        >\n      </hotels>\n    </li>\n  ",
+            template: "\n    <li [ngClass]=\"{active:isSelected}\">\n      <i class=\"fa pull-left\" [ngClass]=\"{'fa-chevron-right':!isSelected,'fa-chevron-down':isSelected}\"></i>\n      <h4 (click)=\"selectFacility()\">\n        {{facility.name}}\n      </h4>\n      <hotels \n        *ngIf=\"isSelected\"\n        [facilityLocation]=\"facility.location\"\n        [class.selected]=\"isSelected\"\n        >\n      </hotels>\n    </li>\n  ",
             styles: ["\n    li {cursor: pointer;}\n    .selected {color: blue;}\n    "]
         }), 
         __metadata('design:paramtypes', [])

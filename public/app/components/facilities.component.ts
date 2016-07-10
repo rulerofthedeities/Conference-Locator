@@ -6,7 +6,7 @@ import {FacilityRow} from './facility-row.component';
   selector: 'conference-list',
   directives: [FacilityRow],
   template: `
-  <ul>
+  <ul class="list-unstyled">
     <facility-row 
       [facility]="facility" 
       *ngFor="let facility of facilities">

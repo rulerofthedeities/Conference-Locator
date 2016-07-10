@@ -40,7 +40,7 @@ var Sights = (function () {
             'selector': 'sights',
             'providers': [sight_service_1.SightService],
             'directives': [sight_row_component_1.SightRow, loading_indicator_component_1.LoadingIndicator],
-            'template': "\n    <div *ngIf=\"hasSights\">Sights near {{hotelLocation | json}}</div>\n    <div *ngIf=\"!hasSights\">Sorry, no sights found nearby</div>\n    <loading-indicator \n      [isLoading]=\"loading\"\n      message=\"Loading sights...\"\n    ></loading-indicator>\n    <ul>\n      <sight-row\n        *ngFor=\"let sight of sights\"\n        [sight]=\"sight\"\n      >\n      </sight-row>\n    </ul>"
+            'template': "\n    <div *ngIf=\"hasSights\">Sights nearby</div>\n    <div *ngIf=\"!hasSights\">Sorry, no sights found nearby</div>\n    <loading-indicator \n      [isLoading]=\"loading\"\n      message=\"Loading sights...\"\n    ></loading-indicator>\n    <ul class=\"list-unstyled\">\n      <sight-row\n        *ngFor=\"let sight of sights;let num=index\"\n        [sight]=\"sight\"\n        [no]=\"num+1\"\n      >\n      </sight-row>\n    </ul>"
         }), 
         __metadata('design:paramtypes', [sight_service_1.SightService])
     ], Sights);

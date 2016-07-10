@@ -21,17 +21,13 @@ var CityFilter = (function () {
         __metadata('design:type', Array)
     ], CityFilter.prototype, "cities", void 0);
     __decorate([
-        core_1.Input('defaultCity'), 
-        __metadata('design:type', String)
-    ], CityFilter.prototype, "currentCity", void 0);
-    __decorate([
         core_1.Output(), 
         __metadata('design:type', Object)
     ], CityFilter.prototype, "selectedCity", void 0);
     CityFilter = __decorate([
         core_1.Component({
             'selector': 'city-filter',
-            'template': "<div>City Selector</div>\n\t\t\t\t      <select\n                  [(ngModel)]=\"currentCity\"\n                  (ngModelChange)=\"onChange($event)\">\n                  <option *ngFor=\"let city of cities\" [value]=\"city.alias\">{{city.name}}</option>\n              </select>\n              {{defaultCity}}\n\t\t\t\t      "
+            'template': "\n    <div class=\"form-group form-group-lg\">\n      <select class=\"form-control\"\n          [(ngModel)]=\"currentCity\"\n          (ngModelChange)=\"onChange($event)\">\n          <option *ngFor=\"let city of cities\" [value]=\"city.alias\">{{city.name}}</option>\n      </select>\n    </div>\n    "
         }), 
         __metadata('design:paramtypes', [])
     ], CityFilter);

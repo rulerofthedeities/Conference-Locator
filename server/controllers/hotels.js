@@ -1,9 +1,9 @@
 var mongo = require('mongodb'),
     assert = require("assert");
 
-var loadSights = function(db, options, callback) {
-  var collection = db.collection('items');
-  
+var loadHotels = function(db, options, callback) {
+  var collection = db.collection('hotels');
+
   collection
     .aggregate([
       {$geoNear:{
@@ -15,19 +15,18 @@ var loadSights = function(db, options, callback) {
           coordinates:[options.pos.lon, options.pos.lat]
          }, 
         distanceField: 'distance'
-      }
-    },
-    {$match:{pos:{$exists:true},'title.en':{$exists:true}}},
-    {$project:{
-      _id:0, 
-      distance:1, 
-      name:'$title.en',
-      cityAlias: '$city.alias',
-      location: { 
-        longitude: {$arrayElemAt: ['$pos.coordinates', 0]},
-        latitude: {$arrayElemAt: ['$pos.coordinates', 1]}
-      }
-    }}])
+        }
+      },
+      {$project: {
+        _id:0, 
+        distance:1, 
+        name:1,
+        thumb:1,
+        location: { 
+          longitude: {$arrayElemAt: ['$pos.coordinates', 0]},
+          latitude: {$arrayElemAt: ['$pos.coordinates', 1]}
+        }}
+      }])
     .toArray(function(err, docs) {
         assert.equal(null, err);
         callback(docs);
@@ -44,11 +43,11 @@ module.exports = {
     pos.lat = parseFloat(pos.lat);
     pos.lon = parseFloat(pos.lon);
     if (pos && isNumber(pos.lat) && isNumber(pos.lon)) {
-      loadSights(mongo.DB, {pos: pos}, function(docs){
-        res.status(200).send({"sights": docs});
+      loadHotels(mongo.DB, {pos: pos}, function(docs){
+        res.status(200).send({"hotels": docs});
       });
     } else {
-      res.status(500).send('Invalid parameters for sights.');
+      res.status(500).send('Invalid parameters for hotels.');
     }
   }
 };

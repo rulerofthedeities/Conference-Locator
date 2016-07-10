@@ -6,10 +6,11 @@ import {Hotels} from './hotels.component';
   selector: 'facility-row',
   directives: [Hotels],
   template: `
-    <li>
-      <div (click)="selectFacility()">
+    <li [ngClass]="{active:isSelected}">
+      <i class="fa pull-left" [ngClass]="{'fa-chevron-right':!isSelected,'fa-chevron-down':isSelected}"></i>
+      <h4 (click)="selectFacility()">
         {{facility.name}}
-      </div>
+      </h4>
       <hotels 
         *ngIf="isSelected"
         [facilityLocation]="facility.location"

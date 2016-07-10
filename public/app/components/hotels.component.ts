@@ -12,15 +12,16 @@ import {LoadingIndicator} from './common/loading-indicator.component';
   directives: [HotelRow, LoadingIndicator],
   template: `
     <div>
-      hotels near location {{facilityLocation | json}}
+      hotels nearby:
       <loading-indicator 
         [isLoading]="loading"
         message="Loading hotels...">
       </loading-indicator>
-      <ul>
+      <ul class="list-unstyled">
         <hotel-row 
-          *ngFor="let hotel of hotels"
-          [hotel]="hotel">
+          *ngFor="let hotel of hotels;let num=index"
+          [hotel]="hotel"
+          [no]="num+1">
         </hotel-row>
       </ul>
     </div>`
