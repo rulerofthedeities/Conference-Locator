@@ -9,26 +9,31 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
+var tab_component_1 = require('./tab.component');
 var Tabs = (function () {
     function Tabs() {
-        this.tabs = [];
     }
     Tabs.prototype.selectTab = function (tab) {
-        this.tabs.forEach(function (tab) {
-            tab.active = false;
-        });
+        this.tabs.toArray().forEach(function (tab) { return tab.active = false; });
         tab.active = true;
     };
-    Tabs.prototype.addTab = function (tab) {
-        if (this.tabs.length === 0) {
-            tab.active = true;
+    // contentChildren are set
+    Tabs.prototype.ngAfterContentInit = function () {
+        // get all active tabs
+        var activeTabs = this.tabs.filter(function (tab) { return tab.active; });
+        // if there is no active tab set, activate the first
+        if (activeTabs.length === 0) {
+            this.selectTab(this.tabs.first);
         }
-        this.tabs.push(tab);
     };
+    __decorate([
+        core_1.ContentChildren(tab_component_1.Tab), 
+        __metadata('design:type', core_1.QueryList)
+    ], Tabs.prototype, "tabs", void 0);
     Tabs = __decorate([
         core_1.Component({
             selector: 'tabs',
-            template: "\n  <ul class=\"nav nav-tabs\">\n    <li *ngFor=\"let tab of tabs;let num=index\" (click)=\"selectTab(tab)\" [class.active]=\"tab.active\">\n      <a href=\"#\">{{tab.title}}</a>\n    </li>\n  </ul>\n  <ng-content></ng-content>\n  "
+            template: "\n  <ul class=\"nav nav-tabs\">\n    <li \n      *ngFor=\"let tab of tabs;let num=index\" \n      (click)=\"selectTab(tab)\" \n      [class.active]=\"tab.active\">\n      <a href=\"#\">{{tab.title}}</a>\n    </li>\n  </ul>\n  <ng-content></ng-content>\n  "
         }), 
         __metadata('design:paramtypes', [])
     ], Tabs);

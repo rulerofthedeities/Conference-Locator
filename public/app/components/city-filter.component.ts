@@ -6,19 +6,23 @@ import {City} from '../models/city.model';
   'template': `
     <div class="form-group form-group-lg">
       <select class="form-control"
-          [(ngModel)]="currentCity"
-          (ngModelChange)="onChange($event)">
-          <option *ngFor="let city of cities" [value]="city.alias">{{city.name}}</option>
+        [ngModel]="currentCity"
+        (ngModelChange)="onChange($event)">
+        <option 
+          *ngFor="let city of cities" 
+          [ngValue]="city">
+          {{city.name}}
+        </option>
       </select>
     </div>
     `
 })
 export class CityFilter {
   @Input() cities: City[];
-  @Output() selectedCity = new EventEmitter<string>();
+  @Output() selectedCity = new EventEmitter<City>();
 
-  onChange(cityAlias: string) {
-    this.selectedCity.emit(cityAlias);
+  onChange(city: City) {
+    this.selectedCity.emit(city);
   }
 
 }

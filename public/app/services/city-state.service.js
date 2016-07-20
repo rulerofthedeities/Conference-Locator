@@ -12,11 +12,11 @@ var core_1 = require('@angular/core');
 var Subject_1 = require('rxjs/Subject');
 var CityStateService = (function () {
     function CityStateService() {
-        this._cityAlias = new Subject_1.Subject();
-        this.cityAlias$ = this._cityAlias.asObservable();
+        this._city = new Subject_1.Subject();
+        this.city$ = this._city.asObservable();
     }
     CityStateService.prototype.setCity = function (city) {
-        this._cityAlias.next(city);
+        this._city.next(city);
     };
     CityStateService = __decorate([
         core_1.Injectable(), 

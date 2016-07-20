@@ -9,28 +9,24 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
-var tabs_component_1 = require('./tabs.component');
 var Tab = (function () {
-    function Tab(tabs) {
-        tabs.addTab(this);
+    function Tab() {
+        this.active = false;
     }
-    Tab.prototype.ngOnInit = function () {
-        this.active = this.active || false;
-    };
     __decorate([
         core_1.Input('tabTitle'), 
         __metadata('design:type', String)
     ], Tab.prototype, "title", void 0);
     __decorate([
         core_1.Input(), 
-        __metadata('design:type', Boolean)
+        __metadata('design:type', Object)
     ], Tab.prototype, "active", void 0);
     Tab = __decorate([
         core_1.Component({
             selector: 'tab',
-            template: "\n    <div [hidden]=\"!active\">\n      <ng-content></ng-content>\n    </div>\n  "
+            template: "\n    <div \n      [hidden]=\"!active\">\n      <ng-content></ng-content>\n    </div>\n  "
         }), 
-        __metadata('design:paramtypes', [tabs_component_1.Tabs])
+        __metadata('design:paramtypes', [])
     ], Tab);
     return Tab;
 }());

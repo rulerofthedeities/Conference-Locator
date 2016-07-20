@@ -1,11 +1,14 @@
-import {Component} from '@angular/core';
+import {Component, ContentChildren, QueryList, AfterContentInit} from '@angular/core';
 import {Tab} from './tab.component';
 
 @Component({
   selector: 'tabs',
   template: `
   <ul class="nav nav-tabs">
-    <li *ngFor="let tab of tabs;let num=index" (click)="selectTab(tab)" [class.active]="tab.active">
+    <li 
+      *ngFor="let tab of tabs;let num=index" 
+      (click)="selectTab(tab)" 
+      [class.active]="tab.active">
       <a href="#">{{tab.title}}</a>
     </li>
   </ul>
@@ -13,20 +16,22 @@ import {Tab} from './tab.component';
   `
 })
 
-export class Tabs {
-  tabs:Tab[] = [];
+export class Tabs implements AfterContentInit {
+  @ContentChildren(Tab) tabs: QueryList<Tab>;
 
   selectTab(tab: Tab) {
-    this.tabs.forEach((tab) => {
-      tab.active = false;
-    });
+    this.tabs.toArray().forEach(tab => tab.active = false);
     tab.active = true;
   }
 
-  addTab(tab: Tab) {
-    if (this.tabs.length === 0) {
-      tab.active = true;
+  // contentChildren are set
+  ngAfterContentInit() {
+    // get all active tabs
+    let activeTabs = this.tabs.filter((tab)=>tab.active);
+
+    // if there is no active tab set, activate the first
+    if(activeTabs.length === 0) {
+      this.selectTab(this.tabs.first);
     }
-    this.tabs.push(tab);
   }
 }

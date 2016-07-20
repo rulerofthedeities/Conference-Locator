@@ -13,8 +13,8 @@ var CityFilter = (function () {
     function CityFilter() {
         this.selectedCity = new core_1.EventEmitter();
     }
-    CityFilter.prototype.onChange = function (cityAlias) {
-        this.selectedCity.emit(cityAlias);
+    CityFilter.prototype.onChange = function (city) {
+        this.selectedCity.emit(city);
     };
     __decorate([
         core_1.Input(), 
@@ -27,7 +27,7 @@ var CityFilter = (function () {
     CityFilter = __decorate([
         core_1.Component({
             'selector': 'city-filter',
-            'template': "\n    <div class=\"form-group form-group-lg\">\n      <select class=\"form-control\"\n          [(ngModel)]=\"currentCity\"\n          (ngModelChange)=\"onChange($event)\">\n          <option *ngFor=\"let city of cities\" [value]=\"city.alias\">{{city.name}}</option>\n      </select>\n    </div>\n    "
+            'template': "\n    <div class=\"form-group form-group-lg\">\n      <select class=\"form-control\"\n        [ngModel]=\"currentCity\"\n        (ngModelChange)=\"onChange($event)\">\n        <option \n          *ngFor=\"let city of cities\" \n          [ngValue]=\"city\">\n          {{city.name}}\n        </option>\n      </select>\n    </div>\n    "
         }), 
         __metadata('design:paramtypes', [])
     ], CityFilter);

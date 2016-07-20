@@ -9,7 +9,9 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
+var city_model_1 = require('../models/city.model');
 var facility_row_component_1 = require('./facility-row.component');
+var map_component_1 = require('./map.component');
 var Facilities = (function () {
     function Facilities() {
     }
@@ -23,11 +25,15 @@ var Facilities = (function () {
         core_1.Input(), 
         __metadata('design:type', Array)
     ], Facilities.prototype, "facilities", void 0);
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', city_model_1.City)
+    ], Facilities.prototype, "city", void 0);
     Facilities = __decorate([
         core_1.Component({
             selector: 'conference-list',
-            directives: [facility_row_component_1.FacilityRow],
-            template: "\n  <ul class=\"list-unstyled\">\n    <facility-row \n      [facility]=\"facility\" \n      *ngFor=\"let facility of facilities\">\n    </facility-row>\n  </ul>\n  <div *ngIf=\"selectedFacility\">\n  \t{{selectedFacility.name}}\n  </div>\n   "
+            directives: [facility_row_component_1.FacilityRow, map_component_1.Map],
+            template: "\n  <div class=\"col-md-6\">\n    <ul class=\"list-unstyled\">\n      <facility-row \n        [facility]=\"facility\" \n        *ngFor=\"let facility of facilities\">\n      </facility-row>\n    </ul>\n    <div *ngIf=\"selectedFacility\">\n    \t{{selectedFacility.name}}\n    </div>\n  </div>\n  <div class=\"col-md-6\">\n    <map\n      [location]=\"city.location\">\n    </map>\n  </div>\n   "
         }), 
         __metadata('design:paramtypes', [])
     ], Facilities);

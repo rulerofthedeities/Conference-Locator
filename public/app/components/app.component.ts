@@ -8,26 +8,27 @@ import {ConferenceService} from '../services/conference.service';
 import {CityService} from '../services/city.service';
 import {CityStateService} from '../services/city-state.service';
 import {Subscription}   from 'rxjs/Subscription';
-import {MapsTest} from './maptest.component';
 
 @Component({
 	selector: 'conferences',
-	directives: [Facilities, CityFilter, LoadingIndicator, MapsTest],
+	directives: [Facilities, CityFilter, LoadingIndicator],
 	providers: [ConferenceService, CityService, CityStateService],
 	template: `
     <div class="container">
-      <maps-test></maps-test>
       <div class="row">
         <city-filter 
           [cities]="cities"
           (selectedCity)="onSelectedCity($event)">
         </city-filter>
       </div>
-      <div class="row">
-        <loading-indicator [isLoading]="loading"></loading-indicator>
+      <div class="row" *ngIf="selectedCity">
+        <loading-indicator 
+          [isLoading]="loading">
+        </loading-indicator>
         <conference-list 
           [facilities]="conferenceSites"
-        ></conference-list>
+          [city]="selectedCity">
+        </conference-list>
         {{error}}
       </div>
     </div>
@@ -37,7 +38,7 @@ import {MapsTest} from './maptest.component';
 export class ConferenceApp implements OnInit, OnDestroy {
 	public conferenceSites: Conference[];
   public cities: City[];
-  selectedCity: string;
+  selectedCity: City;
   subscription: Subscription;
   loading: boolean = false;
   error: string;
@@ -49,7 +50,7 @@ export class ConferenceApp implements OnInit, OnDestroy {
   }
 
 	ngOnInit() {
-    this.subscription = this.cityStateService.cityAlias$.subscribe(
+    this.subscription = this.cityStateService.city$.subscribe(
       city => {
         this.selectedCity = city;
       });
@@ -74,9 +75,9 @@ export class ConferenceApp implements OnInit, OnDestroy {
     );
   }
 
-  onSelectedCity(cityAlias: string) {
-    this.cityStateService.setCity(cityAlias);
-    this.getConferenceSites(cityAlias);
+  onSelectedCity(city: City) {
+    this.cityStateService.setCity(city);
+    this.getConferenceSites(city.alias);
   }
 
   ngOnDestroy() {

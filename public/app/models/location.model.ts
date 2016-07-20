@@ -1,6 +1,6 @@
 export class Location {
-  longitude: string;
-  latitude: string;
+  longitude: number;
+  latitude: number;
 
   public getLongLat(): string {
     return this.longitude + ', ' + this.latitude;

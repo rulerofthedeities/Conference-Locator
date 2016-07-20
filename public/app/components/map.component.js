@@ -9,23 +9,27 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
+var location_model_1 = require('../models/location.model');
 var core_2 = require('angular2-google-maps/core');
-var MapsTest = (function () {
-    function MapsTest() {
-        this.title = 'My first angular2-google-maps project';
+var Map = (function () {
+    function Map() {
         this.lat = 51.678418;
         this.lng = 7.809007;
     }
-    MapsTest = __decorate([
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', location_model_1.Location)
+    ], Map.prototype, "location", void 0);
+    Map = __decorate([
         core_1.Component({
-            selector: 'maps-test',
+            selector: 'map',
             directives: [core_2.GOOGLE_MAPS_DIRECTIVES],
-            template: "\n  <sebm-google-map [latitude]=\"lat\" [longitude]=\"lng\">\n    <sebm-google-map-marker [latitude]=\"lat\" [longitude]=\"lng\"></sebm-google-map-marker>\n  </sebm-google-map>",
+            template: "\n  <sebm-google-map \n    [longitude]=\"location.longitude\"\n    [latitude]=\"location.latitude\">\n    <sebm-google-map-marker \n      [longitude]=\"lng\"\n      [latitude]=\"lat\">\n    </sebm-google-map-marker>\n  </sebm-google-map>",
             styles: ["\n    .sebm-google-map-container {\n      height: 300px;\n    }\n"]
         }), 
         __metadata('design:paramtypes', [])
-    ], MapsTest);
-    return MapsTest;
+    ], Map);
+    return Map;
 }());
-exports.MapsTest = MapsTest;
-//# sourceMappingURL=maptest.component.js.map
+exports.Map = Map;
+//# sourceMappingURL=map.component.js.map
