@@ -15,6 +15,7 @@ var loading_indicator_component_1 = require('./common/loading-indicator.componen
 var conference_service_1 = require('../services/conference.service');
 var city_service_1 = require('../services/city.service');
 var city_state_service_1 = require('../services/city-state.service');
+var maptest_component_1 = require('./maptest.component');
 var ConferenceApp = (function () {
     function ConferenceApp(conferenceService, cityService, cityStateService) {
         this.conferenceService = conferenceService;
@@ -54,9 +55,9 @@ var ConferenceApp = (function () {
     ConferenceApp = __decorate([
         core_1.Component({
             selector: 'conferences',
-            directives: [facilities_component_1.Facilities, city_filter_component_1.CityFilter, loading_indicator_component_1.LoadingIndicator],
+            directives: [facilities_component_1.Facilities, city_filter_component_1.CityFilter, loading_indicator_component_1.LoadingIndicator, maptest_component_1.MapsTest],
             providers: [conference_service_1.ConferenceService, city_service_1.CityService, city_state_service_1.CityStateService],
-            template: "\n    <div class=\"container\">\n      <div class=\"row\">\n        <city-filter \n          [cities]=\"cities\"\n          (selectedCity)=\"onSelectedCity($event)\">\n        </city-filter>\n      </div>\n      <div class=\"row\">\n        <loading-indicator [isLoading]=\"loading\"></loading-indicator>\n        <conference-list \n          [facilities]=\"conferenceSites\"\n        ></conference-list>\n        {{error}}\n      </div>\n    </div>\n    "
+            template: "\n    <div class=\"container\">\n      <maps-test></maps-test>\n      <div class=\"row\">\n        <city-filter \n          [cities]=\"cities\"\n          (selectedCity)=\"onSelectedCity($event)\">\n        </city-filter>\n      </div>\n      <div class=\"row\">\n        <loading-indicator [isLoading]=\"loading\"></loading-indicator>\n        <conference-list \n          [facilities]=\"conferenceSites\"\n        ></conference-list>\n        {{error}}\n      </div>\n    </div>\n    "
         }), 
         __metadata('design:paramtypes', [conference_service_1.ConferenceService, city_service_1.CityService, city_state_service_1.CityStateService])
     ], ConferenceApp);

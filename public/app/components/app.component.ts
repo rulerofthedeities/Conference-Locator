@@ -8,14 +8,15 @@ import {ConferenceService} from '../services/conference.service';
 import {CityService} from '../services/city.service';
 import {CityStateService} from '../services/city-state.service';
 import {Subscription}   from 'rxjs/Subscription';
-
+import {MapsTest} from './maptest.component';
 
 @Component({
 	selector: 'conferences',
-	directives: [Facilities, CityFilter, LoadingIndicator],
+	directives: [Facilities, CityFilter, LoadingIndicator, MapsTest],
 	providers: [ConferenceService, CityService, CityStateService],
 	template: `
     <div class="container">
+      <maps-test></maps-test>
       <div class="row">
         <city-filter 
           [cities]="cities"
