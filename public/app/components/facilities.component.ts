@@ -4,21 +4,21 @@ import {City} from '../models/city.model';
 import {Marker} from '../models/map.model';
 import {FacilityRow} from './facility-row.component';
 import {Map} from './map.component';
+import {MapService} from '../services/map.service';
 
 @Component({
   selector: 'conference-list',
   directives: [FacilityRow, Map],
+  providers: [MapService],
   template: `
   <div class="col-md-6">
     <ul class="list-unstyled">
       <facility-row 
         [facility]="facility" 
-        *ngFor="let facility of facilities">
+        *ngFor="let facility of facilities; let i = index"
+        [i] = "i">
       </facility-row>
     </ul>
-    <div *ngIf="selectedFacility">
-    	{{selectedFacility.name}}
-    </div>
   </div>
   <div class="col-md-6">
     <map
@@ -33,13 +33,5 @@ export class Facilities {
   @Input() facilities: Conference[];
   @Input() markers: Marker[];
   @Input() city: City;
-  selectedFacility: Conference;
 
-  onSelect(facility: Conference): void {
-    this.selectedFacility = facility;
-  }
-
-  isSelected(facility: Conference): boolean {
-    return facility === this.selectedFacility;
-  }
 }

@@ -11,10 +11,17 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('@angular/core');
 var core_2 = require('angular2-google-maps/core');
 var location_model_1 = require('../models/location.model');
-var conference_service_1 = require('../services/conference.service');
+var map_service_1 = require('../services/map.service');
 var Map = (function () {
-    function Map() {
+    function Map(mapService) {
+        this.mapService = mapService;
     }
+    Map.prototype.clickedMarker = function (marker, index) {
+        console.log('clicked the marker:', marker);
+        marker.icon = '../assets/img/icon-star-red.png';
+        //this.markers[0].icon = '../assets/img/icon-star-red.png';
+        this.mapService.newccMarker(index);
+    };
     __decorate([
         core_1.Input(), 
         __metadata('design:type', location_model_1.Location)
@@ -27,11 +34,10 @@ var Map = (function () {
         core_1.Component({
             selector: 'map',
             directives: [core_2.GOOGLE_MAPS_DIRECTIVES],
-            providers: [conference_service_1.ConferenceService],
-            template: "\n  <sebm-google-map \n    [longitude]=\"location.longitude\"\n    [latitude]=\"location.latitude\">\n\n    <sebm-google-map-marker \n      *ngFor=\"let m of markers; let i = index\"\n      [longitude]=\"m.lon\"\n      [latitude]=\"m.lat\"\n      [label]=\"m.label\"\n      [markerDraggable]=\"m.draggable\"\n      [iconUrl]=\"m.icon\">\n      <sebm-google-map-info-window>\n          <p>{{m.infotxt}}</p>\n      </sebm-google-map-info-window>\n    </sebm-google-map-marker>\n\n  </sebm-google-map>",
+            template: "\n  <sebm-google-map \n    [longitude]=\"location.longitude\"\n    [latitude]=\"location.latitude\"\n    [zoom]=\"11\">\n\n    <sebm-google-map-marker \n      *ngFor=\"let m of markers; let i = index\"\n      (markerClick)=\"clickedMarker(m, i)\"\n      [longitude]=\"m.lon\"\n      [latitude]=\"m.lat\"\n      [label]=\"m.label\"\n      [markerDraggable]=\"m.draggable\"\n      [iconUrl]=\"m.icon\">\n      <sebm-google-map-info-window>\n          <p>{{m.infotxt}}</p>\n      </sebm-google-map-info-window>\n    </sebm-google-map-marker>\n\n  </sebm-google-map>",
             styles: ["\n    .sebm-google-map-container {\n      height: 300px;\n    }\n"]
         }), 
-        __metadata('design:paramtypes', [])
+        __metadata('design:paramtypes', [map_service_1.MapService])
     ], Map);
     return Map;
 }());

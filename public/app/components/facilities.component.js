@@ -12,15 +12,10 @@ var core_1 = require('@angular/core');
 var city_model_1 = require('../models/city.model');
 var facility_row_component_1 = require('./facility-row.component');
 var map_component_1 = require('./map.component');
+var map_service_1 = require('../services/map.service');
 var Facilities = (function () {
     function Facilities() {
     }
-    Facilities.prototype.onSelect = function (facility) {
-        this.selectedFacility = facility;
-    };
-    Facilities.prototype.isSelected = function (facility) {
-        return facility === this.selectedFacility;
-    };
     __decorate([
         core_1.Input(), 
         __metadata('design:type', Array)
@@ -37,7 +32,8 @@ var Facilities = (function () {
         core_1.Component({
             selector: 'conference-list',
             directives: [facility_row_component_1.FacilityRow, map_component_1.Map],
-            template: "\n  <div class=\"col-md-6\">\n    <ul class=\"list-unstyled\">\n      <facility-row \n        [facility]=\"facility\" \n        *ngFor=\"let facility of facilities\">\n      </facility-row>\n    </ul>\n    <div *ngIf=\"selectedFacility\">\n    \t{{selectedFacility.name}}\n    </div>\n  </div>\n  <div class=\"col-md-6\">\n    <map\n      [location]=\"city.location\"\n      [markers]=\"markers\">\n    </map>\n  </div>\n   "
+            providers: [map_service_1.MapService],
+            template: "\n  <div class=\"col-md-6\">\n    <ul class=\"list-unstyled\">\n      <facility-row \n        [facility]=\"facility\" \n        *ngFor=\"let facility of facilities; let i = index\"\n        [i] = \"i\">\n      </facility-row>\n    </ul>\n  </div>\n  <div class=\"col-md-6\">\n    <map\n      [location]=\"city.location\"\n      [markers]=\"markers\">\n    </map>\n  </div>\n   "
         }), 
         __metadata('design:paramtypes', [])
     ], Facilities);

@@ -86,11 +86,12 @@ export class ConferenceApp implements OnInit, OnDestroy {
 
   createMarkers(conferences: Conference[]) {
     conferences.forEach(conference => {
-      this.markers.push(
-        {lat: conference.location.latitude,
-          lon: conference.location.longitude,
-          infotxt: conference.name,
-          draggable: false});
+      this.markers.push({
+        lat: conference.location.latitude,
+        lon: conference.location.longitude,
+        infotxt: conference.name,
+        icon: '../assets/img/icon-star-blue.png',
+        draggable: false});
     });
   }
 

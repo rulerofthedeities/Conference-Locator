@@ -52,9 +52,11 @@ var ConferenceApp = (function () {
     ConferenceApp.prototype.createMarkers = function (conferences) {
         var _this = this;
         conferences.forEach(function (conference) {
-            _this.markers.push({ lat: conference.location.latitude,
+            _this.markers.push({
+                lat: conference.location.latitude,
                 lon: conference.location.longitude,
                 infotxt: conference.name,
+                icon: '../assets/img/icon-star-blue.png',
                 draggable: false });
         });
     };

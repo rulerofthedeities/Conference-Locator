@@ -1,6 +1,8 @@
-import {Input, Component} from '@angular/core';
+import {Input, Component, OnDestroy} from '@angular/core';
 import {Conference} from '../models/conference.model';
 import {NearbyItems} from './nearby-items.component';
+import {MapService} from '../services/map.service';
+import {Subscription} from 'rxjs/Subscription';
 
 @Component({
   selector: 'facility-row',
@@ -27,11 +29,29 @@ import {NearbyItems} from './nearby-items.component';
     `]
 })
 
-export class FacilityRow {
+export class FacilityRow implements OnDestroy {
   @Input() facility: Conference;
+  @Input() i: number;
   isSelected: boolean = false;
+  subscription: Subscription;
+
+  constructor(mapService: MapService) {
+    this.subscription = mapService.ccMarkerSelected$.subscribe(
+      index => {
+        this.markerSelected(index);
+      }
+    );
+  }
+
+  markerSelected(index: number) {
+    this.isSelected = index === this.i;
+  }
 
   selectFacility() {
     this.isSelected = !this.isSelected;
+  }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
 }
