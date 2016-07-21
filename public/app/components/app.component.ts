@@ -1,6 +1,7 @@
 import {Component, OnInit, OnDestroy} from '@angular/core';
 import {Conference} from '../models/conference.model';
 import {City} from '../models/city.model';
+import {Marker} from '../models/map.model';
 import {Facilities} from './facilities.component';
 import {CityFilter} from './city-filter.component';
 import {LoadingIndicator} from './common/loading-indicator.component';
@@ -27,6 +28,7 @@ import {Subscription}   from 'rxjs/Subscription';
         </loading-indicator>
         <conference-list 
           [facilities]="conferenceSites"
+          [markers] = "markers"
           [city]="selectedCity">
         </conference-list>
         {{error}}
@@ -39,6 +41,7 @@ export class ConferenceApp implements OnInit, OnDestroy {
 	public conferenceSites: Conference[];
   public cities: City[];
   selectedCity: City;
+  markers: Marker[] = [];
   subscription: Subscription;
   loading: boolean = false;
   error: string;
@@ -60,8 +63,9 @@ export class ConferenceApp implements OnInit, OnDestroy {
   getConferenceSites(cityAlias) {
     this.loading = true;
     this.conferenceService.getConferenceSites(cityAlias).then(
-      conference => {
-        this.conferenceSites = conference;
+      conferences => {
+        this.conferenceSites = conferences;
+        this.createMarkers(conferences);
         this.loading = false;
       }
     ).catch(error => this.error = error);
@@ -78,6 +82,16 @@ export class ConferenceApp implements OnInit, OnDestroy {
   onSelectedCity(city: City) {
     this.cityStateService.setCity(city);
     this.getConferenceSites(city.alias);
+  }
+
+  createMarkers(conferences: Conference[]) {
+    conferences.forEach(conference => {
+      this.markers.push(
+        {lat: conference.location.latitude,
+          lon: conference.location.longitude,
+          infotxt: conference.name,
+          draggable: false});
+    });
   }
 
   ngOnDestroy() {

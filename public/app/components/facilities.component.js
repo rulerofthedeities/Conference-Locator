@@ -27,13 +27,17 @@ var Facilities = (function () {
     ], Facilities.prototype, "facilities", void 0);
     __decorate([
         core_1.Input(), 
+        __metadata('design:type', Array)
+    ], Facilities.prototype, "markers", void 0);
+    __decorate([
+        core_1.Input(), 
         __metadata('design:type', city_model_1.City)
     ], Facilities.prototype, "city", void 0);
     Facilities = __decorate([
         core_1.Component({
             selector: 'conference-list',
             directives: [facility_row_component_1.FacilityRow, map_component_1.Map],
-            template: "\n  <div class=\"col-md-6\">\n    <ul class=\"list-unstyled\">\n      <facility-row \n        [facility]=\"facility\" \n        *ngFor=\"let facility of facilities\">\n      </facility-row>\n    </ul>\n    <div *ngIf=\"selectedFacility\">\n    \t{{selectedFacility.name}}\n    </div>\n  </div>\n  <div class=\"col-md-6\">\n    <map\n      [location]=\"city.location\">\n    </map>\n  </div>\n   "
+            template: "\n  <div class=\"col-md-6\">\n    <ul class=\"list-unstyled\">\n      <facility-row \n        [facility]=\"facility\" \n        *ngFor=\"let facility of facilities\">\n      </facility-row>\n    </ul>\n    <div *ngIf=\"selectedFacility\">\n    \t{{selectedFacility.name}}\n    </div>\n  </div>\n  <div class=\"col-md-6\">\n    <map\n      [location]=\"city.location\"\n      [markers]=\"markers\">\n    </map>\n  </div>\n   "
         }), 
         __metadata('design:paramtypes', [])
     ], Facilities);

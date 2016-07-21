@@ -1,6 +1,7 @@
 import {Input, Component} from '@angular/core';
 import {Conference} from '../models/conference.model';
 import {City} from '../models/city.model';
+import {Marker} from '../models/map.model';
 import {FacilityRow} from './facility-row.component';
 import {Map} from './map.component';
 
@@ -21,23 +22,24 @@ import {Map} from './map.component';
   </div>
   <div class="col-md-6">
     <map
-      [location]="city.location">
+      [location]="city.location"
+      [markers]="markers">
     </map>
   </div>
    `
 })
 
 export class Facilities {
-	@Input() facilities: Conference[];
+  @Input() facilities: Conference[];
+  @Input() markers: Marker[];
   @Input() city: City;
-	selectedFacility: Conference;
+  selectedFacility: Conference;
 
-	onSelect(facility: Conference): void {
-		this.selectedFacility = facility;
-	}
+  onSelect(facility: Conference): void {
+    this.selectedFacility = facility;
+  }
 
-	isSelected(facility: Conference): boolean {
-		return facility === this.selectedFacility;
-	}
-
+  isSelected(facility: Conference): boolean {
+    return facility === this.selectedFacility;
+  }
 }

@@ -20,6 +20,7 @@ var ConferenceApp = (function () {
         this.conferenceService = conferenceService;
         this.cityService = cityService;
         this.cityStateService = cityStateService;
+        this.markers = [];
         this.loading = false;
     }
     ConferenceApp.prototype.ngOnInit = function () {
@@ -32,8 +33,9 @@ var ConferenceApp = (function () {
     ConferenceApp.prototype.getConferenceSites = function (cityAlias) {
         var _this = this;
         this.loading = true;
-        this.conferenceService.getConferenceSites(cityAlias).then(function (conference) {
-            _this.conferenceSites = conference;
+        this.conferenceService.getConferenceSites(cityAlias).then(function (conferences) {
+            _this.conferenceSites = conferences;
+            _this.createMarkers(conferences);
             _this.loading = false;
         }).catch(function (error) { return _this.error = error; });
     };
@@ -47,6 +49,15 @@ var ConferenceApp = (function () {
         this.cityStateService.setCity(city);
         this.getConferenceSites(city.alias);
     };
+    ConferenceApp.prototype.createMarkers = function (conferences) {
+        var _this = this;
+        conferences.forEach(function (conference) {
+            _this.markers.push({ lat: conference.location.latitude,
+                lon: conference.location.longitude,
+                infotxt: conference.name,
+                draggable: false });
+        });
+    };
     ConferenceApp.prototype.ngOnDestroy = function () {
         // prevent memory leak when component destroyed
         this.subscription.unsubscribe();
@@ -56,7 +67,7 @@ var ConferenceApp = (function () {
             selector: 'conferences',
             directives: [facilities_component_1.Facilities, city_filter_component_1.CityFilter, loading_indicator_component_1.LoadingIndicator],
             providers: [conference_service_1.ConferenceService, city_service_1.CityService, city_state_service_1.CityStateService],
-            template: "\n    <div class=\"container\">\n      <div class=\"row\">\n        <city-filter \n          [cities]=\"cities\"\n          (selectedCity)=\"onSelectedCity($event)\">\n        </city-filter>\n      </div>\n      <div class=\"row\" *ngIf=\"selectedCity\">\n        <loading-indicator \n          [isLoading]=\"loading\">\n        </loading-indicator>\n        <conference-list \n          [facilities]=\"conferenceSites\"\n          [city]=\"selectedCity\">\n        </conference-list>\n        {{error}}\n      </div>\n    </div>\n    "
+            template: "\n    <div class=\"container\">\n      <div class=\"row\">\n        <city-filter \n          [cities]=\"cities\"\n          (selectedCity)=\"onSelectedCity($event)\">\n        </city-filter>\n      </div>\n      <div class=\"row\" *ngIf=\"selectedCity\">\n        <loading-indicator \n          [isLoading]=\"loading\">\n        </loading-indicator>\n        <conference-list \n          [facilities]=\"conferenceSites\"\n          [markers] = \"markers\"\n          [city]=\"selectedCity\">\n        </conference-list>\n        {{error}}\n      </div>\n    </div>\n    "
         }), 
         __metadata('design:paramtypes', [conference_service_1.ConferenceService, city_service_1.CityService, city_state_service_1.CityStateService])
     ], ConferenceApp);

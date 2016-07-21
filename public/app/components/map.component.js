@@ -9,22 +9,26 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
-var location_model_1 = require('../models/location.model');
 var core_2 = require('angular2-google-maps/core');
+var location_model_1 = require('../models/location.model');
+var conference_service_1 = require('../services/conference.service');
 var Map = (function () {
     function Map() {
-        this.lat = 51.678418;
-        this.lng = 7.809007;
     }
     __decorate([
         core_1.Input(), 
         __metadata('design:type', location_model_1.Location)
     ], Map.prototype, "location", void 0);
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Array)
+    ], Map.prototype, "markers", void 0);
     Map = __decorate([
         core_1.Component({
             selector: 'map',
             directives: [core_2.GOOGLE_MAPS_DIRECTIVES],
-            template: "\n  <sebm-google-map \n    [longitude]=\"location.longitude\"\n    [latitude]=\"location.latitude\">\n    <sebm-google-map-marker \n      [longitude]=\"lng\"\n      [latitude]=\"lat\">\n    </sebm-google-map-marker>\n  </sebm-google-map>",
+            providers: [conference_service_1.ConferenceService],
+            template: "\n  <sebm-google-map \n    [longitude]=\"location.longitude\"\n    [latitude]=\"location.latitude\">\n\n    <sebm-google-map-marker \n      *ngFor=\"let m of markers; let i = index\"\n      [longitude]=\"m.lon\"\n      [latitude]=\"m.lat\"\n      [label]=\"m.label\"\n      [markerDraggable]=\"m.draggable\"\n      [iconUrl]=\"m.icon\">\n      <sebm-google-map-info-window>\n          <p>{{m.infotxt}}</p>\n      </sebm-google-map-info-window>\n    </sebm-google-map-marker>\n\n  </sebm-google-map>",
             styles: ["\n    .sebm-google-map-container {\n      height: 300px;\n    }\n"]
         }), 
         __metadata('design:paramtypes', [])

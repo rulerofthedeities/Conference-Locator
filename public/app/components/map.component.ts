@@ -1,18 +1,30 @@
 import {Component, Input} from '@angular/core';
-import {Location} from '../models/location.model';
 import {GOOGLE_MAPS_DIRECTIVES} from 'angular2-google-maps/core';
+import {Location} from '../models/location.model';
+import {Marker} from '../models/map.model';
+import {ConferenceService} from '../services/conference.service';
 
 @Component({
   selector: 'map',
   directives: [GOOGLE_MAPS_DIRECTIVES],
+  providers: [ConferenceService],
   template: `
   <sebm-google-map 
     [longitude]="location.longitude"
     [latitude]="location.latitude">
+
     <sebm-google-map-marker 
-      [longitude]="lng"
-      [latitude]="lat">
+      *ngFor="let m of markers; let i = index"
+      [longitude]="m.lon"
+      [latitude]="m.lat"
+      [label]="m.label"
+      [markerDraggable]="m.draggable"
+      [iconUrl]="m.icon">
+      <sebm-google-map-info-window>
+          <p>{{m.infotxt}}</p>
+      </sebm-google-map-info-window>
     </sebm-google-map-marker>
+
   </sebm-google-map>`,
   styles: [`
     .sebm-google-map-container {
@@ -23,7 +35,6 @@ import {GOOGLE_MAPS_DIRECTIVES} from 'angular2-google-maps/core';
 
 export class Map {
   @Input() location: Location;
-  lat: number = 51.678418;
-  lng: number = 7.809007;
-}
+  @Input() markers: Marker[];
 
+}
