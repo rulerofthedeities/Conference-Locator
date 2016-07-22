@@ -17,14 +17,23 @@ import {Component, Input, OnInit} from '@angular/core';
   styles: [`
     img {
       width: 60px;
-      height:60px;
-      margin-left:4px;
-    }`,`
+      height: 60px;
+      margin-left: 4px;
+    }
     .item {
-      margin-bottom:2px;
-    }`,`
+      margin-bottom: 2px;
+      border: 1px solid white;
+    }
+    .media-body {
+      padding-top: 5px;
+    }
     .no {
-      width:20px;
+      width: 20px;
+      padding: 5px;
+    }
+    .item:hover {
+      border: 1px dotted #c9515c;
+      cursor: pointer;
     }
   `]
 })

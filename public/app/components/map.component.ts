@@ -6,10 +6,6 @@ import {MapService} from '../services/map.service';
 import {TabService} from '../services/tabs.service';
 import {Subscription} from 'rxjs/Subscription';
 
-interface Assoc<Subscription> {
-    [K: string]: Subscription;
-}
-
 @Component({
   selector: 'map',
   directives: [GOOGLE_MAPS_DIRECTIVES],
@@ -28,7 +24,7 @@ interface Assoc<Subscription> {
         [markerDraggable]="m.draggable"
         [iconUrl]="m.icon">
         <sebm-google-map-info-window>
-            <p>{{m.infotxt}}</p>
+            <p>{{i}}. {{m.infotxt}}</p>
         </sebm-google-map-info-window>
       </sebm-google-map-marker>
     </div>
@@ -42,7 +38,7 @@ interface Assoc<Subscription> {
         [markerDraggable]="m.draggable"
         [iconUrl]="m.icon">
         <sebm-google-map-info-window>
-            <p>{{m.infotxt}}</p>
+            <p>{{i}}. {m.infotxt}}</p>
         </sebm-google-map-info-window>
       </sebm-google-map-marker>
     </div>
@@ -64,7 +60,7 @@ interface Assoc<Subscription> {
   </sebm-google-map>`,
   styles: [`
     .sebm-google-map-container {
-      height: 300px;
+      height: 600px;
     }
 `]
 })
@@ -77,40 +73,54 @@ export class Map implements OnInit, OnDestroy {
   showWindow: boolean = false;
   showPinType: string = 'hotels';
   zoom: number = 11;
-  subscriptions: Assoc<Subscription> = {};
+  subscriptions: Subscription[] = [];
 
   constructor(
     private mapService: MapService,
     private tabService: TabService) {}
 
   ngOnInit() {
-    this.subscriptions['hotels'] = this.mapService.hotelMarkers$.subscribe(
-      hotels => {this.hotelMarkers = hotels;}
-    );
-    this.subscriptions['sights'] = this.mapService.sightMarkers$.subscribe(
-      sights => {console.log('getting new sights', sights);
-      this.sightMarkers = sights;}
-    );
-    this.subscriptions['ccmarker'] = this.mapService.ccMarkerSelected$.subscribe(
-      index => {this.selectMarker(index);}
-    );
-    this.subscriptions['tabs'] = this.tabService.tabs$.subscribe(
-      tab => {this.showPinType = tab;}
-    );
+    this.subscriptions.push(this.mapService.hotelMarkers$.subscribe(
+      hotels => this.hotelMarkers = hotels
+    ));
+    this.subscriptions.push(this.mapService.sightMarkers$.subscribe(
+      sights => this.sightMarkers = sights
+    ));
+    this.subscriptions.push(this.mapService.ccMarkerSelected$.subscribe(
+      index => this.selectCcMarker(index)
+    ));
+    this.subscriptions.push(this.mapService.sightMarkerSelected$.subscribe(
+      index => this.selectItemMarker(this.sightMarkers, index)
+    ));
+    this.subscriptions.push(this.mapService.hotelMarkerSelected$.subscribe(
+      index => this.selectItemMarker(this.hotelMarkers, index)
+    ));
+    this.subscriptions.push(this.tabService.tabs$.subscribe(
+      tab => this.showPinType = tab
+    ));
   }
 
   clickedMarker(marker: Marker, index: number) {
-    this.selectMarker(index);
+    this.selectCcMarker(index);
     this.mapService.selectCcMarker(index);
   }
 
-  selectMarker(index: number) {
+  selectCcMarker(index: number) {
     this.centerMap(index);
     this.ccMarkers.forEach((marker) => {
       if (marker.icon === '../assets/img/icon-star-red.png') {
         marker.icon = '../assets/img/icon-star-blue.png';
       }});
     this.ccMarkers[index].icon = '../assets/img/icon-star-red.png';
+  }
+
+  selectItemMarker(markers: Marker[], index: number) {
+    let color = this.showPinType === 'hotels' ? 'blue' : 'green';
+    markers.forEach((marker) => {
+      if (marker.icon === '../assets/img/icon-pin-red.png') {
+        marker.icon = '../assets/img/icon-pin-' + color + '.png';
+      }});
+    markers[index].icon = '../assets/img/icon-pin-red.png';
   }
 
   centerMap(index: number) {
@@ -124,9 +134,8 @@ export class Map implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    for (var key in this.subscriptions) {
-      this.subscriptions[key].unsubscribe();
-    }
+    this.subscriptions.forEach(
+      subscription => subscription.unsubscribe());
   }
 
 }

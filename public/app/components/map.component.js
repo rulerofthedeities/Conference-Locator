@@ -20,23 +20,22 @@ var Map = (function () {
         this.showWindow = false;
         this.showPinType = 'hotels';
         this.zoom = 11;
-        this.subscriptions = {};
+        this.subscriptions = [];
     }
     Map.prototype.ngOnInit = function () {
         var _this = this;
-        this.subscriptions['hotels'] = this.mapService.hotelMarkers$.subscribe(function (hotels) { _this.hotelMarkers = hotels; });
-        this.subscriptions['sights'] = this.mapService.sightMarkers$.subscribe(function (sights) {
-            console.log('getting new sights', sights);
-            _this.sightMarkers = sights;
-        });
-        this.subscriptions['ccmarker'] = this.mapService.ccMarkerSelected$.subscribe(function (index) { _this.selectMarker(index); });
-        this.subscriptions['tabs'] = this.tabService.tabs$.subscribe(function (tab) { _this.showPinType = tab; });
+        this.subscriptions.push(this.mapService.hotelMarkers$.subscribe(function (hotels) { return _this.hotelMarkers = hotels; }));
+        this.subscriptions.push(this.mapService.sightMarkers$.subscribe(function (sights) { return _this.sightMarkers = sights; }));
+        this.subscriptions.push(this.mapService.ccMarkerSelected$.subscribe(function (index) { return _this.selectCcMarker(index); }));
+        this.subscriptions.push(this.mapService.sightMarkerSelected$.subscribe(function (index) { return _this.selectItemMarker(_this.sightMarkers, index); }));
+        this.subscriptions.push(this.mapService.hotelMarkerSelected$.subscribe(function (index) { return _this.selectItemMarker(_this.hotelMarkers, index); }));
+        this.subscriptions.push(this.tabService.tabs$.subscribe(function (tab) { return _this.showPinType = tab; }));
     };
     Map.prototype.clickedMarker = function (marker, index) {
-        this.selectMarker(index);
+        this.selectCcMarker(index);
         this.mapService.selectCcMarker(index);
     };
-    Map.prototype.selectMarker = function (index) {
+    Map.prototype.selectCcMarker = function (index) {
         this.centerMap(index);
         this.ccMarkers.forEach(function (marker) {
             if (marker.icon === '../assets/img/icon-star-red.png') {
@@ -44,6 +43,15 @@ var Map = (function () {
             }
         });
         this.ccMarkers[index].icon = '../assets/img/icon-star-red.png';
+    };
+    Map.prototype.selectItemMarker = function (markers, index) {
+        var color = this.showPinType === 'hotels' ? 'blue' : 'green';
+        markers.forEach(function (marker) {
+            if (marker.icon === '../assets/img/icon-pin-red.png') {
+                marker.icon = '../assets/img/icon-pin-' + color + '.png';
+            }
+        });
+        markers[index].icon = '../assets/img/icon-pin-red.png';
     };
     Map.prototype.centerMap = function (index) {
         var marker = this.ccMarkers[index];
@@ -54,9 +62,7 @@ var Map = (function () {
         return tab === this.showPinType;
     };
     Map.prototype.ngOnDestroy = function () {
-        for (var key in this.subscriptions) {
-            this.subscriptions[key].unsubscribe();
-        }
+        this.subscriptions.forEach(function (subscription) { return subscription.unsubscribe(); });
     };
     __decorate([
         core_1.Input(), 
@@ -70,8 +76,8 @@ var Map = (function () {
         core_1.Component({
             selector: 'map',
             directives: [core_2.GOOGLE_MAPS_DIRECTIVES],
-            template: "\n  <sebm-google-map \n    [longitude]=\"location.longitude\"\n    [latitude]=\"location.latitude\"\n    [zoom]=\"zoom\">\n\n    <div *ngIf=\"showPins('hotels')\">\n      <sebm-google-map-marker\n        *ngFor=\"let m of hotelMarkers; let i = index\"\n        [longitude]=\"m.lon\"\n        [latitude]=\"m.lat\"\n        [label]=\"m.label\"\n        [markerDraggable]=\"m.draggable\"\n        [iconUrl]=\"m.icon\">\n        <sebm-google-map-info-window>\n            <p>{{m.infotxt}}</p>\n        </sebm-google-map-info-window>\n      </sebm-google-map-marker>\n    </div>\n\n    <div *ngIf=\"showPins('sights')\">\n      <sebm-google-map-marker\n        *ngFor=\"let m of sightMarkers; let i = index\"\n        [longitude]=\"m.lon\"\n        [latitude]=\"m.lat\"\n        [label]=\"m.label\"\n        [markerDraggable]=\"m.draggable\"\n        [iconUrl]=\"m.icon\">\n        <sebm-google-map-info-window>\n            <p>{{m.infotxt}}</p>\n        </sebm-google-map-info-window>\n      </sebm-google-map-marker>\n    </div>\n\n    <sebm-google-map-marker \n      *ngFor=\"let m of ccMarkers; let i = index\"\n      (markerClick)=\"clickedMarker(m, i)\"\n      [longitude]=\"m.lon\"\n      [latitude]=\"m.lat\"\n      [label]=\"m.label\"\n      [markerDraggable]=\"m.draggable\"\n      [iconUrl]=\"m.icon\">\n      <sebm-google-map-info-window *ngIf=\"showWindow\">\n          <p>{{m.infotxt}}</p>\n      </sebm-google-map-info-window>\n    </sebm-google-map-marker>\n\n\n  </sebm-google-map>",
-            styles: ["\n    .sebm-google-map-container {\n      height: 300px;\n    }\n"]
+            template: "\n  <sebm-google-map \n    [longitude]=\"location.longitude\"\n    [latitude]=\"location.latitude\"\n    [zoom]=\"zoom\">\n\n    <div *ngIf=\"showPins('hotels')\">\n      <sebm-google-map-marker\n        *ngFor=\"let m of hotelMarkers; let i = index\"\n        [longitude]=\"m.lon\"\n        [latitude]=\"m.lat\"\n        [label]=\"m.label\"\n        [markerDraggable]=\"m.draggable\"\n        [iconUrl]=\"m.icon\">\n        <sebm-google-map-info-window>\n            <p>{{i}}. {{m.infotxt}}</p>\n        </sebm-google-map-info-window>\n      </sebm-google-map-marker>\n    </div>\n\n    <div *ngIf=\"showPins('sights')\">\n      <sebm-google-map-marker\n        *ngFor=\"let m of sightMarkers; let i = index\"\n        [longitude]=\"m.lon\"\n        [latitude]=\"m.lat\"\n        [label]=\"m.label\"\n        [markerDraggable]=\"m.draggable\"\n        [iconUrl]=\"m.icon\">\n        <sebm-google-map-info-window>\n            <p>{{i}}. {m.infotxt}}</p>\n        </sebm-google-map-info-window>\n      </sebm-google-map-marker>\n    </div>\n\n    <sebm-google-map-marker \n      *ngFor=\"let m of ccMarkers; let i = index\"\n      (markerClick)=\"clickedMarker(m, i)\"\n      [longitude]=\"m.lon\"\n      [latitude]=\"m.lat\"\n      [label]=\"m.label\"\n      [markerDraggable]=\"m.draggable\"\n      [iconUrl]=\"m.icon\">\n      <sebm-google-map-info-window *ngIf=\"showWindow\">\n          <p>{{m.infotxt}}</p>\n      </sebm-google-map-info-window>\n    </sebm-google-map-marker>\n\n\n  </sebm-google-map>",
+            styles: ["\n    .sebm-google-map-container {\n      height: 600px;\n    }\n"]
         }), 
         __metadata('design:paramtypes', [map_service_1.MapService, tabs_service_1.TabService])
     ], Map);

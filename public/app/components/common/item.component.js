@@ -35,7 +35,7 @@ var Item = (function () {
         core_1.Component({
             selector: 'item',
             template: "\n    <div class=\"media item\">\n      <div class=\"pull-left no\">{{no}}.</div>\n      <div class=\"media-left\">\n        <img src=\"{{img}}\" class=\"media-object\" alt=\"{{name}}\">\n      </div>\n      <div class=\"media-body\">\n        <h5 class=\"media-heading\">{{name}}</h5>\n        <p><i>({{distance}}m)</i></p>\n      </div>\n    </div>\n\t",
-            styles: ["\n    img {\n      width: 60px;\n      height:60px;\n      margin-left:4px;\n    }", "\n    .item {\n      margin-bottom:2px;\n    }", "\n    .no {\n      width:20px;\n    }\n  "]
+            styles: ["\n    img {\n      width: 60px;\n      height: 60px;\n      margin-left: 4px;\n    }\n    .item {\n      margin-bottom: 2px;\n      border: 1px solid white;\n    }\n    .media-body {\n      padding-top: 5px;\n    }\n    .no {\n      width: 20px;\n      padding: 5px;\n    }\n    .item:hover {\n      border: 1px dotted #c9515c;\n      cursor: pointer;\n    }\n  "]
         }), 
         __metadata('design:paramtypes', [])
     ], Item);

@@ -13,20 +13,30 @@ var Subject_1 = require('rxjs/Subject');
 var MapService = (function () {
     function MapService() {
         this.ccMarkerSelected = new Subject_1.Subject();
+        this.sightMarkerSelected = new Subject_1.Subject();
+        this.hotelMarkerSelected = new Subject_1.Subject();
         this.hotelMarkers = new Subject_1.Subject();
         this.sightMarkers = new Subject_1.Subject();
         this.ccMarkerSelected$ = this.ccMarkerSelected.asObservable();
+        this.sightMarkerSelected$ = this.sightMarkerSelected.asObservable();
+        this.hotelMarkerSelected$ = this.hotelMarkerSelected.asObservable();
         this.hotelMarkers$ = this.hotelMarkers.asObservable();
         this.sightMarkers$ = this.sightMarkers.asObservable();
     }
-    MapService.prototype.selectCcMarker = function (index) {
-        this.ccMarkerSelected.next(index);
-    };
     MapService.prototype.setHotelMarkers = function (markers) {
         this.hotelMarkers.next(markers);
     };
     MapService.prototype.setSightMarkers = function (markers) {
         this.sightMarkers.next(markers);
+    };
+    MapService.prototype.selectCcMarker = function (index) {
+        this.ccMarkerSelected.next(index);
+    };
+    MapService.prototype.selectSightMarker = function (index) {
+        this.sightMarkerSelected.next(index);
+    };
+    MapService.prototype.selectHotelMarker = function (index) {
+        this.hotelMarkerSelected.next(index);
     };
     MapService = __decorate([
         core_1.Injectable(), 

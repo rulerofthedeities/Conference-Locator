@@ -8,21 +8,21 @@ import {MapService} from '../services/map.service';
 import {LoadingIndicator} from './common/loading-indicator.component';
 
 @Component({
-  'selector': 'sights',
-  'providers': [SightService],
-  'directives': [SightRow, LoadingIndicator],
-  'template': `
+  selector: 'sights',
+  providers: [SightService],
+  directives: [SightRow, LoadingIndicator],
+  template: `
     <div *ngIf="!hasSights">Sorry, no sights found nearby</div>
     <loading-indicator 
       [isLoading]="loading"
-      message="Loading sights..."
-    ></loading-indicator>
+      message="Loading sights...">
+    </loading-indicator>
     <ul class="list-unstyled">
       <sight-row
         *ngFor="let sight of sights;let num=index"
         [sight]="sight"
         [no]="num+1"
-      >
+        on-mouseenter="onMouseEnter(num)">
       </sight-row>
     </ul>`
 })
@@ -66,4 +66,7 @@ export class Sights implements OnInit {
     this.mapService.setSightMarkers(this.markers);
   }
 
+  onMouseEnter(index: number) {
+    this.mapService.selectSightMarker(index);
+  }
 }

@@ -23,7 +23,8 @@ import {LoadingIndicator} from './common/loading-indicator.component';
         <hotel-row 
           *ngFor="let hotel of hotels;let num=index"
           [hotel]="hotel"
-          [no]="num+1">
+          [no]="num+1"
+          on-mouseenter="onMouseEnter(num)">
         </hotel-row>
       </ul>
     </div>`
@@ -74,5 +75,9 @@ export class Hotels implements OnInit {
         draggable: false});
     });
     this.mapService.setHotelMarkers(this.markers);
+  }
+
+  onMouseEnter(index: number) {
+    this.mapService.selectHotelMarker(index);
   }
 }

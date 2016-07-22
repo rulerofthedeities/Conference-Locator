@@ -47,16 +47,19 @@ var Sights = (function () {
         });
         this.mapService.setSightMarkers(this.markers);
     };
+    Sights.prototype.onMouseEnter = function (index) {
+        this.mapService.selectSightMarker(index);
+    };
     __decorate([
         core_1.Input(), 
         __metadata('design:type', location_model_1.Location)
     ], Sights.prototype, "hotelLocation", void 0);
     Sights = __decorate([
         core_1.Component({
-            'selector': 'sights',
-            'providers': [sight_service_1.SightService],
-            'directives': [sight_row_component_1.SightRow, loading_indicator_component_1.LoadingIndicator],
-            'template': "\n    <div *ngIf=\"!hasSights\">Sorry, no sights found nearby</div>\n    <loading-indicator \n      [isLoading]=\"loading\"\n      message=\"Loading sights...\"\n    ></loading-indicator>\n    <ul class=\"list-unstyled\">\n      <sight-row\n        *ngFor=\"let sight of sights;let num=index\"\n        [sight]=\"sight\"\n        [no]=\"num+1\"\n      >\n      </sight-row>\n    </ul>"
+            selector: 'sights',
+            providers: [sight_service_1.SightService],
+            directives: [sight_row_component_1.SightRow, loading_indicator_component_1.LoadingIndicator],
+            template: "\n    <div *ngIf=\"!hasSights\">Sorry, no sights found nearby</div>\n    <loading-indicator \n      [isLoading]=\"loading\"\n      message=\"Loading sights...\">\n    </loading-indicator>\n    <ul class=\"list-unstyled\">\n      <sight-row\n        *ngFor=\"let sight of sights;let num=index\"\n        [sight]=\"sight\"\n        [no]=\"num+1\"\n        on-mouseenter=\"onMouseEnter(num)\">\n      </sight-row>\n    </ul>"
         }), 
         __metadata('design:paramtypes', [sight_service_1.SightService, map_service_1.MapService])
     ], Sights);
