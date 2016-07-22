@@ -44,6 +44,7 @@ export class Sights implements OnInit {
         this.sights = sights;
         this.loading = false;
         this.hasSights = sights.length > 0;
+        console.log('create markers sights');
       }
     );
   }

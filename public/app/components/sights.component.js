@@ -29,6 +29,7 @@ var Sights = (function () {
             _this.sights = sights;
             _this.loading = false;
             _this.hasSights = sights.length > 0;
+            console.log('create markers sights');
         });
     };
     __decorate([

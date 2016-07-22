@@ -13,10 +13,15 @@ var Subject_1 = require('rxjs/Subject');
 var MapService = (function () {
     function MapService() {
         this.ccMarkerSelected = new Subject_1.Subject();
+        this.hotelMarkers = new Subject_1.Subject();
         this.ccMarkerSelected$ = this.ccMarkerSelected.asObservable();
+        this.hotelMarkers$ = this.hotelMarkers.asObservable();
     }
-    MapService.prototype.newccMarker = function (index) {
+    MapService.prototype.selectCcMarker = function (index) {
         this.ccMarkerSelected.next(index);
+    };
+    MapService.prototype.setHotelMarkers = function (markers) {
+        this.hotelMarkers.next(markers);
     };
     MapService = __decorate([
         core_1.Injectable(), 

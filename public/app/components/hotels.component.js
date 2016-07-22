@@ -11,13 +11,16 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('@angular/core');
 var location_model_1 = require('../models/location.model');
 var hotel_service_1 = require('../services/hotel.service');
+var map_service_1 = require('../services/map.service');
 var hotel_row_component_1 = require('./hotel-row.component');
 var loading_indicator_component_1 = require('./common/loading-indicator.component');
 var Hotels = (function () {
-    function Hotels(hotelService) {
+    function Hotels(hotelService, mapService) {
         this.hotelService = hotelService;
+        this.mapService = mapService;
         this.loading = false;
         this.hasHotels = true;
+        this.markers = [];
     }
     Hotels.prototype.ngOnInit = function () {
         this.getHotels();
@@ -29,10 +32,24 @@ var Hotels = (function () {
             _this.hotels = hotels;
             _this.loading = false;
             _this.hasHotels = hotels.length > 0;
+            _this.createMarkers(hotels);
         });
     };
     Hotels.prototype.isSelected = function (hotel) {
         return (this.selectedHotel === hotel);
+    };
+    Hotels.prototype.createMarkers = function (hotels) {
+        var _this = this;
+        console.log('create markers hotel');
+        hotels.forEach(function (hotel) {
+            _this.markers.push({
+                lat: hotel.location.latitude,
+                lon: hotel.location.longitude,
+                infotxt: hotel.name,
+                icon: '../assets/img/icon-pin-blue.png',
+                draggable: false });
+        });
+        this.mapService.setHotelMarkers(this.markers);
     };
     __decorate([
         core_1.Input(), 
@@ -45,7 +62,7 @@ var Hotels = (function () {
             directives: [hotel_row_component_1.HotelRow, loading_indicator_component_1.LoadingIndicator],
             template: "\n    <div>\n      <div *ngIf=\"!hasHotels\">Sorry, no hotels found nearby</div>\n      <loading-indicator \n        [isLoading]=\"loading\"\n        message=\"Loading hotels...\">\n      </loading-indicator>\n      <ul class=\"list-unstyled\">\n        <hotel-row \n          *ngFor=\"let hotel of hotels;let num=index\"\n          [hotel]=\"hotel\"\n          [no]=\"num+1\">\n        </hotel-row>\n      </ul>\n    </div>"
         }), 
-        __metadata('design:paramtypes', [hotel_service_1.HotelService])
+        __metadata('design:paramtypes', [hotel_service_1.HotelService, map_service_1.MapService])
     ], Hotels);
     return Hotels;
 }());

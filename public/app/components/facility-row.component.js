@@ -15,6 +15,7 @@ var map_service_1 = require('../services/map.service');
 var FacilityRow = (function () {
     function FacilityRow(mapService) {
         var _this = this;
+        this.mapService = mapService;
         this.isSelected = false;
         this.subscription = mapService.ccMarkerSelected$.subscribe(function (index) {
             _this.markerSelected(index);
@@ -25,6 +26,9 @@ var FacilityRow = (function () {
     };
     FacilityRow.prototype.selectFacility = function () {
         this.isSelected = !this.isSelected;
+        if (this.isSelected) {
+            this.mapService.selectCcMarker(this.i);
+        }
     };
     FacilityRow.prototype.ngOnDestroy = function () {
         this.subscription.unsubscribe();

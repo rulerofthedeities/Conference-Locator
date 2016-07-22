@@ -35,7 +35,7 @@ export class FacilityRow implements OnDestroy {
   isSelected: boolean = false;
   subscription: Subscription;
 
-  constructor(mapService: MapService) {
+  constructor(private mapService: MapService) {
     this.subscription = mapService.ccMarkerSelected$.subscribe(
       index => {
         this.markerSelected(index);
@@ -49,6 +49,9 @@ export class FacilityRow implements OnDestroy {
 
   selectFacility() {
     this.isSelected = !this.isSelected;
+    if (this.isSelected) {
+      this.mapService.selectCcMarker(this.i);
+    }
   }
 
   ngOnDestroy() {
