@@ -12,12 +12,15 @@ var core_1 = require('@angular/core');
 var sight_service_1 = require('../services/sight.service');
 var location_model_1 = require('../models/location.model');
 var sight_row_component_1 = require('./sight-row.component');
+var map_service_1 = require('../services/map.service');
 var loading_indicator_component_1 = require('./common/loading-indicator.component');
 var Sights = (function () {
-    function Sights(sightService) {
+    function Sights(sightService, mapService) {
         this.sightService = sightService;
+        this.mapService = mapService;
         this.loading = false;
         this.hasSights = true;
+        this.markers = [];
     }
     Sights.prototype.ngOnInit = function () {
         this.getSights();
@@ -29,8 +32,20 @@ var Sights = (function () {
             _this.sights = sights;
             _this.loading = false;
             _this.hasSights = sights.length > 0;
-            console.log('create markers sights');
+            _this.createMarkers(sights);
         });
+    };
+    Sights.prototype.createMarkers = function (sights) {
+        var _this = this;
+        sights.forEach(function (sight) {
+            _this.markers.push({
+                lat: sight.location.latitude,
+                lon: sight.location.longitude,
+                infotxt: sight.name,
+                icon: '../assets/img/icon-pin-green.png',
+                draggable: false });
+        });
+        this.mapService.setSightMarkers(this.markers);
     };
     __decorate([
         core_1.Input(), 
@@ -43,7 +58,7 @@ var Sights = (function () {
             'directives': [sight_row_component_1.SightRow, loading_indicator_component_1.LoadingIndicator],
             'template': "\n    <div *ngIf=\"!hasSights\">Sorry, no sights found nearby</div>\n    <loading-indicator \n      [isLoading]=\"loading\"\n      message=\"Loading sights...\"\n    ></loading-indicator>\n    <ul class=\"list-unstyled\">\n      <sight-row\n        *ngFor=\"let sight of sights;let num=index\"\n        [sight]=\"sight\"\n        [no]=\"num+1\"\n      >\n      </sight-row>\n    </ul>"
         }), 
-        __metadata('design:paramtypes', [sight_service_1.SightService])
+        __metadata('design:paramtypes', [sight_service_1.SightService, map_service_1.MapService])
     ], Sights);
     return Sights;
 }());

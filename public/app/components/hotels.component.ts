@@ -65,7 +65,6 @@ export class Hotels implements OnInit {
   }
 
   createMarkers(hotels: Hotel[]) {
-    console.log('create markers hotel');
     hotels.forEach(hotel => {
       this.markers.push({
         lat: hotel.location.latitude,

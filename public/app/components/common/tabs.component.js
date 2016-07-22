@@ -10,12 +10,15 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('@angular/core');
 var tab_component_1 = require('./tab.component');
+var tabs_service_1 = require('../../services/tabs.service');
 var Tabs = (function () {
-    function Tabs() {
+    function Tabs(tabService) {
+        this.tabService = tabService;
     }
     Tabs.prototype.selectTab = function (tab) {
         this.tabs.toArray().forEach(function (tab) { return tab.active = false; });
         tab.active = true;
+        this.tabService.setTab(tab.alias);
     };
     // contentChildren are set
     Tabs.prototype.ngAfterContentInit = function () {
@@ -35,7 +38,7 @@ var Tabs = (function () {
             selector: 'tabs',
             template: "\n  <ul class=\"nav nav-tabs\">\n    <li \n      *ngFor=\"let tab of tabs;let num=index\" \n      (click)=\"selectTab(tab)\" \n      [class.active]=\"tab.active\">\n      <a href=\"#\">{{tab.title}}</a>\n    </li>\n  </ul>\n  <ng-content></ng-content>\n  "
         }), 
-        __metadata('design:paramtypes', [])
+        __metadata('design:paramtypes', [tabs_service_1.TabService])
     ], Tabs);
     return Tabs;
 }());

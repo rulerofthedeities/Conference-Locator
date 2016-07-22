@@ -15,6 +15,7 @@ var loading_indicator_component_1 = require('./common/loading-indicator.componen
 var conference_service_1 = require('../services/conference.service');
 var city_service_1 = require('../services/city.service');
 var city_state_service_1 = require('../services/city-state.service');
+var tabs_service_1 = require('../services/tabs.service');
 var ConferenceApp = (function () {
     function ConferenceApp(conferenceService, cityService, cityStateService) {
         this.conferenceService = conferenceService;
@@ -27,6 +28,7 @@ var ConferenceApp = (function () {
         var _this = this;
         this.subscription = this.cityStateService.city$.subscribe(function (city) {
             _this.selectedCity = city;
+            _this.markers = [];
         });
         this.getCities();
     };
@@ -68,7 +70,7 @@ var ConferenceApp = (function () {
         core_1.Component({
             selector: 'conferences',
             directives: [facilities_component_1.Facilities, city_filter_component_1.CityFilter, loading_indicator_component_1.LoadingIndicator],
-            providers: [conference_service_1.ConferenceService, city_service_1.CityService, city_state_service_1.CityStateService],
+            providers: [conference_service_1.ConferenceService, city_service_1.CityService, city_state_service_1.CityStateService, tabs_service_1.TabService],
             template: "\n    <div class=\"container\">\n      <div class=\"row\">\n        <city-filter \n          [cities]=\"cities\"\n          (selectedCity)=\"onSelectedCity($event)\">\n        </city-filter>\n      </div>\n      <div class=\"row\" *ngIf=\"selectedCity\">\n        <loading-indicator \n          [isLoading]=\"loading\">\n        </loading-indicator>\n        <conference-list \n          [facilities]=\"conferenceSites\"\n          [markers] = \"markers\"\n          [city]=\"selectedCity\">\n        </conference-list>\n        {{error}}\n      </div>\n    </div>\n    "
         }), 
         __metadata('design:paramtypes', [conference_service_1.ConferenceService, city_service_1.CityService, city_state_service_1.CityStateService])

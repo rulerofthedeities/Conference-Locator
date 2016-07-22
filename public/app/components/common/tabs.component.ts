@@ -1,5 +1,6 @@
 import {Component, ContentChildren, QueryList, AfterContentInit} from '@angular/core';
 import {Tab} from './tab.component';
+import {TabService} from '../../services/tabs.service';
 
 @Component({
   selector: 'tabs',
@@ -19,9 +20,12 @@ import {Tab} from './tab.component';
 export class Tabs implements AfterContentInit {
   @ContentChildren(Tab) tabs: QueryList<Tab>;
 
+  constructor(private tabService: TabService) {}
+
   selectTab(tab: Tab) {
     this.tabs.toArray().forEach(tab => tab.active = false);
     tab.active = true;
+    this.tabService.setTab(tab.alias);
   }
 
   // contentChildren are set

@@ -40,7 +40,6 @@ var Hotels = (function () {
     };
     Hotels.prototype.createMarkers = function (hotels) {
         var _this = this;
-        console.log('create markers hotel');
         hotels.forEach(function (hotel) {
             _this.markers.push({
                 lat: hotel.location.latitude,

@@ -8,12 +8,13 @@ import {LoadingIndicator} from './common/loading-indicator.component';
 import {ConferenceService} from '../services/conference.service';
 import {CityService} from '../services/city.service';
 import {CityStateService} from '../services/city-state.service';
+import {TabService} from '../services/tabs.service';
 import {Subscription}   from 'rxjs/Subscription';
 
 @Component({
 	selector: 'conferences',
 	directives: [Facilities, CityFilter, LoadingIndicator],
-	providers: [ConferenceService, CityService, CityStateService],
+	providers: [ConferenceService, CityService, CityStateService, TabService],
 	template: `
     <div class="container">
       <div class="row">
@@ -56,6 +57,7 @@ export class ConferenceApp implements OnInit, OnDestroy {
     this.subscription = this.cityStateService.city$.subscribe(
       city => {
         this.selectedCity = city;
+        this.markers = [];
       });
     this.getCities();
 	}

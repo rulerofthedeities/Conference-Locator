@@ -14,14 +14,19 @@ var MapService = (function () {
     function MapService() {
         this.ccMarkerSelected = new Subject_1.Subject();
         this.hotelMarkers = new Subject_1.Subject();
+        this.sightMarkers = new Subject_1.Subject();
         this.ccMarkerSelected$ = this.ccMarkerSelected.asObservable();
         this.hotelMarkers$ = this.hotelMarkers.asObservable();
+        this.sightMarkers$ = this.sightMarkers.asObservable();
     }
     MapService.prototype.selectCcMarker = function (index) {
         this.ccMarkerSelected.next(index);
     };
     MapService.prototype.setHotelMarkers = function (markers) {
         this.hotelMarkers.next(markers);
+    };
+    MapService.prototype.setSightMarkers = function (markers) {
+        this.sightMarkers.next(markers);
     };
     MapService = __decorate([
         core_1.Injectable(), 

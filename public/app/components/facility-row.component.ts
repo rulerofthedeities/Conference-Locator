@@ -51,6 +51,9 @@ export class FacilityRow implements OnDestroy {
     this.isSelected = !this.isSelected;
     if (this.isSelected) {
       this.mapService.selectCcMarker(this.i);
+    } else {
+      this.mapService.setHotelMarkers(null);
+      this.mapService.setSightMarkers(null);
     }
   }
 

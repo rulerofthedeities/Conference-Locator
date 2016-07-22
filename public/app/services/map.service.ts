@@ -4,17 +4,23 @@ import {Marker} from '../models/map.model';
 
 @Injectable()
 export class MapService {
-    private ccMarkerSelected = new Subject<number>();
-    private hotelMarkers = new Subject<Marker[]>();
+  private ccMarkerSelected = new Subject<number>();
+  private hotelMarkers = new Subject<Marker[]>();
+  private sightMarkers = new Subject<Marker[]>();
 
-    ccMarkerSelected$ = this.ccMarkerSelected.asObservable();
-    hotelMarkers$ = this.hotelMarkers.asObservable();
+  ccMarkerSelected$ = this.ccMarkerSelected.asObservable();
+  hotelMarkers$ = this.hotelMarkers.asObservable();
+  sightMarkers$ = this.sightMarkers.asObservable();
 
-    selectCcMarker(index: number) {
-      this.ccMarkerSelected.next(index);
-    }
+  selectCcMarker(index: number) {
+    this.ccMarkerSelected.next(index);
+  }
 
-    setHotelMarkers(markers: Marker[]) {
-      this.hotelMarkers.next(markers);
-    }
+  setHotelMarkers(markers: Marker[]) {
+    this.hotelMarkers.next(markers);
+  }
+
+  setSightMarkers(markers: Marker[]) {
+    this.sightMarkers.next(markers);
+  }
 }

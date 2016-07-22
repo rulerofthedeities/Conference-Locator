@@ -1,8 +1,10 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {SightService} from '../services/sight.service';
 import {Location} from '../models/location.model';
+import {Marker} from '../models/map.model';
 import {Sight} from '../models/sight.model';
 import {SightRow} from './sight-row.component';
+import {MapService} from '../services/map.service';
 import {LoadingIndicator} from './common/loading-indicator.component';
 
 @Component({
@@ -30,8 +32,11 @@ export class Sights implements OnInit {
   sights: Sight[];
   loading: boolean = false;
   hasSights: boolean = true;
+  markers: Marker[] = [];
 
-  constructor(private sightService: SightService) {}
+  constructor(
+    private sightService: SightService,
+    private mapService: MapService) {}
 
   ngOnInit() {
     this.getSights();
@@ -44,8 +49,21 @@ export class Sights implements OnInit {
         this.sights = sights;
         this.loading = false;
         this.hasSights = sights.length > 0;
-        console.log('create markers sights');
+        this.createMarkers(sights);
       }
     );
   }
+
+  createMarkers(sights: Sight[]) {
+    sights.forEach(sight => {
+      this.markers.push({
+        lat: sight.location.latitude,
+        lon: sight.location.longitude,
+        infotxt: sight.name,
+        icon: '../assets/img/icon-pin-green.png',
+        draggable: false});
+    });
+    this.mapService.setSightMarkers(this.markers);
+  }
+
 }

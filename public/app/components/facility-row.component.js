@@ -29,6 +29,10 @@ var FacilityRow = (function () {
         if (this.isSelected) {
             this.mapService.selectCcMarker(this.i);
         }
+        else {
+            this.mapService.setHotelMarkers(null);
+            this.mapService.setSightMarkers(null);
+        }
     };
     FacilityRow.prototype.ngOnDestroy = function () {
         this.subscription.unsubscribe();

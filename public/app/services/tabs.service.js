@@ -9,30 +9,20 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
-var Tab = (function () {
-    function Tab() {
-        this.active = false;
+var Subject_1 = require('rxjs/Subject');
+var TabService = (function () {
+    function TabService() {
+        this.tabs = new Subject_1.Subject();
+        this.tabs$ = this.tabs.asObservable();
     }
-    __decorate([
-        core_1.Input('tabTitle'), 
-        __metadata('design:type', String)
-    ], Tab.prototype, "title", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], Tab.prototype, "active", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', String)
-    ], Tab.prototype, "alias", void 0);
-    Tab = __decorate([
-        core_1.Component({
-            selector: 'tab',
-            template: "\n    <div \n      [hidden]=\"!active\">\n      <ng-content></ng-content>\n    </div>\n  "
-        }), 
+    TabService.prototype.setTab = function (tab) {
+        this.tabs.next(tab);
+    };
+    TabService = __decorate([
+        core_1.Injectable(), 
         __metadata('design:paramtypes', [])
-    ], Tab);
-    return Tab;
+    ], TabService);
+    return TabService;
 }());
-exports.Tab = Tab;
-//# sourceMappingURL=tab.component.js.map
+exports.TabService = TabService;
+//# sourceMappingURL=tabs.service.js.map

@@ -25,7 +25,7 @@ var NearbyItems = (function () {
         core_1.Component({
             selector: 'nearby-items',
             directives: [hotels_component_1.Hotels, sights_component_1.Sights, tabs_component_1.Tabs, tab_component_1.Tab],
-            template: "\n    <tabs>\n      <tab tabTitle=\"Hotels nearby\">\n        <hotels \n          [facilityLocation]=\"location\">\n        </hotels>\n      </tab>\n      <tab tabTitle=\"Sights nearby\">\n        <sights \n          [hotelLocation]=\"location\">\n        </sights>\n      </tab>\n    </tabs>"
+            template: "\n    <tabs>\n      <tab tabTitle=\"Hotels nearby\" alias=\"hotels\">\n        <hotels \n          [facilityLocation]=\"location\">\n        </hotels>\n      </tab>\n      <tab tabTitle=\"Sights nearby\" alias=\"sights\">\n        <sights \n          [hotelLocation]=\"location\">\n        </sights>\n      </tab>\n    </tabs>"
         }), 
         __metadata('design:paramtypes', [])
     ], NearbyItems);
