@@ -62,7 +62,7 @@ var Hotels = (function () {
             selector: 'hotels',
             providers: [hotel_service_1.HotelService],
             directives: [hotel_row_component_1.HotelRow, loading_indicator_component_1.LoadingIndicator],
-            template: "\n    <div>\n      <div *ngIf=\"!hasHotels\">Sorry, no hotels found nearby</div>\n      <loading-indicator \n        [isLoading]=\"loading\"\n        message=\"Loading hotels...\">\n      </loading-indicator>\n      <ul class=\"list-unstyled\">\n        <hotel-row \n          *ngFor=\"let hotel of hotels;let num=index\"\n          [hotel]=\"hotel\"\n          [no]=\"num+1\"\n          on-mouseenter=\"onMouseEnter(num)\">\n        </hotel-row>\n      </ul>\n    </div>"
+            template: "\n    <div>\n      <div *ngIf=\"!hasHotels\">Sorry, no hotels found nearby</div>\n      <loading-indicator \n        [isLoading]=\"loading\"\n        message=\"Loading hotels\">\n      </loading-indicator>\n      <ul class=\"list-unstyled\">\n        <hotel-row \n          *ngFor=\"let hotel of hotels;let num=index\"\n          [hotel]=\"hotel\"\n          [no]=\"num+1\"\n          on-mouseenter=\"onMouseEnter(num)\">\n        </hotel-row>\n      </ul>\n    </div>"
         }), 
         __metadata('design:paramtypes', [hotel_service_1.HotelService, map_service_1.MapService])
     ], Hotels);

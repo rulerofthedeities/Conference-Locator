@@ -1,16 +1,27 @@
-import {Component, Input} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
+import {Observable} from 'rxjs/Rx';
 
-const DEFAULTMESSAGE = 'Loading...';
+const DEFAULTMESSAGE = 'Loading';
+
 @Component({
   selector: 'loading-indicator',
-  template: '<div *ngIf="isLoading">{{message}}</div>'
+  template: '<div *ngIf="isLoading">{{message$ | async}}</div>'
 })
 
-export class LoadingIndicator {
+export class LoadingIndicator implements OnInit {
   @Input() isLoading: boolean;
-  @Input() message: string;
+  @Input('message') userMessage: string;
+  message$: Observable<string>;
+  private message: string;
+  private dots = ['', '.', '..', '...'];
 
-  constructor() {
-    this.message = this.message || DEFAULTMESSAGE;
+  ngOnInit() {
+    this.message = this.userMessage || DEFAULTMESSAGE;
+    this.doDots();
+  }
+
+  doDots() {
+  this.message$ = Observable.interval(500)
+    .map(i => this.message + this.dots[i % this.dots.length]);
   }
 }

@@ -15,7 +15,7 @@ import {LoadingIndicator} from './common/loading-indicator.component';
     <div *ngIf="!hasSights">Sorry, no sights found nearby</div>
     <loading-indicator 
       [isLoading]="loading"
-      message="Loading sights...">
+      message="Loading sights">
     </loading-indicator>
     <ul class="list-unstyled">
       <sight-row

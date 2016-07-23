@@ -32,6 +32,7 @@ var FacilityRow = (function () {
         else {
             this.mapService.setHotelMarkers(null);
             this.mapService.setSightMarkers(null);
+            this.mapService.selectCcMarker(null);
         }
     };
     FacilityRow.prototype.ngOnDestroy = function () {
@@ -50,7 +51,7 @@ var FacilityRow = (function () {
             selector: 'facility-row',
             directives: [nearby_items_component_1.NearbyItems],
             template: "\n    <li [ngClass]=\"{active:isSelected}\">\n      <i \n        class=\"fa pull-left\" \n        [ngClass]=\"{'fa-chevron-right':!isSelected,'fa-chevron-down':isSelected}\">\n      </i>\n      \n      <h4 (click)=\"selectFacility()\">\n        {{facility.name}}\n      </h4>\n\n      <nearby-items *ngIf=\"isSelected\"\n        [location]=\"facility.location\">\n      </nearby-items>\n\n    </li>\n  ",
-            styles: ["\n    li>h4 {cursor: pointer;}\n    "]
+            styles: ["\n    li>h4 {cursor: pointer;}\n  "]
         }), 
         __metadata('design:paramtypes', [map_service_1.MapService])
     ], FacilityRow);

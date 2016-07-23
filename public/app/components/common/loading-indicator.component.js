@@ -9,23 +9,33 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
-var DEFAULTMESSAGE = 'Loading...';
+var Rx_1 = require('rxjs/Rx');
+var DEFAULTMESSAGE = 'Loading';
 var LoadingIndicator = (function () {
     function LoadingIndicator() {
-        this.message = this.message || DEFAULTMESSAGE;
+        this.dots = ['', '.', '..', '...'];
     }
+    LoadingIndicator.prototype.ngOnInit = function () {
+        this.message = this.userMessage || DEFAULTMESSAGE;
+        this.doDots();
+    };
+    LoadingIndicator.prototype.doDots = function () {
+        var _this = this;
+        this.message$ = Rx_1.Observable.interval(500)
+            .map(function (i) { return _this.message + _this.dots[i % _this.dots.length]; });
+    };
     __decorate([
         core_1.Input(), 
         __metadata('design:type', Boolean)
     ], LoadingIndicator.prototype, "isLoading", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input('message'), 
         __metadata('design:type', String)
-    ], LoadingIndicator.prototype, "message", void 0);
+    ], LoadingIndicator.prototype, "userMessage", void 0);
     LoadingIndicator = __decorate([
         core_1.Component({
             selector: 'loading-indicator',
-            template: '<div *ngIf="isLoading">{{message}}</div>'
+            template: '<div *ngIf="isLoading">{{message$ | async}}</div>'
         }), 
         __metadata('design:paramtypes', [])
     ], LoadingIndicator);

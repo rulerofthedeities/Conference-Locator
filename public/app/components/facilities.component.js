@@ -11,7 +11,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('@angular/core');
 var city_model_1 = require('../models/city.model');
 var facility_row_component_1 = require('./facility-row.component');
-var map_component_1 = require('./map.component');
+var map_component_1 = require('./map/map.component');
 var map_service_1 = require('../services/map.service');
 var Facilities = (function () {
     function Facilities() {
@@ -33,7 +33,8 @@ var Facilities = (function () {
             selector: 'conference-list',
             directives: [facility_row_component_1.FacilityRow, map_component_1.Map],
             providers: [map_service_1.MapService],
-            template: "\n  <div class=\"col-md-6\">\n    <ul class=\"list-unstyled\">\n      <facility-row \n        [facility]=\"facility\" \n        *ngFor=\"let facility of facilities; let i = index\"\n        [i] = \"i\">\n      </facility-row>\n    </ul>\n  </div>\n  <div class=\"col-md-6\">\n    <map\n      [location]=\"city.location\"\n      [markers]=\"markers\">\n    </map>\n  </div>\n   "
+            template: "\n  <div class=\"col-md-6\">\n    <ul class=\"list-unstyled ccs\">\n      <facility-row \n        [facility]=\"facility\" \n        *ngFor=\"let facility of facilities; let i = index\"\n        [i] = \"i\">\n      </facility-row>\n    </ul>\n  </div>\n  <div class=\"col-md-6\">\n    <map\n      [location]=\"city.location\"\n      [markers]=\"markers\">\n    </map>\n  </div>\n   ",
+            styles: ["\n    .ccs {height:600px;overflow-y:scroll;}\n    map {\n      border: 1px solid #666;\n      display: block;\n    }\n  "]
         }), 
         __metadata('design:paramtypes', [])
     ], Facilities);

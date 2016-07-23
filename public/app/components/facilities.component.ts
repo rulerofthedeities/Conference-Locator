@@ -3,7 +3,7 @@ import {Conference} from '../models/conference.model';
 import {City} from '../models/city.model';
 import {Marker} from '../models/map.model';
 import {FacilityRow} from './facility-row.component';
-import {Map} from './map.component';
+import {Map} from './map/map.component';
 import {MapService} from '../services/map.service';
 
 @Component({
@@ -12,7 +12,7 @@ import {MapService} from '../services/map.service';
   providers: [MapService],
   template: `
   <div class="col-md-6">
-    <ul class="list-unstyled">
+    <ul class="list-unstyled ccs">
       <facility-row 
         [facility]="facility" 
         *ngFor="let facility of facilities; let i = index"
@@ -26,7 +26,14 @@ import {MapService} from '../services/map.service';
       [markers]="markers">
     </map>
   </div>
-   `
+   `,
+  styles: [`
+    .ccs {height:600px;overflow-y:scroll;}
+    map {
+      border: 1px solid #666;
+      display: block;
+    }
+  `]
 })
 
 export class Facilities {

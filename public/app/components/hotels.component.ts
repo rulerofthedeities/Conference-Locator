@@ -17,7 +17,7 @@ import {LoadingIndicator} from './common/loading-indicator.component';
       <div *ngIf="!hasHotels">Sorry, no hotels found nearby</div>
       <loading-indicator 
         [isLoading]="loading"
-        message="Loading hotels...">
+        message="Loading hotels">
       </loading-indicator>
       <ul class="list-unstyled">
         <hotel-row 

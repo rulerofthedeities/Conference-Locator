@@ -26,7 +26,7 @@ import {Subscription} from 'rxjs/Subscription';
   `,
   styles: [`
     li>h4 {cursor: pointer;}
-    `]
+  `]
 })
 
 export class FacilityRow implements OnDestroy {
@@ -54,6 +54,7 @@ export class FacilityRow implements OnDestroy {
     } else {
       this.mapService.setHotelMarkers(null);
       this.mapService.setSightMarkers(null);
+      this.mapService.selectCcMarker(null);
     }
   }
 

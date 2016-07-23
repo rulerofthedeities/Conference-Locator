@@ -33,6 +33,7 @@ import {Component, Input, OnInit} from '@angular/core';
     }
     .item:hover {
       border: 1px dotted #c9515c;
+      border-radius: 3px;
       cursor: pointer;
     }
   `]

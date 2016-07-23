@@ -16,6 +16,11 @@ import {Subscription}   from 'rxjs/Subscription';
 	directives: [Facilities, CityFilter, LoadingIndicator],
 	providers: [ConferenceService, CityService, CityStateService, TabService],
 	template: `
+          <loading-indicator 
+          [isLoading]="true"
+          message="Loading application2">
+        </loading-indicator>
+
     <div class="container">
       <div class="row">
         <city-filter 
@@ -23,9 +28,10 @@ import {Subscription}   from 'rxjs/Subscription';
           (selectedCity)="onSelectedCity($event)">
         </city-filter>
       </div>
-      <div class="row" *ngIf="selectedCity">
+      <div class="row panel panel-default" *ngIf="selectedCity">
         <loading-indicator 
-          [isLoading]="loading">
+          [isLoading]="loading"
+          message="Loading conference centers">
         </loading-indicator>
         <conference-list 
           [facilities]="conferenceSites"
@@ -35,7 +41,8 @@ import {Subscription}   from 'rxjs/Subscription';
         {{error}}
       </div>
     </div>
-    `
+    `,
+    styles: [`.panel {padding-top:10px;}`]
 })
 
 export class ConferenceApp implements OnInit, OnDestroy {

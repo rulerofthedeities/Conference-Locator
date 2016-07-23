@@ -10,9 +10,10 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('@angular/core');
 var core_2 = require('angular2-google-maps/core');
-var location_model_1 = require('../models/location.model');
-var map_service_1 = require('../services/map.service');
-var tabs_service_1 = require('../services/tabs.service');
+var location_model_1 = require('../../models/location.model');
+var map_markers_component_1 = require('./map-markers.component');
+var map_service_1 = require('../../services/map.service');
+var tabs_service_1 = require('../../services/tabs.service');
 var Map = (function () {
     function Map(mapService, tabService) {
         this.mapService = mapService;
@@ -36,13 +37,15 @@ var Map = (function () {
         this.mapService.selectCcMarker(index);
     };
     Map.prototype.selectCcMarker = function (index) {
-        this.centerMap(index);
         this.ccMarkers.forEach(function (marker) {
             if (marker.icon === '../assets/img/icon-star-red.png') {
                 marker.icon = '../assets/img/icon-star-blue.png';
             }
         });
-        this.ccMarkers[index].icon = '../assets/img/icon-star-red.png';
+        if (index !== null) {
+            this.centerMap(index);
+            this.ccMarkers[index].icon = '../assets/img/icon-star-red.png';
+        }
     };
     Map.prototype.selectItemMarker = function (markers, index) {
         var color = this.showPinType === 'hotels' ? 'blue' : 'green';
@@ -75,9 +78,9 @@ var Map = (function () {
     Map = __decorate([
         core_1.Component({
             selector: 'map',
-            directives: [core_2.GOOGLE_MAPS_DIRECTIVES],
-            template: "\n  <sebm-google-map \n    [longitude]=\"location.longitude\"\n    [latitude]=\"location.latitude\"\n    [zoom]=\"zoom\">\n\n    <div *ngIf=\"showPins('hotels')\">\n      <sebm-google-map-marker\n        *ngFor=\"let m of hotelMarkers; let i = index\"\n        [longitude]=\"m.lon\"\n        [latitude]=\"m.lat\"\n        [label]=\"m.label\"\n        [markerDraggable]=\"m.draggable\"\n        [iconUrl]=\"m.icon\">\n        <sebm-google-map-info-window>\n            <p>{{i}}. {{m.infotxt}}</p>\n        </sebm-google-map-info-window>\n      </sebm-google-map-marker>\n    </div>\n\n    <div *ngIf=\"showPins('sights')\">\n      <sebm-google-map-marker\n        *ngFor=\"let m of sightMarkers; let i = index\"\n        [longitude]=\"m.lon\"\n        [latitude]=\"m.lat\"\n        [label]=\"m.label\"\n        [markerDraggable]=\"m.draggable\"\n        [iconUrl]=\"m.icon\">\n        <sebm-google-map-info-window>\n            <p>{{i}}. {m.infotxt}}</p>\n        </sebm-google-map-info-window>\n      </sebm-google-map-marker>\n    </div>\n\n    <sebm-google-map-marker \n      *ngFor=\"let m of ccMarkers; let i = index\"\n      (markerClick)=\"clickedMarker(m, i)\"\n      [longitude]=\"m.lon\"\n      [latitude]=\"m.lat\"\n      [label]=\"m.label\"\n      [markerDraggable]=\"m.draggable\"\n      [iconUrl]=\"m.icon\">\n      <sebm-google-map-info-window *ngIf=\"showWindow\">\n          <p>{{m.infotxt}}</p>\n      </sebm-google-map-info-window>\n    </sebm-google-map-marker>\n\n\n  </sebm-google-map>",
-            styles: ["\n    .sebm-google-map-container {\n      height: 600px;\n    }\n"]
+            directives: [core_2.GOOGLE_MAPS_DIRECTIVES, map_markers_component_1.MapMarkers],
+            template: "\n  <sebm-google-map \n    [longitude]=\"location.longitude\"\n    [latitude]=\"location.latitude\"\n    [zoom]=\"zoom\">\n\n    <map-markers *ngIf=\"showPins('hotels')\"\n      [markers]=\"hotelMarkers\">\n    </map-markers>\n\n    <map-markers *ngIf=\"showPins('sights')\"\n      [markers]=\"sightMarkers\">\n    </map-markers>\n\n    <sebm-google-map-marker \n      *ngFor=\"let m of ccMarkers; let i = index\"\n      (markerClick)=\"clickedMarker(m, i)\"\n      [longitude]=\"m.lon\"\n      [latitude]=\"m.lat\"\n      [label]=\"m.label\"\n      [markerDraggable]=\"m.draggable\"\n      [iconUrl]=\"m.icon\">\n      <sebm-google-map-info-window *ngIf=\"showWindow\">\n          <p>{{m.infotxt}}</p>\n      </sebm-google-map-info-window>\n    </sebm-google-map-marker>\n\n  </sebm-google-map>",
+            styles: ["\n    .sebm-google-map-container {\n      height: 600px;\n    }\n  "]
         }), 
         __metadata('design:paramtypes', [map_service_1.MapService, tabs_service_1.TabService])
     ], Map);
