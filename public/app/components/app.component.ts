@@ -37,7 +37,9 @@ import {Subscription}   from 'rxjs/Subscription';
       </div>
     </div>
     `,
-    styles: [`.panel {padding-top:10px;}`]
+    styles: [`
+      .panel {padding-top:10px;}
+    `]
 })
 
 export class ConferenceApp implements OnInit, OnDestroy {

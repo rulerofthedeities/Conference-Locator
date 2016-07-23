@@ -72,7 +72,7 @@ var ConferenceApp = (function () {
             directives: [facilities_component_1.Facilities, city_filter_component_1.CityFilter, loading_indicator_component_1.LoadingIndicator],
             providers: [conference_service_1.ConferenceService, city_service_1.CityService, city_state_service_1.CityStateService, tabs_service_1.TabService],
             template: "\n    <div class=\"container\">\n      <div class=\"row\">\n        <city-filter \n          [cities]=\"cities\"\n          (selectedCity)=\"onSelectedCity($event)\">\n        </city-filter>\n      </div>\n      <div class=\"row panel panel-default\" *ngIf=\"selectedCity\">\n        <loading-indicator \n          [isLoading]=\"loading\"\n          message=\"Loading conference centers\">\n        </loading-indicator>\n        <conference-list \n          [facilities]=\"conferenceSites\"\n          [markers] = \"markers\"\n          [city]=\"selectedCity\">\n        </conference-list>\n        {{error}}\n      </div>\n    </div>\n    ",
-            styles: [".panel {padding-top:10px;}"]
+            styles: ["\n      .panel {padding-top:10px;}\n    "]
         }), 
         __metadata('design:paramtypes', [conference_service_1.ConferenceService, city_service_1.CityService, city_state_service_1.CityStateService])
     ], ConferenceApp);

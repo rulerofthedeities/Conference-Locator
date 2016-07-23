@@ -20,6 +20,9 @@ var HotelRow = (function () {
         if (this.hasStars()) {
             this.arr = new Array(parseInt(this.hotel.stars, 10));
         }
+        if (this.hotel.hotelId) {
+            this.url = 'http://travel.aviewoncities.com/templates/430701/hotels/' + this.hotel.hotelId + '/overview';
+        }
     };
     HotelRow.prototype.selectHotel = function () {
         this.isSelected = !this.isSelected;
@@ -40,7 +43,7 @@ var HotelRow = (function () {
             selector: 'hotel-row',
             directives: [item_component_1.Item],
             pipes: [meters_pipe_1.MeterPipe],
-            template: "\n    <li>\n      <item (click)=\"selectHotel()\"\n        [no]=\"no\"\n        [img]=\"hotel.thumb\">\n        <strong class=\"media-heading\">\n          {{hotel.name}}\n        </strong> \n        <span *ngIf=\"hasStars()\"><i *ngFor=\"let s of arr\" class=\"fa fa-star\"></i></span>\n        <p>\n          <span class=\"address\">{{hotel.address}}</span>\n          <i>({{hotel.distance | meter:1}}m)</i>\n        </p>\n      </item>\n    </li>",
+            template: "\n    <li>\n      <item (click)=\"selectHotel()\"\n        [no]=\"no\"\n        [img]=\"hotel.thumb\"\n        [url]=\"url\">\n        <strong class=\"media-heading\">\n          {{hotel.name}}\n        </strong> \n        <span *ngIf=\"hasStars()\"><i *ngFor=\"let s of arr\" class=\"fa fa-star\"></i></span>\n        <p>\n          <span class=\"address\">{{hotel.address}}</span>\n          <i>({{hotel.distance | meter:1}}m)</i>\n        </p>\n      </item>\n    </li>",
             styles: ["\n      .fa-star {color: red;}\n    "]
         }), 
         __metadata('design:paramtypes', [])

@@ -22,7 +22,9 @@ var loadSights = function(db, options, callback) {
       _id:0, 
       distance:1, 
       name:'$title.en',
+      alias:'$alias.en',
       address:'$address.en',
+      published: '$isPublished.en',
       cityAlias: '$city.alias',
       thumb: 1,
       location: { 

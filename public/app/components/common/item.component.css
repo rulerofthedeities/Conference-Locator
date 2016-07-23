@@ -1,0 +1,31 @@
+img {
+  width: 60px;
+  height: 60px;
+  margin-left: 4px;
+}
+.media-body {
+  padding-top: 5px;
+}
+.no {
+  width: 20px;
+  padding: 5px;
+}
+.item {
+  margin-bottom: 2px;
+  border: 1px solid white;
+}
+.item:hover {
+  border: 1px dotted #c9515c;
+  border-radius: 3px;
+  cursor: default;
+}
+.item.link {
+  background: url(/assets/img/ext.png) right top no-repeat;
+}
+.item.link:hover {
+  background: url(/assets/img/ext-sel.png) right top no-repeat;
+  cursor: pointer;
+}
+.address {
+  color: #666;
+}

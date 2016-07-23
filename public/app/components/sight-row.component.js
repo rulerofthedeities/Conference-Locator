@@ -17,6 +17,9 @@ var SightRow = (function () {
     }
     SightRow.prototype.ngOnInit = function () {
         this.imgsrc = 'http://www.aviewoncities.com/img/' + this.sight.cityAlias + '/' + this.sight.thumb + '.jpg';
+        if (this.sight.published) {
+            this.url = 'http://www.aviewoncities.com/' + this.sight.cityAlias + '/' + this.sight.alias + '.htm';
+        }
     };
     __decorate([
         core_1.Input(), 
@@ -31,7 +34,7 @@ var SightRow = (function () {
             selector: 'sight-row',
             directives: [item_component_1.Item],
             pipes: [meters_pipe_1.MeterPipe],
-            template: "\n    <li>\n      <item\n        [no]=\"no\"\n        [img]=\"imgsrc\">\n        <strong class=\"media-heading\">\n          {{sight.name}}\n        </strong>\n        <p>\n          <span class=\"address\">{{sight.address}}</span>\n          <i>({{sight.distance | meter:1}}m)</i>\n        </p>\n      </item>\n    </li>"
+            template: "\n    <li>\n      <item\n        [no]=\"no\"\n        [img]=\"imgsrc\"\n        [url]=\"url\">\n        <strong class=\"media-heading\">\n          {{sight.name}}\n        </strong>\n        <p>\n          <span class=\"address\">{{sight.address}}</span>\n          <i>({{sight.distance | meter:1}}m)</i>\n        </p>\n      </item>\n    </li>"
         }), 
         __metadata('design:paramtypes', [])
     ], SightRow);
