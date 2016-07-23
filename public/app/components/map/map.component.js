@@ -37,24 +37,22 @@ var Map = (function () {
         this.mapService.selectCcMarker(index);
     };
     Map.prototype.selectCcMarker = function (index) {
-        this.ccMarkers.forEach(function (marker) {
-            if (marker.icon === '../assets/img/icon-star-red.png') {
-                marker.icon = '../assets/img/icon-star-blue.png';
-            }
-        });
+        var redIcon = '../assets/img/icon-star-red.png';
+        this.ccMarkers
+            .filter(function (marker) { return marker.icon === redIcon; })
+            .forEach(function (marker) { return marker.icon = '../assets/img/icon-star-blue.png'; });
         if (index !== null) {
             this.centerMap(index);
-            this.ccMarkers[index].icon = '../assets/img/icon-star-red.png';
+            this.ccMarkers[index].icon = redIcon;
         }
     };
     Map.prototype.selectItemMarker = function (markers, index) {
         var color = this.showPinType === 'hotels' ? 'blue' : 'green';
-        markers.forEach(function (marker) {
-            if (marker.icon === '../assets/img/icon-pin-red.png') {
-                marker.icon = '../assets/img/icon-pin-' + color + '.png';
-            }
-        });
-        markers[index].icon = '../assets/img/icon-pin-red.png';
+        var redIcon = '../assets/img/icon-pin-red.png';
+        markers
+            .filter(function (marker) { return marker.icon === redIcon; })
+            .forEach(function (marker) { return marker.icon = '../assets/img/icon-pin-' + color + '.png'; });
+        markers[index].icon = redIcon;
     };
     Map.prototype.centerMap = function (index) {
         var marker = this.ccMarkers[index];
@@ -79,7 +77,7 @@ var Map = (function () {
         core_1.Component({
             selector: 'map',
             directives: [core_2.GOOGLE_MAPS_DIRECTIVES, map_markers_component_1.MapMarkers],
-            template: "\n  <sebm-google-map \n    [longitude]=\"location.longitude\"\n    [latitude]=\"location.latitude\"\n    [zoom]=\"zoom\">\n\n    <map-markers *ngIf=\"showPins('hotels')\"\n      [markers]=\"hotelMarkers\">\n    </map-markers>\n\n    <map-markers *ngIf=\"showPins('sights')\"\n      [markers]=\"sightMarkers\">\n    </map-markers>\n\n    <sebm-google-map-marker \n      *ngFor=\"let m of ccMarkers; let i = index\"\n      (markerClick)=\"clickedMarker(m, i)\"\n      [longitude]=\"m.lon\"\n      [latitude]=\"m.lat\"\n      [label]=\"m.label\"\n      [markerDraggable]=\"m.draggable\"\n      [iconUrl]=\"m.icon\">\n      <sebm-google-map-info-window *ngIf=\"showWindow\">\n          <p>{{m.infotxt}}</p>\n      </sebm-google-map-info-window>\n    </sebm-google-map-marker>\n\n  </sebm-google-map>",
+            template: "\n  <sebm-google-map \n    [longitude]=\"location.longitude\"\n    [latitude]=\"location.latitude\"\n    [zoom]=\"zoom\">\n\n    <map-markers *ngIf=\"showPins('hotels')\"\n      [markers]=\"hotelMarkers\">\n    </map-markers>\n\n    <map-markers *ngIf=\"showPins('sights')\"\n      [markers]=\"sightMarkers\">\n    </map-markers>\n\n    <sebm-google-map-marker \n      *ngFor=\"let m of ccMarkers; let i = index\"\n      (markerClick)=\"clickedMarker(m, i)\"\n      [longitude]=\"m.lon\"\n      [latitude]=\"m.lat\"\n      [label]=\"m.label\"\n      [markerDraggable]=\"m.draggable\"\n      [iconUrl]=\"m.icon\">\n      <sebm-google-map-info-window *ngIf=\"showWindow\">\n          <p>{{m.infotxt}}</p>\n      </sebm-google-map-info-window>\n    </sebm-google-map-marker>\n\n  </sebm-google-map> {{windowHeight}}",
             styles: ["\n    .sebm-google-map-container {\n      height: 600px;\n    }\n  "]
         }), 
         __metadata('design:paramtypes', [map_service_1.MapService, tabs_service_1.TabService])

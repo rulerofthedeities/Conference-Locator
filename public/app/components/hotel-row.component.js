@@ -11,12 +11,21 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('@angular/core');
 var hotel_model_1 = require('../models/hotel.model');
 var item_component_1 = require('./common/item.component');
+var meters_pipe_1 = require('../pipes/meters.pipe');
 var HotelRow = (function () {
     function HotelRow() {
         this.isSelected = false;
     }
+    HotelRow.prototype.ngOnInit = function () {
+        if (this.hasStars()) {
+            this.arr = new Array(parseInt(this.hotel.stars, 10));
+        }
+    };
     HotelRow.prototype.selectHotel = function () {
         this.isSelected = !this.isSelected;
+    };
+    HotelRow.prototype.hasStars = function () {
+        return this.hotel.stars !== '';
     };
     __decorate([
         core_1.Input(), 
@@ -30,7 +39,9 @@ var HotelRow = (function () {
         core_1.Component({
             selector: 'hotel-row',
             directives: [item_component_1.Item],
-            template: "\n    <li>\n      <item (click)=\"selectHotel()\"\n        [no]=\"no\"\n        [img]=\"hotel.thumb\"\n        [name]=\"hotel.name\"\n        [distance]=\"hotel.distance\">\n      </item>\n    </li>"
+            pipes: [meters_pipe_1.MeterPipe],
+            template: "\n    <li>\n      <item (click)=\"selectHotel()\"\n        [no]=\"no\"\n        [img]=\"hotel.thumb\">\n        <strong class=\"media-heading\">\n          {{hotel.name}}\n        </strong> \n        <span *ngIf=\"hasStars()\"><i *ngFor=\"let s of arr\" class=\"fa fa-star\"></i></span>\n        <p>\n          <span class=\"address\">{{hotel.address}}</span>\n          <i>({{hotel.distance | meter:1}}m)</i>\n        </p>\n      </item>\n    </li>",
+            styles: ["\n      .fa-star {color: red;}\n    "]
         }), 
         __metadata('design:paramtypes', [])
     ], HotelRow);

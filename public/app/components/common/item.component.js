@@ -12,9 +12,6 @@ var core_1 = require('@angular/core');
 var Item = (function () {
     function Item() {
     }
-    Item.prototype.ngOnInit = function () {
-        this.distance = Math.round(this.distance / 10) * 10;
-    };
     __decorate([
         core_1.Input(), 
         __metadata('design:type', Number)
@@ -23,19 +20,11 @@ var Item = (function () {
         core_1.Input(), 
         __metadata('design:type', String)
     ], Item.prototype, "img", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', String)
-    ], Item.prototype, "name", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Number)
-    ], Item.prototype, "distance", void 0);
     Item = __decorate([
         core_1.Component({
             selector: 'item',
-            template: "\n    <div class=\"media item\">\n      <div class=\"pull-left no\">{{no}}.</div>\n      <div class=\"media-left\">\n        <img src=\"{{img}}\" class=\"media-object\" alt=\"{{name}}\">\n      </div>\n      <div class=\"media-body\">\n        <h5 class=\"media-heading\">{{name}}</h5>\n        <p><i>({{distance}}m)</i></p>\n      </div>\n    </div>\n\t",
-            styles: ["\n    img {\n      width: 60px;\n      height: 60px;\n      margin-left: 4px;\n    }\n    .item {\n      margin-bottom: 2px;\n      border: 1px solid white;\n    }\n    .media-body {\n      padding-top: 5px;\n    }\n    .no {\n      width: 20px;\n      padding: 5px;\n    }\n    .item:hover {\n      border: 1px dotted #c9515c;\n      border-radius: 3px;\n      cursor: pointer;\n    }\n  "]
+            template: "\n    <div class=\"media item\">\n      <div class=\"pull-left no\">{{no}}.</div>\n      <div class=\"media-left\">\n        <img src=\"{{img}}\" class=\"media-object\" alt=\"{{name}}\">\n      </div>\n      <div class=\"media-body\">\n        <ng-content></ng-content>\n      </div>\n    </div>\n\t",
+            styles: ["\n    img {\n      width: 60px;\n      height: 60px;\n      margin-left: 4px;\n    }\n    .item {\n      margin-bottom: 2px;\n      border: 1px solid white;\n    }\n    .media-body {\n      padding-top: 5px;\n    }\n    .no {\n      width: 20px;\n      padding: 5px;\n    }\n    .item:hover {\n      border: 1px dotted #c9515c;\n      border-radius: 3px;\n      cursor: pointer;\n    }\n    .address {\n      color: #666;\n    }\n  "]
         }), 
         __metadata('design:paramtypes', [])
     ], Item);

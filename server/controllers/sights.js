@@ -10,18 +10,19 @@ var loadSights = function(db, options, callback) {
         spherical:true,
         limit:20,
         maxDistance:2000,
+        query:{pos:{$exists:true},'title.en':{$exists:true}},
         near:{
           type:"Point", 
           coordinates:[options.pos.lon, options.pos.lat]
          }, 
-        distanceField: 'distance'
+        distanceField:'distance'
       }
     },
-    {$match:{pos:{$exists:true},'title.en':{$exists:true}}},
     {$project:{
       _id:0, 
       distance:1, 
       name:'$title.en',
+      address:'$address.en',
       cityAlias: '$city.alias',
       thumb: 1,
       location: { 

@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input} from '@angular/core';
 
 @Component({
 	selector: 'item',
@@ -9,8 +9,7 @@ import {Component, Input, OnInit} from '@angular/core';
         <img src="{{img}}" class="media-object" alt="{{name}}">
       </div>
       <div class="media-body">
-        <h5 class="media-heading">{{name}}</h5>
-        <p><i>({{distance}}m)</i></p>
+        <ng-content></ng-content>
       </div>
     </div>
 	`,
@@ -36,16 +35,14 @@ import {Component, Input, OnInit} from '@angular/core';
       border-radius: 3px;
       cursor: pointer;
     }
+    .address {
+      color: #666;
+    }
   `]
 })
 
-export class Item implements OnInit {
+export class Item {
 	@Input() no: number;
   @Input() img: string;
-  @Input() name: string;
-  @Input() distance: number;
 
-  ngOnInit() {
-    this.distance = Math.round(this.distance / 10) * 10;
-  }
 }

@@ -11,6 +11,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('@angular/core');
 var item_component_1 = require('./common/item.component');
 var sight_model_1 = require('../models/sight.model');
+var meters_pipe_1 = require('../pipes/meters.pipe');
 var SightRow = (function () {
     function SightRow() {
     }
@@ -29,7 +30,8 @@ var SightRow = (function () {
         core_1.Component({
             selector: 'sight-row',
             directives: [item_component_1.Item],
-            template: "\n    <li>\n      <item\n        [no]=\"no\"\n        [img]=\"imgsrc\"\n        [name]=\"sight.name\"\n        [distance]=\"sight.distance\">\n      </item>\n    </li>"
+            pipes: [meters_pipe_1.MeterPipe],
+            template: "\n    <li>\n      <item\n        [no]=\"no\"\n        [img]=\"imgsrc\">\n        <strong class=\"media-heading\">\n          {{sight.name}}\n        </strong>\n        <p>\n          <span class=\"address\">{{sight.address}}</span>\n          <i>({{sight.distance | meter:1}}m)</i>\n        </p>\n      </item>\n    </li>"
         }), 
         __metadata('design:paramtypes', [])
     ], SightRow);

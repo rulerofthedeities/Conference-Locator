@@ -1,17 +1,24 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Item} from './common/item.component';
 import {Sight} from '../models/sight.model';
+import {MeterPipe} from '../pipes/meters.pipe';
 
 @Component({
   selector: 'sight-row',
   directives: [Item],
+  pipes: [MeterPipe],
   template: `
     <li>
       <item
         [no]="no"
-        [img]="imgsrc"
-        [name]="sight.name"
-        [distance]="sight.distance">
+        [img]="imgsrc">
+        <strong class="media-heading">
+          {{sight.name}}
+        </strong>
+        <p>
+          <span class="address">{{sight.address}}</span>
+          <i>({{sight.distance | meter:1}}m)</i>
+        </p>
       </item>
     </li>`
 })

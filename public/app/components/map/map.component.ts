@@ -37,7 +37,7 @@ import {Subscription} from 'rxjs/Subscription';
       </sebm-google-map-info-window>
     </sebm-google-map-marker>
 
-  </sebm-google-map>`,
+  </sebm-google-map> {{windowHeight}}`,
   styles: [`
     .sebm-google-map-container {
       height: 600px;
@@ -54,10 +54,12 @@ export class Map implements OnInit, OnDestroy {
   showPinType: string = 'hotels';
   zoom: number = 11;
   subscriptions: Subscription[] = [];
+  windowHeight: number;
 
   constructor(
     private mapService: MapService,
-    private tabService: TabService) {}
+    private tabService: TabService) {
+  }
 
   ngOnInit() {
     this.subscriptions.push(this.mapService.hotelMarkers$.subscribe(
@@ -86,27 +88,30 @@ export class Map implements OnInit, OnDestroy {
   }
 
   selectCcMarker(index: number) {
-    this.ccMarkers.forEach((marker) => {
-      if (marker.icon === '../assets/img/icon-star-red.png') {
-        marker.icon = '../assets/img/icon-star-blue.png';
-      }});
+    const redIcon = '../assets/img/icon-star-red.png';
+
+    this.ccMarkers
+      .filter((marker) => marker.icon === redIcon)
+      .forEach((marker) => marker.icon = '../assets/img/icon-star-blue.png');
+
     if (index !== null) {
       this.centerMap(index);
-      this.ccMarkers[index].icon = '../assets/img/icon-star-red.png';
+      this.ccMarkers[index].icon = redIcon;
     }
   }
 
   selectItemMarker(markers: Marker[], index: number) {
-    let color = this.showPinType === 'hotels' ? 'blue' : 'green';
-    markers.forEach((marker) => {
-      if (marker.icon === '../assets/img/icon-pin-red.png') {
-        marker.icon = '../assets/img/icon-pin-' + color + '.png';
-      }});
-    markers[index].icon = '../assets/img/icon-pin-red.png';
+    const color = this.showPinType === 'hotels' ? 'blue' : 'green';
+    const redIcon = '../assets/img/icon-pin-red.png';
+
+    markers
+      .filter(marker => marker.icon === redIcon)
+      .forEach(marker => marker.icon = '../assets/img/icon-pin-' + color + '.png');
+    markers[index].icon = redIcon;
   }
 
   centerMap(index: number) {
-    let marker = this.ccMarkers[index];
+    const marker = this.ccMarkers[index];
     this.location.longitude = marker.lon;
     this.location.latitude = marker.lat;
   }

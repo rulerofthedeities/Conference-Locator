@@ -16,11 +16,6 @@ import {Subscription}   from 'rxjs/Subscription';
 	directives: [Facilities, CityFilter, LoadingIndicator],
 	providers: [ConferenceService, CityService, CityStateService, TabService],
 	template: `
-          <loading-indicator 
-          [isLoading]="true"
-          message="Loading application2">
-        </loading-indicator>
-
     <div class="container">
       <div class="row">
         <city-filter 
