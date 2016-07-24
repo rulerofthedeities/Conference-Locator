@@ -21,9 +21,11 @@ img {
 }
 .item.link {
   background: url(/assets/img/ext.png) right top no-repeat;
+  background-position: 99% 6px;
 }
 .item.link:hover {
   background: url(/assets/img/ext-sel.png) right top no-repeat;
+  background-position: 99% 6px;
   cursor: pointer;
 }
 .address {

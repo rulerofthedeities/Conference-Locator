@@ -2,7 +2,7 @@ export interface Marker {
     lat: number;
     lon: number;
     label?: string;
-    draggable: boolean;
     icon?: string;
+    url?: string;
     infotxt: string;
 }

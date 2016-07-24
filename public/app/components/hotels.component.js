@@ -30,6 +30,9 @@ var Hotels = (function () {
         this.loading = true;
         this.hotelService.getNearbyHotels(this.facilityLocation).then(function (hotels) {
             _this.hotels = hotels;
+            _this.hotels.forEach(function (hotel) {
+                hotel.url = hotel.hotelId ? 'http://travel.aviewoncities.com/templates/430701/hotels/' + hotel.hotelId + '/overview' : null;
+            });
             _this.loading = false;
             _this.hasHotels = hotels.length > 0;
             _this.createMarkers(hotels);
@@ -45,8 +48,8 @@ var Hotels = (function () {
                 lat: hotel.location.latitude,
                 lon: hotel.location.longitude,
                 infotxt: hotel.name,
-                icon: '../assets/img/icon-pin-blue.png',
-                draggable: false });
+                url: hotel.url,
+                icon: '../assets/img/icon-pin-blue.png' });
         });
         this.mapService.setHotelMarkers(this.markers);
     };

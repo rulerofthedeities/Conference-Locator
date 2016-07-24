@@ -4,4 +4,5 @@ export class Hotel extends Site {
   stars: string;
   hotelId: string;
   address: string;
+  url: string;
 }

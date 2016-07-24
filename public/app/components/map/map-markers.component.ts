@@ -11,14 +11,18 @@ import {Marker} from '../../models/map.model';
       [longitude]="m.lon"
       [latitude]="m.lat"
       [label]="m.label"
-      [markerDraggable]="m.draggable"
+      [markerDraggable]="false"
       [iconUrl]="m.icon">
       <sebm-google-map-info-window>
-          <p>{{i+1}}. {{m.infotxt}}</p>
+        <p>{{i+1}}. 
+          <span *ngIf="m.url"><a href="{{m.url}}" target="_blank">{{m.infotxt}}</a></span>
+          <span *ngIf="!m.url">{{m.infotxt}}</span>
+        </p>
       </sebm-google-map-info-window>
     </sebm-google-map-marker>`
 })
 
 export class MapMarkers {
   @Input() markers: Marker[];
+
 }

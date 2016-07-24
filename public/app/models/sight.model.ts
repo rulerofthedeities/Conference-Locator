@@ -5,4 +5,5 @@ export class Sight extends Site {
   alias: string;
   address: string;
   published: boolean;
+  url: string;
 }

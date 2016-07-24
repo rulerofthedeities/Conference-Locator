@@ -58,8 +58,7 @@ var ConferenceApp = (function () {
                 lat: conference.location.latitude,
                 lon: conference.location.longitude,
                 infotxt: conference.name,
-                icon: '../assets/img/icon-star-blue.png',
-                draggable: false });
+                icon: '../assets/img/icon-star-blue.png' });
         });
     };
     ConferenceApp.prototype.ngOnDestroy = function () {

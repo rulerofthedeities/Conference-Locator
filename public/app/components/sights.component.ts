@@ -47,6 +47,9 @@ export class Sights implements OnInit {
     this.sightService.getNearbySights(this.hotelLocation).then(
       sights => {
         this.sights = sights;
+        this.sights.forEach(sight => {
+            sight.url = sight.published ? sight.url = 'http://www.aviewoncities.com/' + sight.cityAlias + '/' + sight.alias + '.htm' : null;
+        });
         this.loading = false;
         this.hasSights = sights.length > 0;
         this.createMarkers(sights);
@@ -60,8 +63,8 @@ export class Sights implements OnInit {
         lat: sight.location.latitude,
         lon: sight.location.longitude,
         infotxt: sight.name,
-        icon: '../assets/img/icon-pin-green.png',
-        draggable: false});
+        url: sight.url,
+        icon: '../assets/img/icon-pin-green.png'});
     });
     this.mapService.setSightMarkers(this.markers);
   }

@@ -12,7 +12,7 @@ import {MeterPipe} from '../pipes/meters.pipe';
       <item
         [no]="no"
         [img]="imgsrc"
-        [url]="url">
+        [url]="sight.url">
         <strong class="media-heading">
           {{sight.name}}
         </strong>
@@ -28,12 +28,8 @@ export class SightRow implements OnInit {
   @Input() sight: Sight;
   @Input() no: number;
   imgsrc: string;
-  url: string;
 
   ngOnInit() {
     this.imgsrc = 'http://www.aviewoncities.com/img/' + this.sight.cityAlias + '/' + this.sight.thumb + '.jpg';
-    if (this.sight.published) {
-      this.url = 'http://www.aviewoncities.com/' + this.sight.cityAlias + '/' + this.sight.alias + '.htm';
-    }
   }
 }

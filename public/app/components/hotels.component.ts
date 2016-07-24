@@ -54,6 +54,10 @@ export class Hotels implements OnInit {
     this.hotelService.getNearbyHotels(this.facilityLocation).then(
       hotels => {
         this.hotels = hotels;
+        this.hotels.forEach(
+          hotel => {
+              hotel.url = hotel.hotelId ? 'http://travel.aviewoncities.com/templates/430701/hotels/' + hotel.hotelId + '/overview' : null;
+          });
         this.loading = false;
         this.hasHotels = hotels.length > 0;
         this.createMarkers(hotels);
@@ -71,8 +75,8 @@ export class Hotels implements OnInit {
         lat: hotel.location.latitude,
         lon: hotel.location.longitude,
         infotxt: hotel.name,
-        icon: '../assets/img/icon-pin-blue.png',
-        draggable: false});
+        url: hotel.url,
+        icon: '../assets/img/icon-pin-blue.png'});
     });
     this.mapService.setHotelMarkers(this.markers);
   }

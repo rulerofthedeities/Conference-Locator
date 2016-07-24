@@ -30,10 +30,10 @@ import {Subscription} from 'rxjs/Subscription';
       [longitude]="m.lon"
       [latitude]="m.lat"
       [label]="m.label"
-      [markerDraggable]="m.draggable"
+      [markerDraggable]="false"
       [iconUrl]="m.icon">
       <sebm-google-map-info-window *ngIf="showWindow">
-          <p>{{m.infotxt}}</p>
+          <p>{{title}}</p>
       </sebm-google-map-info-window>
     </sebm-google-map-marker>
 

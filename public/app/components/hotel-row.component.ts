@@ -12,7 +12,7 @@ import {MeterPipe} from '../pipes/meters.pipe';
       <item (click)="selectHotel()"
         [no]="no"
         [img]="hotel.thumb"
-        [url]="url">
+        [url]="hotel.url">
         <strong class="media-heading">
           {{hotel.name}}
         </strong> 
@@ -33,14 +33,10 @@ export class HotelRow implements OnInit {
   @Input() no: number;
   isSelected: boolean = false;
   arr: Array<number>;
-  url: string;
 
   ngOnInit() {
     if (this.hasStars()) {
       this.arr = new Array(parseInt(this.hotel.stars, 10));
-    }
-    if (this.hotel.hotelId) {
-      this.url = 'http://travel.aviewoncities.com/templates/430701/hotels/' + this.hotel.hotelId + '/overview';
     }
   }
 

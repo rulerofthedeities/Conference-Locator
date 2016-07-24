@@ -30,6 +30,9 @@ var Sights = (function () {
         this.loading = true;
         this.sightService.getNearbySights(this.hotelLocation).then(function (sights) {
             _this.sights = sights;
+            _this.sights.forEach(function (sight) {
+                sight.url = sight.published ? sight.url = 'http://www.aviewoncities.com/' + sight.cityAlias + '/' + sight.alias + '.htm' : null;
+            });
             _this.loading = false;
             _this.hasSights = sights.length > 0;
             _this.createMarkers(sights);
@@ -42,8 +45,8 @@ var Sights = (function () {
                 lat: sight.location.latitude,
                 lon: sight.location.longitude,
                 infotxt: sight.name,
-                icon: '../assets/img/icon-pin-green.png',
-                draggable: false });
+                url: sight.url,
+                icon: '../assets/img/icon-pin-green.png' });
         });
         this.mapService.setSightMarkers(this.markers);
     };

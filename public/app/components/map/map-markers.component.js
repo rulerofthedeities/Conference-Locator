@@ -21,7 +21,7 @@ var MapMarkers = (function () {
         core_1.Component({
             selector: 'map-markers',
             directives: [core_2.GOOGLE_MAPS_DIRECTIVES],
-            template: "\n    <sebm-google-map-marker\n      *ngFor=\"let m of markers; let i = index\"\n      [longitude]=\"m.lon\"\n      [latitude]=\"m.lat\"\n      [label]=\"m.label\"\n      [markerDraggable]=\"m.draggable\"\n      [iconUrl]=\"m.icon\">\n      <sebm-google-map-info-window>\n          <p>{{i+1}}. {{m.infotxt}}</p>\n      </sebm-google-map-info-window>\n    </sebm-google-map-marker>"
+            template: "\n    <sebm-google-map-marker\n      *ngFor=\"let m of markers; let i = index\"\n      [longitude]=\"m.lon\"\n      [latitude]=\"m.lat\"\n      [label]=\"m.label\"\n      [markerDraggable]=\"false\"\n      [iconUrl]=\"m.icon\">\n      <sebm-google-map-info-window>\n        <p>{{i+1}}. \n          <span *ngIf=\"m.url\"><a href=\"{{m.url}}\" target=\"_blank\">{{m.infotxt}}</a></span>\n          <span *ngIf=\"!m.url\">{{m.infotxt}}</span>\n        </p>\n      </sebm-google-map-info-window>\n    </sebm-google-map-marker>"
         }), 
         __metadata('design:paramtypes', [])
     ], MapMarkers);

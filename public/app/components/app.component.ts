@@ -96,8 +96,7 @@ export class ConferenceApp implements OnInit, OnDestroy {
         lat: conference.location.latitude,
         lon: conference.location.longitude,
         infotxt: conference.name,
-        icon: '../assets/img/icon-star-blue.png',
-        draggable: false});
+        icon: '../assets/img/icon-star-blue.png'});
     });
   }
 
