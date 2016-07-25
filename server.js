@@ -2,6 +2,7 @@
 
 var express = require('express'),
     app = express(),
+    path = require('path'),
     bodyParser = require('body-parser'),
     routes = require('./server/routes'),
     db = require('./server/db');
@@ -18,6 +19,7 @@ if (app.get('env') == 'development') {
 app.use(express.static(__dirname + '/public'));
 app.use(bodyParser.json());
 
+app.use('/client', express.static(path.join(__dirname, '/client')));
 //routing
 routes.initialize(app, new express.Router());
 

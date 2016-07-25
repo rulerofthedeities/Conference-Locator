@@ -3,7 +3,6 @@ var mongo = require('mongodb'),
 
 var loadHotels = function(db, options, callback) {
   var collection = db.collection('hotels');
-
   collection
     .aggregate([
       {$geoNear:{
