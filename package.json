@@ -12,7 +12,9 @@
     "watch:ts": "tsc -w",
     "browsersync": "browser-sync start --files \"public/**/*.*\" --proxy 127.127.0.1:8080 --reload-delay=300 --reload-debounce=500",
     "postinstall": "typings install",
-    "typings": "typings"
+    "typings": "typings",
+    
+    "bundle": "node tools/builder.js"
   },
   "license": "ISC",
   "dependencies": {
@@ -43,6 +45,7 @@
     "gulp": "^3.9.1",
     "gulp-concat": "^2.6.0",
     "nodemon": "^1.9.2",
+    "systemjs-builder": "^0.15.23",
     "typescript": "^1.8.10",
     "typings": "^1.0.4"
   }
