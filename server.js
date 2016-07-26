@@ -2,6 +2,7 @@
 
 var express = require('express'),
     app = express(),
+    compression = require('compression'),
     path = require('path'),
     bodyParser = require('body-parser'),
     routes = require('./server/routes'),
@@ -11,14 +12,17 @@ var express = require('express'),
 app.set('port', process.env.PORT || 3000);
 app.set('env', process.env.NODE_ENV || 'development');
 
+app.use(compression());
+
 if (app.get('env') == 'development') {
   // All code depending on the environment here
   // You can put morgan here for example
-  app.use(express.static(path.join(__dirname, '../node_modules')));
+  console.log('Server running in development mode');
+  app.use('/node', express.static(path.join(__dirname, '/node_modules')));
 }
 
   
-app.use(express.static(__dirname + '/public'));
+app.use(express.static(path.join(__dirname, '/public')));
 app.use(bodyParser.json());
 
 app.use('/client', express.static(path.join(__dirname, '/client')));

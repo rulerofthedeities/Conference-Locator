@@ -1,3 +1,4 @@
+var isPublic = typeof window != "undefined";
 /**
  * System configuration for Angular 2 samples
  * Adjust as necessary for your application needs.
@@ -6,9 +7,9 @@
   // map tells the System loader where to look for things
   var map = {
     'app':                        'client', // 'dist',
-    '@angular':                   'node_modules/@angular',
-    'rxjs':                       'node_modules/rxjs',
-    'angular2-google-maps':       'node_modules/angular2-google-maps'
+    '@angular':                   (isPublic) ? 'node/@angular' : 'node_modules/@angular',
+    'rxjs':                       (isPublic) ? 'node/rxjs' : 'node_modules/rxjs',
+    'angular2-google-maps':       (isPublic) ? 'node/angular2-google-maps' : 'node_modules/angular2-google-maps'
   };
   // packages tells the System loader how to load when no filename and/or no extension
   var packages = {

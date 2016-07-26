@@ -14,7 +14,11 @@
     "postinstall": "typings install",
     "typings": "typings",
     
-    "bundle": "node tools/builder.js"
+    "build:prod": "npm run bundle && npm run minify:bundle && npm run minify:libs && npm run minify:css",
+    "bundle": "node tools/builder.js",
+    "minify:bundle": "uglifyjs public/assets/js/bundle.js --screw-ie8 --compress --mangle --output public/assets/js/bundle.min.js",
+    "minify:libs": "uglifyjs public/assets/js/libs.js --screw-ie8 --compress --mangle --output public/assets/js/libs.min.js",
+    "minify:css": "cleancss public/assets/css/styles.css -o public/assets/css/styles.min.css"
   },
   "license": "ISC",
   "dependencies": {
@@ -30,6 +34,7 @@
     "angular2-google-maps": "^0.12.0",
     "body-parser": "^1.14.0",
     "bootstrap": "^3.3.6",
+    "compression": "^1.6.2",
     "core-js": "^2.4.0",
     "express": "^4.13.3",
     "font-awesome": "^4.6.3",
@@ -41,12 +46,14 @@
   },
   "devDependencies": {
     "browserify": "^13.0.1",
+    "clean-css": "^3.4.19",
     "concurrently": "^2.0.0",
     "gulp": "^3.9.1",
     "gulp-concat": "^2.6.0",
     "nodemon": "^1.9.2",
     "systemjs-builder": "^0.15.23",
     "typescript": "^1.8.10",
-    "typings": "^1.0.4"
+    "typings": "^1.0.4",
+    "uglifyjs": "^2.4.10"
   }
 }
