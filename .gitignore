@@ -3,6 +3,7 @@ public/assets/js
 logs
 *.log
 npm-debug.log*
+client/data/config.*
 
 # Runtime data
 pids
