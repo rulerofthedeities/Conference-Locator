@@ -1,8 +1,12 @@
-var mongo = require('mongodb'),
-    assert = require("assert");
+var mongo = require('mongodb');
 
+  
 var loadHotels = function(db, options, callback) {
   var collection = db.collection('hotels');
+
+  //$arrayElemAt is introduced in 3.2 / use workaround until mLab is on 3.2
+
+  /*
   collection
     .aggregate([
       {$geoNear:{
@@ -34,6 +38,44 @@ var loadHotels = function(db, options, callback) {
         assert.equal(null, err);
         callback(docs);
     });
+}
+*/
+
+//Workaround for Mongo v3.0
+
+collection
+  .aggregate([
+    {$geoNear:{
+      spherical:true,
+      limit:20,
+      maxDistance:2000,
+      query:{stars:{$in:['', '3', '4','5']}},
+      near:{
+        type:"Point", 
+        coordinates:[options.pos.lon, options.pos.lat]
+       }, 
+      distanceField: 'distance'
+      }
+    },
+    {$project: {
+      _id:0, 
+      distance:1, 
+      name:1,
+      address:1,
+      thumb:1,
+      stars:1,
+      hotelId:1,
+      location: "$pos"}
+    }])
+  .toArray(function(err, docs) {
+    //Workaround for Mongo v3.0 on MLab
+    var loc;
+    docs.forEach(function(doc){
+      loc = doc.location.coordinates;
+      doc.location = {longitude:loc[0], latitude:loc[1]};
+    });
+    callback(docs);
+  });
 }
 
 var isNumber= function(n) {
