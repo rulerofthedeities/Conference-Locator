@@ -1,9 +1,7 @@
-public/assets/js
 # Logs
 logs
 *.log
 npm-debug.log*
-client/data/config.*
 
 # Runtime data
 pids
@@ -32,9 +30,7 @@ build/Release
 node_modules
 jspm_packages
 typings
-server/**/*.js
 server/**/*.js.map
-client/**/*.js
 client/**/*.js.map
 
 # Optional npm cache directory
