@@ -1,5 +1,4 @@
-var mongo = require('mongodb'),
-    assert = require("assert");
+var mongo = require('mongodb');
 
 var loadConferences = function(db, options, callback) {
   var collection = db.collection('cc');
@@ -20,7 +19,6 @@ var loadConferences = function(db, options, callback) {
     }])
     .sort({'name': 1})
     .toArray(function(err, docs) {
-        assert.equal(null, err);
         callback(docs);
     });
 }
