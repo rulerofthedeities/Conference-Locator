@@ -1,9 +1,11 @@
-import {Component, EventEmitter, Input, Output} from '@angular/core';
+import {Component, EventEmitter, Output, OnInit} from '@angular/core';
+import {CityService} from '../services/city.service';
 import {City} from '../models/city.model';
 
 @Component({
-  'selector': 'city-filter',
-  'template': `
+  selector: 'city-filter',
+  providers: [CityService],
+  template: `
     <div class="form-group form-group-lg">
       <select class="form-control"
         [ngModel]="currentCity"
@@ -17,9 +19,23 @@ import {City} from '../models/city.model';
     </div>
     `
 })
-export class CityFilter {
-  @Input() cities: City[];
+export class CityFilter implements OnInit {
   @Output() selectedCity = new EventEmitter<City>();
+  cities: City[];
+  currentCity: City;
+
+  constructor(private cityService: CityService) {}
+
+  ngOnInit() {
+    this.cityService.getCities().then(
+      cities => {
+        this.cities = cities;
+        //Select default city
+        this.selectedCity.emit(cities[cities.length - 1]);
+        this.currentCity = cities[cities.length - 1];
+      }
+    );
+  }
 
   onChange(city: City) {
     this.selectedCity.emit(city);

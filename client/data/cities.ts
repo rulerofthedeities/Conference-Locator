@@ -9,7 +9,12 @@ let locPrague: Location = new Location();
 locPrague.longitude = 14.416843124389648;
 locPrague.latitude = 50.083471541270624;
 
+let locLondon: Location = new Location();
+locLondon.longitude = -0.1253890380859375;
+locLondon.latitude = 51.511092905004745;
+
 export const CITIES: City[] = [
-	{name:'Prague', alias: 'prague', location: locPrague},
-	{name:'Paris', alias: 'paris', location: locParis}
+  {name:'London', alias: 'london', location: locLondon},
+  {name:'Paris', alias: 'paris', location: locParis},
+	{name:'Prague', alias: 'prague', location: locPrague}
 ];

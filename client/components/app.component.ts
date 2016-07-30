@@ -6,7 +6,6 @@ import {Facilities} from './facilities.component';
 import {CityFilter} from './city-filter.component';
 import {LoadingIndicator} from './common/loading-indicator.component';
 import {ConferenceService} from '../services/conference.service';
-import {CityService} from '../services/city.service';
 import {CityStateService} from '../services/city-state.service';
 import {TabService} from '../services/tabs.service';
 import {Subscription}   from 'rxjs/Subscription';
@@ -14,7 +13,7 @@ import {Subscription}   from 'rxjs/Subscription';
 @Component({
 	selector: 'conferences',
 	directives: [Facilities, CityFilter, LoadingIndicator],
-	providers: [ConferenceService, CityService, CityStateService, TabService],
+	providers: [ConferenceService, CityStateService, TabService],
 	template: `
     <div class="container">
       <div class="row">
@@ -53,7 +52,6 @@ export class ConferenceApp implements OnInit, OnDestroy {
 
 	constructor(
     private conferenceService: ConferenceService,
-    private cityService: CityService,
     private cityStateService: CityStateService) {
   }
 
@@ -63,7 +61,6 @@ export class ConferenceApp implements OnInit, OnDestroy {
         this.selectedCity = city;
         this.markers = [];
       });
-    this.getCities();
 	}
 
   getConferenceSites(cityAlias) {
@@ -75,14 +72,6 @@ export class ConferenceApp implements OnInit, OnDestroy {
         this.loading = false;
       }
     ).catch(error => this.error = error);
-  }
-
-  getCities() {
-    this.cityService.getCities().then(
-      cities => {
-        this.cities = cities;
-      }
-    );
   }
 
   onSelectedCity(city: City) {

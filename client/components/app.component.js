@@ -1,4 +1,4 @@
-System.register(['@angular/core', './facilities.component', './city-filter.component', './common/loading-indicator.component', '../services/conference.service', '../services/city.service', '../services/city-state.service', '../services/tabs.service'], function(exports_1, context_1) {
+System.register(['@angular/core', './facilities.component', './city-filter.component', './common/loading-indicator.component', '../services/conference.service', '../services/city-state.service', '../services/tabs.service'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,7 +10,7 @@ System.register(['@angular/core', './facilities.component', './city-filter.compo
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, facilities_component_1, city_filter_component_1, loading_indicator_component_1, conference_service_1, city_service_1, city_state_service_1, tabs_service_1;
+    var core_1, facilities_component_1, city_filter_component_1, loading_indicator_component_1, conference_service_1, city_state_service_1, tabs_service_1;
     var ConferenceApp;
     return {
         setters:[
@@ -29,9 +29,6 @@ System.register(['@angular/core', './facilities.component', './city-filter.compo
             function (conference_service_1_1) {
                 conference_service_1 = conference_service_1_1;
             },
-            function (city_service_1_1) {
-                city_service_1 = city_service_1_1;
-            },
             function (city_state_service_1_1) {
                 city_state_service_1 = city_state_service_1_1;
             },
@@ -40,9 +37,8 @@ System.register(['@angular/core', './facilities.component', './city-filter.compo
             }],
         execute: function() {
             ConferenceApp = (function () {
-                function ConferenceApp(conferenceService, cityService, cityStateService) {
+                function ConferenceApp(conferenceService, cityStateService) {
                     this.conferenceService = conferenceService;
-                    this.cityService = cityService;
                     this.cityStateService = cityStateService;
                     this.markers = [];
                     this.loading = false;
@@ -53,7 +49,6 @@ System.register(['@angular/core', './facilities.component', './city-filter.compo
                         _this.selectedCity = city;
                         _this.markers = [];
                     });
-                    this.getCities();
                 };
                 ConferenceApp.prototype.getConferenceSites = function (cityAlias) {
                     var _this = this;
@@ -63,12 +58,6 @@ System.register(['@angular/core', './facilities.component', './city-filter.compo
                         _this.createMarkers(conferences);
                         _this.loading = false;
                     }).catch(function (error) { return _this.error = error; });
-                };
-                ConferenceApp.prototype.getCities = function () {
-                    var _this = this;
-                    this.cityService.getCities().then(function (cities) {
-                        _this.cities = cities;
-                    });
                 };
                 ConferenceApp.prototype.onSelectedCity = function (city) {
                     this.cityStateService.setCity(city);
@@ -92,11 +81,11 @@ System.register(['@angular/core', './facilities.component', './city-filter.compo
                     core_1.Component({
                         selector: 'conferences',
                         directives: [facilities_component_1.Facilities, city_filter_component_1.CityFilter, loading_indicator_component_1.LoadingIndicator],
-                        providers: [conference_service_1.ConferenceService, city_service_1.CityService, city_state_service_1.CityStateService, tabs_service_1.TabService],
+                        providers: [conference_service_1.ConferenceService, city_state_service_1.CityStateService, tabs_service_1.TabService],
                         template: "\n    <div class=\"container\">\n      <div class=\"row\">\n        <city-filter \n          [cities]=\"cities\"\n          (selectedCity)=\"onSelectedCity($event)\">\n        </city-filter>\n      </div>\n      <div class=\"row panel panel-default\" *ngIf=\"selectedCity\">\n        <loading-indicator \n          [isLoading]=\"loading\"\n          message=\"Loading conference centers\">\n        </loading-indicator>\n        <conference-list \n          [facilities]=\"conferenceSites\"\n          [markers] = \"markers\"\n          [city]=\"selectedCity\">\n        </conference-list>\n        {{error}}\n      </div>\n    </div>\n    ",
                         styles: ["\n      .panel {padding-top:10px;}\n    "]
                     }), 
-                    __metadata('design:paramtypes', [conference_service_1.ConferenceService, city_service_1.CityService, city_state_service_1.CityStateService])
+                    __metadata('design:paramtypes', [conference_service_1.ConferenceService, city_state_service_1.CityStateService])
                 ], ConferenceApp);
                 return ConferenceApp;
             }());

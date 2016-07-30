@@ -2,7 +2,7 @@ System.register(['../models/location.model'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var location_model_1;
-    var locParis, locPrague, CITIES;
+    var locParis, locPrague, locLondon, CITIES;
     return {
         setters:[
             function (location_model_1_1) {
@@ -15,9 +15,13 @@ System.register(['../models/location.model'], function(exports_1, context_1) {
             locPrague = new location_model_1.Location();
             locPrague.longitude = 14.416843124389648;
             locPrague.latitude = 50.083471541270624;
+            locLondon = new location_model_1.Location();
+            locLondon.longitude = -0.1253890380859375;
+            locLondon.latitude = 51.511092905004745;
             exports_1("CITIES", CITIES = [
-                { name: 'Prague', alias: 'prague', location: locPrague },
-                { name: 'Paris', alias: 'paris', location: locParis }
+                { name: 'London', alias: 'london', location: locLondon },
+                { name: 'Paris', alias: 'paris', location: locParis },
+                { name: 'Prague', alias: 'prague', location: locPrague }
             ]);
         }
     }
