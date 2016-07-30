@@ -3,6 +3,8 @@
     <title>Conferences</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="assets/css/vendor.css">
     <link rel="stylesheet" href="assets/css/styles.min.css">
     <!-- 1. Load libraries -->
@@ -10,16 +12,17 @@
     <script src="assets/js/libs.min.js"></script>
     <!-- 2. Configure SystemJS -->
 
-    <!-- Development mode -->
+    <!-- Development mode
     <script src="systemjs.config.js"></script>
     <script>
       System.import('app').catch(function(err){ console.error(err); });
     </script>
+    -->
   </head>
   <!-- 3. Display the application -->
   <body>
     <conferences>Loading application...</conferences>
-    <!--  Production mode
-    <script src="assets/js/bundle.min.js"></script>  -->
+    <!--  Production mode  -->
+    <script src="assets/js/bundle.min.js"></script>
   </body>
 </html>

@@ -13,7 +13,6 @@
     "browsersync": "browser-sync start --files \"public/**/*.*\" --proxy 127.127.0.1:8080 --reload-delay=300 --reload-debounce=500",
     "postinstall": "typings install",
     "typings": "typings",
-    
     "build:prod": "npm run bundle && npm run minify:bundle && npm run minify:libs && npm run minify:css",
     "bundle": "node tools/builder.js",
     "minify:bundle": "uglifyjs public/assets/js/bundle.js --screw-ie8 --compress --mangle --output public/assets/js/bundle.min.js",
@@ -41,6 +40,7 @@
     "reflect-metadata": "^0.1.3",
     "rxjs": "5.0.0-beta.6",
     "systemjs": "0.19.27",
+    "typings": "^1.3.2",
     "zone.js": "^0.6.12"
   },
   "devDependencies": {

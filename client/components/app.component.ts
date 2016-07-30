@@ -34,8 +34,7 @@ import {Subscription}   from 'rxjs/Subscription';
         </conference-list>
         {{error}}
       </div>
-    </div>
-    `,
+    </div>`,
     styles: [`
       .panel {padding-top:10px;}
     `]
