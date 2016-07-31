@@ -23,7 +23,7 @@ System.register(['@angular/platform-browser-dynamic', '@angular/core', '@angular
                 config_1 = config_1_1;
             }],
         execute: function() {
-            core_1.enableProdMode();
+            //enableProdMode();
             platform_browser_dynamic_1.bootstrap(app_component_1.ConferenceApp, [
                 http_1.HTTP_PROVIDERS,
                 core_2.GOOGLE_MAPS_PROVIDERS,

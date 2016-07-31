@@ -1,6 +1,7 @@
 var conferences = require('../server/controllers/conferences'),
     hotels = require('../server/controllers/hotels'),
     sights = require('../server/controllers/sights'),
+    env = require('../server/controllers/env'),
     path = require("path");
 
 module.exports.initialize = function(app, router) {

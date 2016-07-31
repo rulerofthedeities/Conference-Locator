@@ -5,7 +5,7 @@ import {ConferenceApp} from './components/app.component';
 import {GOOGLE_MAPS_PROVIDERS, LazyMapsAPILoaderConfig} from 'angular2-google-maps/core';
 import {APPCONFIG} from './data/config';
 
-enableProdMode();
+//enableProdMode();
 
 bootstrap(ConferenceApp, [
   HTTP_PROVIDERS,
