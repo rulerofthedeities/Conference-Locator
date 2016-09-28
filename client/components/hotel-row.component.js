@@ -1,4 +1,4 @@
-System.register(['@angular/core', '../models/hotel.model', './common/item.component', '../pipes/meters.pipe'], function(exports_1, context_1) {
+System.register(['@angular/core', '../models/hotel.model'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,7 +10,7 @@ System.register(['@angular/core', '../models/hotel.model', './common/item.compon
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, hotel_model_1, item_component_1, meters_pipe_1;
+    var core_1, hotel_model_1;
     var HotelRow;
     return {
         setters:[
@@ -19,12 +19,6 @@ System.register(['@angular/core', '../models/hotel.model', './common/item.compon
             },
             function (hotel_model_1_1) {
                 hotel_model_1 = hotel_model_1_1;
-            },
-            function (item_component_1_1) {
-                item_component_1 = item_component_1_1;
-            },
-            function (meters_pipe_1_1) {
-                meters_pipe_1 = meters_pipe_1_1;
             }],
         execute: function() {
             HotelRow = (function () {
@@ -53,8 +47,6 @@ System.register(['@angular/core', '../models/hotel.model', './common/item.compon
                 HotelRow = __decorate([
                     core_1.Component({
                         selector: 'hotel-row',
-                        directives: [item_component_1.Item],
-                        pipes: [meters_pipe_1.MeterPipe],
                         template: "\n    <li>\n      <item (click)=\"selectHotel()\"\n        [no]=\"no\"\n        [img]=\"hotel.thumb\"\n        [url]=\"hotel.url\">\n        <strong class=\"media-heading\">\n          {{hotel.name}}\n        </strong> \n        <span *ngIf=\"hasStars()\"><i *ngFor=\"let s of arr\" class=\"fa fa-star\"></i></span>\n        <p>\n          <span class=\"address\">{{hotel.address}}</span>\n          <i>({{hotel.distance | meter:1}}m)</i>\n        </p>\n      </item>\n    </li>",
                         styles: ["\n      .fa-star {color: red;}\n    "]
                     }), 

@@ -1,12 +1,8 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Item} from './common/item.component';
 import {Sight} from '../models/sight.model';
-import {MeterPipe} from '../pipes/meters.pipe';
 
 @Component({
   selector: 'sight-row',
-  directives: [Item],
-  pipes: [MeterPipe],
   template: `
     <li>
       <item

@@ -1,15 +1,12 @@
 import {Component, Input, OnInit, OnDestroy} from '@angular/core';
-import {GOOGLE_MAPS_DIRECTIVES} from 'angular2-google-maps/core';
 import {Location} from '../../models/location.model';
 import {Marker} from '../../models/map.model';
-import {MapMarkers} from './map-markers.component';
 import {MapService} from '../../services/map.service';
 import {TabService} from '../../services/tabs.service';
 import {Subscription} from 'rxjs/Subscription';
 
 @Component({
   selector: 'map',
-  directives: [GOOGLE_MAPS_DIRECTIVES, MapMarkers],
   template: `
   <sebm-google-map 
     [longitude]="location.longitude"

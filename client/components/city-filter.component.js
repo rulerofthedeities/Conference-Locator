@@ -45,7 +45,6 @@ System.register(['@angular/core', '../services/city.service'], function(exports_
                 CityFilter = __decorate([
                     core_1.Component({
                         selector: 'city-filter',
-                        providers: [city_service_1.CityService],
                         template: "\n    <div class=\"form-group form-group-lg\">\n      <select class=\"form-control\"\n        [ngModel]=\"currentCity\"\n        (ngModelChange)=\"onChange($event)\">\n        <option \n          *ngFor=\"let city of cities\" \n          [ngValue]=\"city\">\n          {{city.name}}\n        </option>\n      </select>\n    </div>\n    "
                     }), 
                     __metadata('design:paramtypes', [city_service_1.CityService])

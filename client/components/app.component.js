@@ -1,4 +1,4 @@
-System.register(['@angular/core', './facilities.component', './city-filter.component', './common/loading-indicator.component', '../services/conference.service', '../services/city-state.service', '../services/tabs.service'], function(exports_1, context_1) {
+System.register(['@angular/core', '../services/conference.service', '../services/city-state.service'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,30 +10,18 @@ System.register(['@angular/core', './facilities.component', './city-filter.compo
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, facilities_component_1, city_filter_component_1, loading_indicator_component_1, conference_service_1, city_state_service_1, tabs_service_1;
+    var core_1, conference_service_1, city_state_service_1;
     var ConferenceApp;
     return {
         setters:[
             function (core_1_1) {
                 core_1 = core_1_1;
             },
-            function (facilities_component_1_1) {
-                facilities_component_1 = facilities_component_1_1;
-            },
-            function (city_filter_component_1_1) {
-                city_filter_component_1 = city_filter_component_1_1;
-            },
-            function (loading_indicator_component_1_1) {
-                loading_indicator_component_1 = loading_indicator_component_1_1;
-            },
             function (conference_service_1_1) {
                 conference_service_1 = conference_service_1_1;
             },
             function (city_state_service_1_1) {
                 city_state_service_1 = city_state_service_1_1;
-            },
-            function (tabs_service_1_1) {
-                tabs_service_1 = tabs_service_1_1;
             }],
         execute: function() {
             ConferenceApp = (function () {
@@ -80,9 +68,7 @@ System.register(['@angular/core', './facilities.component', './city-filter.compo
                 ConferenceApp = __decorate([
                     core_1.Component({
                         selector: 'conferences',
-                        directives: [facilities_component_1.Facilities, city_filter_component_1.CityFilter, loading_indicator_component_1.LoadingIndicator],
-                        providers: [conference_service_1.ConferenceService, city_state_service_1.CityStateService, tabs_service_1.TabService],
-                        template: "\n    <div class=\"container\">\n      <div class=\"row\">\n        <city-filter \n          [cities]=\"cities\"\n          (selectedCity)=\"onSelectedCity($event)\">\n        </city-filter>\n      </div>\n      <div class=\"row panel panel-default\" *ngIf=\"selectedCity\">\n        <loading-indicator \n          [isLoading]=\"loading\"\n          message=\"Loading conference centers\">\n        </loading-indicator>\n        <conference-list \n          [facilities]=\"conferenceSites\"\n          [markers] = \"markers\"\n          [city]=\"selectedCity\">\n        </conference-list>\n        {{error}}\n      </div>\n    </div>",
+                        template: "\n    <div class=\"container\">\n      <div class=\"row\">\n        <city-filter \n          (selectedCity)=\"onSelectedCity($event)\">\n        </city-filter>\n      </div>\n      <div class=\"row panel panel-default\" *ngIf=\"selectedCity\">\n        <loading-indicator \n          [isLoading]=\"loading\"\n          message=\"Loading conference centers\">\n        </loading-indicator>\n        <conference-list \n          [facilities]=\"conferenceSites\"\n          [markers] = \"markers\"\n          [city]=\"selectedCity\">\n        </conference-list>\n        {{error}}\n      </div>\n    </div>",
                         styles: ["\n      .panel {padding-top:10px;}\n    "]
                     }), 
                     __metadata('design:paramtypes', [conference_service_1.ConferenceService, city_state_service_1.CityStateService])

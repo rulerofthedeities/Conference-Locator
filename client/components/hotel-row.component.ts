@@ -1,12 +1,8 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Hotel} from '../models/hotel.model';
-import {Item} from './common/item.component';
-import {MeterPipe} from '../pipes/meters.pipe';
 
 @Component({
   selector: 'hotel-row',
-  directives: [Item],
-  pipes: [MeterPipe],
   template: `
     <li>
       <item (click)="selectHotel()"

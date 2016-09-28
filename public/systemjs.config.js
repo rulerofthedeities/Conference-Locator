@@ -18,16 +18,14 @@ var isPublic = typeof window != "undefined";
     'angular2-google-maps/core':  { main: 'index.js', defaultExtension: 'js' }
   };
   var ngPackageNames = [
-    'common',
-    'compiler',
-    'core',
-    'forms',
-    'http',
-    'platform-browser',
-    'platform-browser-dynamic',
-    'router',
-    'router-deprecated',
-    'upgrade',
+      'common',
+      'forms',
+      'compiler',
+      'core',
+      'router',
+      'http',
+      'platform-browser',
+      'platform-browser-dynamic'
   ];
   // Individual files (~300 requests):
   function packIndex(pkgName) {

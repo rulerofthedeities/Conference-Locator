@@ -1,4 +1,4 @@
-System.register(['@angular/core', 'angular2-google-maps/core', '../../models/location.model', './map-markers.component', '../../services/map.service', '../../services/tabs.service'], function(exports_1, context_1) {
+System.register(['@angular/core', '../../models/location.model', '../../services/map.service', '../../services/tabs.service'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,21 +10,15 @@ System.register(['@angular/core', 'angular2-google-maps/core', '../../models/loc
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, core_2, location_model_1, map_markers_component_1, map_service_1, tabs_service_1;
+    var core_1, location_model_1, map_service_1, tabs_service_1;
     var Map;
     return {
         setters:[
             function (core_1_1) {
                 core_1 = core_1_1;
             },
-            function (core_2_1) {
-                core_2 = core_2_1;
-            },
             function (location_model_1_1) {
                 location_model_1 = location_model_1_1;
-            },
-            function (map_markers_component_1_1) {
-                map_markers_component_1 = map_markers_component_1_1;
             },
             function (map_service_1_1) {
                 map_service_1 = map_service_1_1;
@@ -95,7 +89,6 @@ System.register(['@angular/core', 'angular2-google-maps/core', '../../models/loc
                 Map = __decorate([
                     core_1.Component({
                         selector: 'map',
-                        directives: [core_2.GOOGLE_MAPS_DIRECTIVES, map_markers_component_1.MapMarkers],
                         template: "\n  <sebm-google-map \n    [longitude]=\"location.longitude\"\n    [latitude]=\"location.latitude\"\n    [zoom]=\"zoom\">\n\n    <map-markers *ngIf=\"showPins('hotels')\"\n      [markers]=\"hotelMarkers\">\n    </map-markers>\n\n    <map-markers *ngIf=\"showPins('sights')\"\n      [markers]=\"sightMarkers\">\n    </map-markers>\n\n    <sebm-google-map-marker \n      *ngFor=\"let m of ccMarkers; let i = index\"\n      (markerClick)=\"clickedMarker(m, i)\"\n      [longitude]=\"m.lon\"\n      [latitude]=\"m.lat\"\n      [label]=\"m.label\"\n      [markerDraggable]=\"false\"\n      [iconUrl]=\"m.icon\">\n      <sebm-google-map-info-window *ngIf=\"showWindow\">\n          <p>{{title}}</p>\n      </sebm-google-map-info-window>\n    </sebm-google-map-marker>\n\n  </sebm-google-map> {{windowHeight}}",
                         styles: ["\n    .sebm-google-map-container {\n      height: 600px;\n    }\n  "]
                     }), 

@@ -3,14 +3,10 @@ import {SightService} from '../services/sight.service';
 import {Location} from '../models/location.model';
 import {Marker} from '../models/map.model';
 import {Sight} from '../models/sight.model';
-import {SightRow} from './sight-row.component';
 import {MapService} from '../services/map.service';
-import {LoadingIndicator} from './common/loading-indicator.component';
 
 @Component({
   selector: 'sights',
-  providers: [SightService],
-  directives: [SightRow, LoadingIndicator],
   template: `
     <div *ngIf="!hasSights">Sorry, no sights found nearby</div>
     <loading-indicator 

@@ -2,23 +2,16 @@ import {Component, OnInit, OnDestroy} from '@angular/core';
 import {Conference} from '../models/conference.model';
 import {City} from '../models/city.model';
 import {Marker} from '../models/map.model';
-import {Facilities} from './facilities.component';
-import {CityFilter} from './city-filter.component';
-import {LoadingIndicator} from './common/loading-indicator.component';
 import {ConferenceService} from '../services/conference.service';
 import {CityStateService} from '../services/city-state.service';
-import {TabService} from '../services/tabs.service';
 import {Subscription}   from 'rxjs/Subscription';
 
 @Component({
 	selector: 'conferences',
-	directives: [Facilities, CityFilter, LoadingIndicator],
-	providers: [ConferenceService, CityStateService, TabService],
 	template: `
     <div class="container">
       <div class="row">
         <city-filter 
-          [cities]="cities"
           (selectedCity)="onSelectedCity($event)">
         </city-filter>
       </div>

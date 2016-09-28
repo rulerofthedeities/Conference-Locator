@@ -1,4 +1,4 @@
-System.register(['@angular/core', '../services/sight.service', '../models/location.model', './sight-row.component', '../services/map.service', './common/loading-indicator.component'], function(exports_1, context_1) {
+System.register(['@angular/core', '../services/sight.service', '../models/location.model', '../services/map.service'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,7 +10,7 @@ System.register(['@angular/core', '../services/sight.service', '../models/locati
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, sight_service_1, location_model_1, sight_row_component_1, map_service_1, loading_indicator_component_1;
+    var core_1, sight_service_1, location_model_1, map_service_1;
     var Sights;
     return {
         setters:[
@@ -23,14 +23,8 @@ System.register(['@angular/core', '../services/sight.service', '../models/locati
             function (location_model_1_1) {
                 location_model_1 = location_model_1_1;
             },
-            function (sight_row_component_1_1) {
-                sight_row_component_1 = sight_row_component_1_1;
-            },
             function (map_service_1_1) {
                 map_service_1 = map_service_1_1;
-            },
-            function (loading_indicator_component_1_1) {
-                loading_indicator_component_1 = loading_indicator_component_1_1;
             }],
         execute: function() {
             Sights = (function () {
@@ -79,8 +73,6 @@ System.register(['@angular/core', '../services/sight.service', '../models/locati
                 Sights = __decorate([
                     core_1.Component({
                         selector: 'sights',
-                        providers: [sight_service_1.SightService],
-                        directives: [sight_row_component_1.SightRow, loading_indicator_component_1.LoadingIndicator],
                         template: "\n    <div *ngIf=\"!hasSights\">Sorry, no sights found nearby</div>\n    <loading-indicator \n      [isLoading]=\"loading\"\n      message=\"Loading sights\">\n    </loading-indicator>\n    <ul class=\"list-unstyled\">\n      <sight-row\n        *ngFor=\"let sight of sights;let num=index\"\n        [sight]=\"sight\"\n        [no]=\"num+1\"\n        on-mouseenter=\"onMouseEnter(num)\">\n      </sight-row>\n    </ul>"
                     }), 
                     __metadata('design:paramtypes', [sight_service_1.SightService, map_service_1.MapService])

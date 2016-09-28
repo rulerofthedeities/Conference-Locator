@@ -1,12 +1,10 @@
 import {Input, Component, OnDestroy} from '@angular/core';
 import {Conference} from '../models/conference.model';
-import {NearbyItems} from './nearby-items.component';
 import {MapService} from '../services/map.service';
 import {Subscription} from 'rxjs/Subscription';
 
 @Component({
   selector: 'facility-row',
-  directives: [NearbyItems],
   template: `
     <li [ngClass]="{active:isSelected}">
       <i 

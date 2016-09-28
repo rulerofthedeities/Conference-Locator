@@ -1,4 +1,4 @@
-System.register(['@angular/core', '../models/location.model', '../services/hotel.service', '../services/map.service', './hotel-row.component', './common/loading-indicator.component'], function(exports_1, context_1) {
+System.register(['@angular/core', '../models/location.model', '../services/hotel.service', '../services/map.service'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,7 +10,7 @@ System.register(['@angular/core', '../models/location.model', '../services/hotel
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, location_model_1, hotel_service_1, map_service_1, hotel_row_component_1, loading_indicator_component_1;
+    var core_1, location_model_1, hotel_service_1, map_service_1;
     var Hotels;
     return {
         setters:[
@@ -25,12 +25,6 @@ System.register(['@angular/core', '../models/location.model', '../services/hotel
             },
             function (map_service_1_1) {
                 map_service_1 = map_service_1_1;
-            },
-            function (hotel_row_component_1_1) {
-                hotel_row_component_1 = hotel_row_component_1_1;
-            },
-            function (loading_indicator_component_1_1) {
-                loading_indicator_component_1 = loading_indicator_component_1_1;
             }],
         execute: function() {
             Hotels = (function () {
@@ -82,8 +76,6 @@ System.register(['@angular/core', '../models/location.model', '../services/hotel
                 Hotels = __decorate([
                     core_1.Component({
                         selector: 'hotels',
-                        providers: [hotel_service_1.HotelService],
-                        directives: [hotel_row_component_1.HotelRow, loading_indicator_component_1.LoadingIndicator],
                         template: "\n    <div>\n      <div *ngIf=\"!hasHotels\">Sorry, no hotels found nearby</div>\n      <loading-indicator \n        [isLoading]=\"loading\"\n        message=\"Loading hotels\">\n      </loading-indicator>\n      <ul class=\"list-unstyled\">\n        <hotel-row \n          *ngFor=\"let hotel of hotels;let num=index\"\n          [hotel]=\"hotel\"\n          [no]=\"num+1\"\n          on-mouseenter=\"onMouseEnter(num)\">\n        </hotel-row>\n      </ul>\n    </div>"
                     }), 
                     __metadata('design:paramtypes', [hotel_service_1.HotelService, map_service_1.MapService])

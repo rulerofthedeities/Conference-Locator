@@ -1,4 +1,4 @@
-System.register(['@angular/core', 'angular2-google-maps/core'], function(exports_1, context_1) {
+System.register(['@angular/core'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,15 +10,12 @@ System.register(['@angular/core', 'angular2-google-maps/core'], function(exports
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, core_2;
+    var core_1;
     var MapMarkers;
     return {
         setters:[
             function (core_1_1) {
                 core_1 = core_1_1;
-            },
-            function (core_2_1) {
-                core_2 = core_2_1;
             }],
         execute: function() {
             MapMarkers = (function () {
@@ -31,7 +28,6 @@ System.register(['@angular/core', 'angular2-google-maps/core'], function(exports
                 MapMarkers = __decorate([
                     core_1.Component({
                         selector: 'map-markers',
-                        directives: [core_2.GOOGLE_MAPS_DIRECTIVES],
                         template: "\n    <sebm-google-map-marker\n      *ngFor=\"let m of markers; let i = index\"\n      [longitude]=\"m.lon\"\n      [latitude]=\"m.lat\"\n      [label]=\"m.label\"\n      [markerDraggable]=\"false\"\n      [iconUrl]=\"m.icon\">\n      <sebm-google-map-info-window>\n        <p>{{i+1}}. \n          <span *ngIf=\"m.url\"><a href=\"{{m.url}}\" target=\"_blank\">{{m.infotxt}}</a></span>\n          <span *ngIf=\"!m.url\">{{m.infotxt}}</span>\n        </p>\n      </sebm-google-map-info-window>\n    </sebm-google-map-marker>"
                     }), 
                     __metadata('design:paramtypes', [])

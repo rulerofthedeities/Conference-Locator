@@ -4,7 +4,6 @@ import {City} from '../models/city.model';
 
 @Component({
   selector: 'city-filter',
-  providers: [CityService],
   template: `
     <div class="form-group form-group-lg">
       <select class="form-control"

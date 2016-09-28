@@ -1,10 +1,8 @@
 import {Component, Input} from '@angular/core';
-import {GOOGLE_MAPS_DIRECTIVES} from 'angular2-google-maps/core';
 import {Marker} from '../../models/map.model';
 
 @Component({
   selector: 'map-markers',
-  directives: [GOOGLE_MAPS_DIRECTIVES],
   template: `
     <sebm-google-map-marker
       *ngFor="let m of markers; let i = index"

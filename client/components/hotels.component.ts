@@ -4,14 +4,10 @@ import {Hotel} from '../models/hotel.model';
 import {Marker} from '../models/map.model';
 import {HotelService} from '../services/hotel.service';
 import {MapService} from '../services/map.service';
-import {HotelRow} from './hotel-row.component';
 import {Subscription} from 'rxjs/Subscription';
-import {LoadingIndicator} from './common/loading-indicator.component';
 
 @Component({
   selector: 'hotels',
-  providers: [HotelService],
-  directives: [HotelRow, LoadingIndicator],
   template: `
     <div>
       <div *ngIf="!hasHotels">Sorry, no hotels found nearby</div>
