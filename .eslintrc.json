@@ -1,4 +1,4 @@
 {
-    "extends": "standard",
-    "installedESLint": true
+  "extends": "standard",
+  "installedESLint": true
 }
