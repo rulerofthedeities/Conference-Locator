@@ -87,6 +87,7 @@ export class Map implements OnInit, OnDestroy {
   selectCcMarker(index: number) {
     const redIcon = '../assets/img/icon-star-red.png';
 
+    this.zoom = 11;
     this.ccMarkers
       .filter((marker) => marker.icon === redIcon)
       .forEach((marker) => marker.icon = '../assets/img/icon-star-blue.png');
@@ -109,6 +110,7 @@ export class Map implements OnInit, OnDestroy {
 
   centerMap(index: number) {
     const marker = this.ccMarkers[index];
+    this.zoom = 13;
     this.location.longitude = marker.lon;
     this.location.latitude = marker.lat;
   }

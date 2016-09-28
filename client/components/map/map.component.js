@@ -51,6 +51,7 @@ System.register(['@angular/core', '../../models/location.model', '../../services
                 };
                 Map.prototype.selectCcMarker = function (index) {
                     var redIcon = '../assets/img/icon-star-red.png';
+                    this.zoom = 11;
                     this.ccMarkers
                         .filter(function (marker) { return marker.icon === redIcon; })
                         .forEach(function (marker) { return marker.icon = '../assets/img/icon-star-blue.png'; });
@@ -69,6 +70,7 @@ System.register(['@angular/core', '../../models/location.model', '../../services
                 };
                 Map.prototype.centerMap = function (index) {
                     var marker = this.ccMarkers[index];
+                    this.zoom = 13;
                     this.location.longitude = marker.lon;
                     this.location.latitude = marker.lat;
                 };
