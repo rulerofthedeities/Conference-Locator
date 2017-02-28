@@ -4,22 +4,19 @@ import {MapService} from '../services/map.service';
 import {Subscription} from 'rxjs/Subscription';
 
 @Component({
-  selector: 'facility-row',
+  selector: 'km-facility-row',
   template: `
     <li [ngClass]="{active:isSelected}">
       <i 
         class="fa pull-left" 
         [ngClass]="{'fa-chevron-right':!isSelected,'fa-chevron-down':isSelected}">
       </i>
-      
       <h4 (click)="selectFacility()">
         {{facility.name}}
       </h4>
-
-      <nearby-items *ngIf="isSelected"
+      <km-nearby-items *ngIf="isSelected"
         [location]="facility.location">
-      </nearby-items>
-
+      </km-nearby-items>
     </li>
   `,
   styles: [`
@@ -27,10 +24,10 @@ import {Subscription} from 'rxjs/Subscription';
   `]
 })
 
-export class FacilityRow implements OnDestroy {
+export class FacilityRowComponent implements OnDestroy {
   @Input() facility: Conference;
   @Input() i: number;
-  isSelected: boolean = false;
+  isSelected = false;
   subscription: Subscription;
 
   constructor(private mapService: MapService) {

@@ -1,7 +1,7 @@
 import {Component, Input} from '@angular/core';
 
 @Component({
-  selector: 'tab',
+  selector: 'km-tab',
   template: `
     <div 
       [hidden]="!active">
@@ -10,7 +10,7 @@ import {Component, Input} from '@angular/core';
   `
 })
 
-export class Tab {
+export class TabComponent {
   @Input('tabTitle') title: string;
   @Input() active = false;
   @Input() alias: string;

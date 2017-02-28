@@ -3,7 +3,7 @@ import {CityService} from '../services/city.service';
 import {City} from '../models/city.model';
 
 @Component({
-  selector: 'city-filter',
+  selector: 'km-city-filter',
   template: `
     <div class="form-group form-group-lg">
       <select class="form-control"
@@ -18,7 +18,7 @@ import {City} from '../models/city.model';
     </div>
     `
 })
-export class CityFilter implements OnInit {
+export class CityFilterComponent implements OnInit {
   @Output() selectedCity = new EventEmitter<City>();
   cities: City[];
   currentCity: City;
@@ -29,7 +29,7 @@ export class CityFilter implements OnInit {
     this.cityService.getCities().then(
       cities => {
         this.cities = cities;
-        //Select default city
+        // Select default city
         this.selectedCity.emit(cities[cities.length - 1]);
         this.currentCity = cities[cities.length - 1];
       }
@@ -39,5 +39,4 @@ export class CityFilter implements OnInit {
   onChange(city: City) {
     this.selectedCity.emit(city);
   }
-
 }

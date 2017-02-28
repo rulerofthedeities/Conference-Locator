@@ -2,22 +2,22 @@ import {Component, Input} from '@angular/core';
 import {Location} from '../models/location.model';
 
 @Component({
-  selector: 'nearby-items',
+  selector: 'km-nearby-items',
   template: `
-    <tabs>
-      <tab tabTitle="Hotels nearby" alias="hotels">
-        <hotels 
+    <km-tabs>
+      <km-tab tabTitle="Hotels nearby" alias="hotels">
+        <km-hotels 
           [facilityLocation]="location">
-        </hotels>
-      </tab>
-      <tab tabTitle="Sights nearby" alias="sights">
-        <sights 
+        </km-hotels>
+      </km-tab>
+      <km-tab tabTitle="Sights nearby" alias="sights">
+        <km-sights 
           [hotelLocation]="location">
-        </sights>
-      </tab>
-    </tabs>`
+        </km-sights>
+      </km-tab>
+    </km-tabs>`
 })
 
-export class NearbyItems {
-  @Input() location:Location;
+export class NearbyItemsComponent {
+  @Input() location: Location;
 }

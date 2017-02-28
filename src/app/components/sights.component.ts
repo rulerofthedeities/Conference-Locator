@@ -6,28 +6,28 @@ import {Sight} from '../models/sight.model';
 import {MapService} from '../services/map.service';
 
 @Component({
-  selector: 'sights',
+  selector: 'km-sights',
   template: `
     <div *ngIf="!hasSights">Sorry, no sights found nearby</div>
-    <loading-indicator 
+    <km-loading-indicator 
       [isLoading]="loading"
       message="Loading sights">
-    </loading-indicator>
+    </km-loading-indicator>
     <ul class="list-unstyled">
-      <sight-row
+      <km-sight-row
         *ngFor="let sight of sights;let num=index"
         [sight]="sight"
         [no]="num+1"
         on-mouseenter="onMouseEnter(num)">
-      </sight-row>
+      </km-sight-row>
     </ul>`
 })
 
-export class Sights implements OnInit {
+export class SightsComponent implements OnInit {
   @Input() hotelLocation: Location;
   sights: Sight[];
-  loading: boolean = false;
-  hasSights: boolean = true;
+  loading = false;
+  hasSights = true;
   markers: Marker[] = [];
 
   constructor(

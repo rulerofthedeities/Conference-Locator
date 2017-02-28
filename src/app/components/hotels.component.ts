@@ -7,33 +7,33 @@ import {MapService} from '../services/map.service';
 import {Subscription} from 'rxjs/Subscription';
 
 @Component({
-  selector: 'hotels',
+  selector: 'km-hotels',
   template: `
     <div>
       <div *ngIf="!hasHotels">Sorry, no hotels found nearby</div>
-      <loading-indicator 
+      <km-loading-indicator 
         [isLoading]="loading"
         message="Loading hotels">
-      </loading-indicator>
+      </km-loading-indicator>
       <ul class="list-unstyled">
-        <hotel-row 
+        <km-hotel-row 
           *ngFor="let hotel of hotels;let num=index"
           [hotel]="hotel"
           [no]="num+1"
           on-mouseenter="onMouseEnter(num)">
-        </hotel-row>
+        </km-hotel-row>
       </ul>
     </div>`
 })
 
-export class Hotels implements OnInit {
+export class HotelsComponent implements OnInit {
   @Input() facilityLocation: Location;
   hotels: Hotel[];
   selectedHotel: Hotel;
   selectedCity: string;
   subscription: Subscription;
-  loading: boolean = false;
-  hasHotels: boolean = true;
+  loading = false;
+  hasHotels = true;
   markers: Marker[] = [];
 
   constructor(

@@ -2,7 +2,7 @@ import {Component, Input} from '@angular/core';
 import {Marker} from '../../models/map.model';
 
 @Component({
-  selector: 'map-markers',
+  selector: 'km-map-markers',
   template: `
     <sebm-google-map-marker
       *ngFor="let m of markers; let i = index"
@@ -20,7 +20,7 @@ import {Marker} from '../../models/map.model';
     </sebm-google-map-marker>`
 })
 
-export class MapMarkers {
+export class MapMarkersComponent {
   @Input() markers: Marker[];
 
 }

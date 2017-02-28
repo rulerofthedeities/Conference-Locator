@@ -3,7 +3,7 @@ import {CITIES} from '../data/cities';
 
 @Injectable()
 export class CityService {
-	getCities() {
-		return Promise.resolve(CITIES);
-	}
+  getCities() {
+    return Promise.resolve(CITIES);
+  }
 }

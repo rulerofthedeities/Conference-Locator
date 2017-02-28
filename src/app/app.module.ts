@@ -2,7 +2,6 @@ import {NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
 import {FormsModule} from '@angular/forms';
 import {HttpModule} from '@angular/http';
-
 import {AgmCoreModule} from 'angular2-google-maps/core';
 
 import {APPCONFIG} from './data/config';
@@ -17,22 +16,21 @@ import {TabService} from './services/tabs.service';
 
 import {MeterPipe} from './pipes/meters.pipe';
 
-import {ConferenceApp} from './components/app.component';
-import {CityFilter} from './components/city-filter.component';
-import {Facilities} from './components/facilities.component';
-import {FacilityRow} from './components/facility-row.component';
-import {HotelRow} from './components/hotel-row.component';
-import {Hotels} from './components/hotels.component';
-import {NearbyItems} from './components/nearby-items.component';
-import {SightRow} from './components/sight-row.component';
-import {Sights} from './components/sights.component';
-import {Map} from './components/map/map.component';
-import {MapMarkers} from './components/map/map-markers.component';
-import {Tab} from './components/common/tab.component';
-import {Tabs} from './components/common/tabs.component';
-import {LoadingIndicator} from './components/common/loading-indicator.component';
-import {Item} from './components/common/item.component';
-
+import {ConferenceAppComponent} from './components/app.component';
+import {CityFilterComponent} from './components/city-filter.component';
+import {FacilitiesComponent} from './components/facilities.component';
+import {FacilityRowComponent} from './components/facility-row.component';
+import {HotelRowComponent} from './components/hotel-row.component';
+import {HotelsComponent} from './components/hotels.component';
+import {NearbyItemsComponent} from './components/nearby-items.component';
+import {SightRowComponent} from './components/sight-row.component';
+import {SightsComponent} from './components/sights.component';
+import {MapComponent} from './components/map/map.component';
+import {MapMarkersComponent} from './components/map/map-markers.component';
+import {TabComponent} from './components/tabs/tab.component';
+import {TabsComponent} from './components/tabs/tabs.component';
+import {LoadingIndicatorComponent} from './components/loading-indicator.component';
+import {ItemComponent} from './components/item.component';
 
 @NgModule({
   imports: [
@@ -53,24 +51,23 @@ import {Item} from './components/common/item.component';
     TabService
   ],
   declarations: [
-    ConferenceApp,
-    CityFilter,
-    Facilities,
-    FacilityRow,
-    HotelRow,
-    Hotels,
-    NearbyItems,
-    SightRow,
-    Sights,
-    Map,
-    MapMarkers,
-    Tab,
-    Tabs,
-    LoadingIndicator,
-    Item,
+    ConferenceAppComponent,
+    CityFilterComponent,
+    FacilitiesComponent,
+    FacilityRowComponent,
+    HotelRowComponent,
+    HotelsComponent,
+    NearbyItemsComponent,
+    SightRowComponent,
+    SightsComponent,
+    MapComponent,
+    MapMarkersComponent,
+    TabComponent,
+    TabsComponent,
+    LoadingIndicatorComponent,
+    ItemComponent,
     MeterPipe
   ],
-  bootstrap: [ ConferenceApp ]
+  bootstrap: [ConferenceAppComponent]
 })
 export class AppModule {}
-

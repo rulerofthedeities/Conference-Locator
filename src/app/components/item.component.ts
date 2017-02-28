@@ -1,8 +1,8 @@
 import {Component, Input} from '@angular/core';
 
 @Component({
-	selector: 'item',
-	template: `
+  selector: 'km-item',
+  template: `
     <div class="media item" [ngClass]="{'link':url}" (click)="externalLink()">
       <div class="pull-left no">
         {{no}}.
@@ -18,8 +18,8 @@ import {Component, Input} from '@angular/core';
   styleUrls: ['./item.component.css']
 })
 
-export class Item {
-	@Input() no: number;
+export class ItemComponent {
+  @Input() no: number;
   @Input() img: string;
   @Input() url: string;
 

@@ -4,11 +4,11 @@ import {Observable} from 'rxjs/Rx';
 const DEFAULTMESSAGE = 'Loading';
 
 @Component({
-  selector: 'loading-indicator',
+  selector: 'km-loading-indicator',
   template: '<div *ngIf="isLoading">{{message$ | async}}</div>'
 })
 
-export class LoadingIndicator implements OnInit {
+export class LoadingIndicatorComponent implements OnInit {
   @Input() isLoading: boolean;
   @Input('message') userMessage: string;
   message$: Observable<string>;

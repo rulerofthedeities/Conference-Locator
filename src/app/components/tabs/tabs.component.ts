@@ -1,9 +1,9 @@
 import {Component, ContentChildren, QueryList, AfterContentInit} from '@angular/core';
-import {Tab} from './tab.component';
+import {TabComponent} from './tab.component';
 import {TabService} from '../../services/tabs.service';
 
 @Component({
-  selector: 'tabs',
+  selector: 'km-tabs',
   template: `
   <ul class="nav nav-tabs">
     <li 
@@ -17,13 +17,13 @@ import {TabService} from '../../services/tabs.service';
   `
 })
 
-export class Tabs implements AfterContentInit {
-  @ContentChildren(Tab) tabs: QueryList<Tab>;
+export class TabsComponent implements AfterContentInit {
+  @ContentChildren(TabComponent) tabs: QueryList<TabComponent>;
 
   constructor(private tabService: TabService) {}
 
-  selectTab(tab: Tab) {
-    this.tabs.toArray().forEach(tab => tab.active = false);
+  selectTab(tab: TabComponent) {
+    this.tabs.toArray().forEach( tabItem => tabItem.active = false);
     tab.active = true;
     this.tabService.setTab(tab.alias);
   }
@@ -31,10 +31,10 @@ export class Tabs implements AfterContentInit {
   // contentChildren are set
   ngAfterContentInit() {
     // get all active tabs
-    let activeTabs = this.tabs.filter((tab)=>tab.active);
+    const activeTabs = this.tabs.filter((tab) => tab.active);
 
     // if there is no active tab set, activate the first
-    if(activeTabs.length === 0) {
+    if (activeTabs.length === 0) {
       this.selectTab(this.tabs.first);
     }
   }

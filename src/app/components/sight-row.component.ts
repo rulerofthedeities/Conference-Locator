@@ -2,10 +2,10 @@ import {Component, Input, OnInit} from '@angular/core';
 import {Sight} from '../models/sight.model';
 
 @Component({
-  selector: 'sight-row',
+  selector: 'km-sight-row',
   template: `
     <li>
-      <item
+      <km-item
         [no]="no"
         [img]="imgsrc"
         [url]="sight.url">
@@ -16,11 +16,11 @@ import {Sight} from '../models/sight.model';
           <span class="address">{{sight.address}}</span>
           <i>({{sight.distance | meter:1}}m)</i>
         </p>
-      </item>
+      </km-item>
     </li>`
 })
 
-export class SightRow implements OnInit {
+export class SightRowComponent implements OnInit {
   @Input() sight: Sight;
   @Input() no: number;
   imgsrc: string;

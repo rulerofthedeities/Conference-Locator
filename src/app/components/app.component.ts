@@ -7,35 +7,35 @@ import {CityStateService} from '../services/city-state.service';
 import {Subscription} from 'rxjs/Subscription';
 
 @Component({
-  selector: 'app-root',
+  selector: 'km-app-root',
   template: `
     <div class="container">
       <div class="row">
-        <city-filter 
+        <km-city-filter 
           (selectedCity)="onSelectedCity($event)">
-        </city-filter>
+        </km-city-filter>
       </div>
       <div class="row panel panel-default" *ngIf="selectedCity">
-        <loading-indicator 
+        <km-loading-indicator 
           [isLoading]="loading"
           message="Loading conference centers">
-        </loading-indicator>
-        <conference-list 
+        </km-loading-indicator>
+        <km-conference-list 
           [facilities]="conferenceSites"
           [markers] = "markers"
           [city]="selectedCity">
-        </conference-list>
+        </km-conference-list>
         {{error}}
       </div>
     </div>`,
-    styles: [`
-      .panel {padding-top:10px;}
-    `]
+  styles: [`
+    .panel {padding-top:10px;}
+  `]
 })
 
-export class ConferenceApp implements OnInit, OnDestroy {
-  public conferenceSites: Conference[];
-  public cities: City[];
+export class ConferenceAppComponent implements OnInit, OnDestroy {
+  conferenceSites: Conference[];
+  cities: City[];
   selectedCity: City;
   markers: Marker[] = [];
   subscription: Subscription;
@@ -44,15 +44,16 @@ export class ConferenceApp implements OnInit, OnDestroy {
 
   constructor(
     private conferenceService: ConferenceService,
-    private cityStateService: CityStateService) {
-  }
+    private cityStateService: CityStateService
+  ) {}
 
   ngOnInit() {
     this.subscription = this.cityStateService.city$.subscribe(
       city => {
         this.selectedCity = city;
         this.markers = [];
-      });
+      }
+    );
   }
 
   getConferenceSites(cityAlias) {
@@ -78,7 +79,8 @@ export class ConferenceApp implements OnInit, OnDestroy {
         lon: conference.location.longitude,
         infotxt: conference.name,
         icon: '../assets/img/icon-star-blue.png'});
-    });
+      }
+    );
   }
 
   ngOnDestroy() {

@@ -6,20 +6,20 @@ import {TabService} from '../../services/tabs.service';
 import {Subscription} from 'rxjs/Subscription';
 
 @Component({
-  selector: 'map',
+  selector: 'km-map',
   template: `
   <sebm-google-map 
     [longitude]="location.longitude"
     [latitude]="location.latitude"
     [zoom]="zoom">
 
-    <map-markers *ngIf="showPins('hotels')"
+    <km-map-markers *ngIf="showPins('hotels')"
       [markers]="hotelMarkers">
-    </map-markers>
+    </km-map-markers>
 
-    <map-markers *ngIf="showPins('sights')"
+    <km-map-markers *ngIf="showPins('sights')"
       [markers]="sightMarkers">
-    </map-markers>
+    </km-map-markers>
 
     <sebm-google-map-marker 
       *ngFor="let m of ccMarkers; let i = index"
@@ -42,14 +42,14 @@ import {Subscription} from 'rxjs/Subscription';
   `]
 })
 
-export class Map implements OnInit, OnDestroy {
+export class MapComponent implements OnInit, OnDestroy {
   @Input() location: Location;
   @Input('markers') ccMarkers: Marker[];
   hotelMarkers: Marker[];
   sightMarkers: Marker[];
-  showWindow: boolean = false;
-  showPinType: string = 'hotels';
-  zoom: number = 11;
+  showWindow = false;
+  showPinType = 'hotels';
+  zoom = 11;
   subscriptions: Subscription[] = [];
   windowHeight: number;
 
@@ -123,5 +123,4 @@ export class Map implements OnInit, OnDestroy {
     this.subscriptions.forEach(
       subscription => subscription.unsubscribe());
   }
-
 }

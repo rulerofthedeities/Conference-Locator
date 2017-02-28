@@ -1,6 +1,7 @@
 import {Site} from './site.model';
+
 export class Hotel extends Site {
-	thumb: string;
+  thumb: string;
   stars: string;
   hotelId: string;
   address: string;

@@ -2,10 +2,10 @@ import {Component, Input, OnInit} from '@angular/core';
 import {Hotel} from '../models/hotel.model';
 
 @Component({
-  selector: 'hotel-row',
+  selector: 'km-hotel-row',
   template: `
     <li>
-      <item (click)="selectHotel()"
+      <km-item (click)="selectHotel()"
         [no]="no"
         [img]="hotel.thumb"
         [url]="hotel.url">
@@ -17,17 +17,18 @@ import {Hotel} from '../models/hotel.model';
           <span class="address">{{hotel.address}}</span>
           <i>({{hotel.distance | meter:1}}m)</i>
         </p>
-      </item>
-    </li>`,
-    styles: [`
-      .fa-star {color: red;}
-    `]
+      </km-item>
+    </li>
+  `,
+  styles: [`
+    .fa-star {color: red;}
+  `]
 })
 
-export class HotelRow implements OnInit {
+export class HotelRowComponent implements OnInit {
   @Input() hotel: Hotel;
   @Input() no: number;
-  isSelected: boolean = false;
+  isSelected = false;
   arr: Array<number>;
 
   ngOnInit() {
