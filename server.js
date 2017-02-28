@@ -1,31 +1,24 @@
 'use strict';
 
 var express = require('express'),
-    app = express(),
-    compression = require('compression'),
     path = require('path'),
+    cookieParser = require('cookie-parser'),
     bodyParser = require('body-parser'),
+    compression = require('compression'),
+    app = express(),
     routes = require('./server/routes'),
     db = require('./server/db');
-
+    
 //config
 app.set('port', process.env.PORT || 3000);
 app.set('env', process.env.NODE_ENV || 'development');
 
-app.use(compression());
-
-if (app.get('env') == 'development') {
-  // All code depending on the environment here
-  // You can put morgan here for example
-  console.log('Server running in development mode');
-  app.use('/node', express.static(path.join(__dirname, '/node_modules')));
-}
-
-  
-app.use(express.static(path.join(__dirname, '/public')));
+//middleware
 app.use(bodyParser.json());
-
-app.use('/client', express.static(path.join(__dirname, '/client')));
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(cookieParser());
+app.use(compression());
+app.use(express.static((path.join(__dirname, 'dist'))));
 
 //routing
 routes.initialize(app, new express.Router());
