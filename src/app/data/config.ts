@@ -3,5 +3,5 @@ interface AppConfig {
 }
 
 export const APPCONFIG: AppConfig = {
-  mapApi:'AIzaSyBcs2F4n2aPZOl7DIzSBUXx0xOfY3RK9A4'
+  mapApi: 'AIzaSyBcs2F4n2aPZOl7DIzSBUXx0xOfY3RK9A4'
 };
