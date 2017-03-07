@@ -10,7 +10,7 @@ var express = require('express'),
     db = require('./server/db');
     
 //config
-app.set('port', process.env.PORT || 3000);
+app.set('port', process.env.PORT || 3001);
 app.set('env', process.env.NODE_ENV || 'development');
 
 //middleware
@@ -22,6 +22,11 @@ app.use(express.static((path.join(__dirname, 'dist'))));
 
 //routing
 routes.initialize(app, new express.Router());
+app.use(function (req, res, next) {
+    var home = path.resolve(__dirname + '/dist/index.html');
+    res.sendFile(home);
+});
+
 
 db.connect(function(){
   app.listen(app.get('port'), function() { 
