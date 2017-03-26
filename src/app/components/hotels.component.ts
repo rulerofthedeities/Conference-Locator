@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+﻿import {Component, Input, OnInit} from '@angular/core';
 import {Location} from '../models/location.model';
 import {Hotel} from '../models/hotel.model';
 import {Marker} from '../models/map.model';
