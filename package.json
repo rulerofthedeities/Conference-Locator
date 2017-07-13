@@ -30,6 +30,7 @@
     "angular2-google-maps": "^0.17.0",
     "body-parser": "^1.16.1",
     "bootstrap": "^3.3.7",
+    "compression": "^1.7.0",
     "cookie-parser": "^1.4.3",
     "core-js": "^2.4.1",
     "express": "^4.14.1",
