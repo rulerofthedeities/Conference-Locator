@@ -34,7 +34,7 @@ import {Subscription} from 'rxjs/Subscription';
       </sebm-google-map-info-window>
     </sebm-google-map-marker>
 
-  </sebm-google-map> {{windowHeight}}`,
+  </sebm-google-map>`,
   styles: [`
     .sebm-google-map-container {
       height: 600px;

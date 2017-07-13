@@ -21,7 +21,7 @@ export class LoadingIndicatorComponent implements OnInit {
   }
 
   doDots() {
-  this.message$ = Observable.interval(500)
+    this.message$ = Observable.interval(500)
     .map(i => this.message + this.dots[i % this.dots.length]);
   }
 }
