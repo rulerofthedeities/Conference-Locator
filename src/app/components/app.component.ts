@@ -28,7 +28,7 @@ import {environment} from '../../environments/environment';
         {{error}}
       </div>
     </div>
-    <div class="version">{{appVersion}} piping test 2</div>`,
+    <div class="version">{{appVersion}} piping test 3</div>`,
   styles: [`
     .panel {padding-top: 10px;}
     .version {font-size: 8px; color: grey;}
