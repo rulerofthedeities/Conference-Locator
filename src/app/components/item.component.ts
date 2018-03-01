@@ -8,7 +8,7 @@ import {Component, Input} from '@angular/core';
         {{no}}.
       </div>
       <div class="media-left">
-        <img src="{{img}}" class="media-object" alt="{{name}}">
+        <img src="{{img}}" class="media-object">
       </div>
       <div class="media-body">
         <ng-content></ng-content>

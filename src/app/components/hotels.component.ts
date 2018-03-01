@@ -49,14 +49,11 @@ export class HotelsComponent implements OnInit {
     this.loading = true;
     this.hotelService.getNearbyHotels(this.facilityLocation).then(
       hotels => {
-        this.hotels = hotels;
-        this.hotels.forEach(
-          hotel => {
-              hotel.url = hotel.hotelId ? 'http://travel.aviewoncities.com/templates/430701/hotels/' + hotel.hotelId + '/overview' : null;
-          });
-        this.loading = false;
-        this.hasHotels = hotels.length > 0;
-        this.createMarkers(hotels);
+        if (hotels) {
+          this.addHotels(hotels);
+          this.createMarkers(hotels);
+          this.hotels = hotels;
+        }
       }
     );
   }
@@ -79,5 +76,14 @@ export class HotelsComponent implements OnInit {
 
   onMouseEnter(index: number) {
     this.mapService.selectHotelMarker(index);
+  }
+
+  private addHotels(hotels: Hotel[]) {
+    hotels.forEach(
+      hotel => {
+          hotel.url = hotel.hotelId ? 'http://travel.aviewoncities.com/templates/430701/hotels/' + hotel.hotelId + '/overview' : null;
+      });
+    this.hasHotels = hotels.length > 0;
+    this.loading = false;
   }
 }

@@ -5,7 +5,7 @@ import {Marker} from '../models/map.model';
 import {ConferenceService} from '../services/conference.service';
 import {CityStateService} from '../services/city-state.service';
 import {Subscription} from 'rxjs/Subscription';
-
+import {environment} from '../../environments/environment';
 @Component({
   selector: 'km-app-root',
   template: `
@@ -27,9 +27,11 @@ import {Subscription} from 'rxjs/Subscription';
         </km-conference-list>
         {{error}}
       </div>
-    </div>`,
+    </div>
+    <div class="version">{{appVersion}} piping test 1</div>`,
   styles: [`
-    .panel {padding-top:10px;}
+    .panel {padding-top: 10px;}
+    .version {font-size: 8px; color: grey;}
   `]
 })
 
@@ -41,6 +43,7 @@ export class ConferenceAppComponent implements OnInit, OnDestroy {
   subscription: Subscription;
   loading = false;
   error: string;
+  appVersion = environment.VERSION;
 
   constructor(
     private conferenceService: ConferenceService,
