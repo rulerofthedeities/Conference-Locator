@@ -28,7 +28,7 @@ import {environment} from '../../environments/environment';
         {{error}}
       </div>
     </div>
-    <div class="version">{{appVersion}} piping test 3</div>`,
+    <div class="version">{{appVersion}} Angular 5</div>`,
   styles: [`
     .panel {padding-top: 10px;}
     .version {font-size: 8px; color: grey;}
@@ -43,7 +43,7 @@ export class ConferenceAppComponent implements OnInit, OnDestroy {
   subscription: Subscription;
   loading = false;
   error: string;
-  appVersion = environment.VERSION;
+  appVersion = environment.version;
 
   constructor(
     private conferenceService: ConferenceService,

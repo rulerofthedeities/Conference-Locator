@@ -8,7 +8,7 @@ import {Subscription} from 'rxjs/Subscription';
 @Component({
   selector: 'km-map',
   template: `
-  <sebm-google-map 
+  <agm-map 
     [longitude]="location.longitude"
     [latitude]="location.latitude"
     [zoom]="zoom">
@@ -21,7 +21,7 @@ import {Subscription} from 'rxjs/Subscription';
       [markers]="sightMarkers">
     </km-map-markers>
 
-    <sebm-google-map-marker 
+    <agm-marker
       *ngFor="let m of ccMarkers; let i = index"
       (markerClick)="clickedMarker(m, i)"
       [longitude]="m.lon"
@@ -29,14 +29,14 @@ import {Subscription} from 'rxjs/Subscription';
       [label]="m.label"
       [markerDraggable]="false"
       [iconUrl]="m.icon">
-      <sebm-google-map-info-window *ngIf="showWindow">
+      <agm-info-window *ngIf="showWindow">
           <p>{{title}}</p>
-      </sebm-google-map-info-window>
-    </sebm-google-map-marker>
+      </agm-info-window>
+    </agm-marker>
 
-  </sebm-google-map>`,
+  </agm-map>`,
   styles: [`
-    .sebm-google-map-container {
+    agm-map {
       height: 600px;
     }
   `]
