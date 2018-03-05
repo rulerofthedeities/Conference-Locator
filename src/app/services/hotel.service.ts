@@ -1,21 +1,16 @@
 import {Injectable} from '@angular/core';
 import {Location} from '../models/location.model';
-import {Http} from '@angular/http';
+import {HttpClient} from '@angular/common/http';
 import 'rxjs/add/operator/toPromise';
+import {Observable} from 'rxjs/Rx';
+import {Hotel} from '../models/hotel.model';
 
 @Injectable()
 export class HotelService {
-  constructor(private http: Http) { }
+  constructor(private http: HttpClient) { }
 
-  getNearbyHotels(location: Location) {
-    return this.http.get('/api/hotels?lon=' + location.longitude + '&lat=' + location.latitude)
-      .toPromise()
-      .then(response => response.json().hotels)
-      .catch(this.handleError);
-  }
-
-  private handleError(error: any) {
-    console.error('An error occurred', error);
-    return Promise.reject(error.message || error);
+  getNearbyHotels(location: Location): Observable<Hotel[]> {
+    return this.http
+    .get<Hotel[]>('/api/hotels?lon=' + location.longitude + '&lat=' + location.latitude);
   }
 }

@@ -9,8 +9,8 @@ import {City} from '../models/city.model';
       <select class="form-control"
         [ngModel]="currentCity"
         (ngModelChange)="onChange($event)">
-        <option 
-          *ngFor="let city of cities" 
+        <option
+          *ngFor="let city of cities"
           [ngValue]="city">
           {{city.name}}
         </option>

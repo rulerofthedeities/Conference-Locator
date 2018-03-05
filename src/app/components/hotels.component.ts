@@ -35,6 +35,7 @@ export class HotelsComponent implements OnInit {
   loading = false;
   hasHotels = true;
   markers: Marker[] = [];
+  error: string;
 
   constructor(
     private hotelService: HotelService,
@@ -47,14 +48,18 @@ export class HotelsComponent implements OnInit {
 
   getHotels() {
     this.loading = true;
-    this.hotelService.getNearbyHotels(this.facilityLocation).then(
-      hotels => {
-        if (hotels) {
-          this.addHotels(hotels);
-          this.createMarkers(hotels);
-          this.hotels = hotels;
+    this.hotelService
+    .getNearbyHotels(this.facilityLocation)
+    .subscribe(
+      data => {
+        if (data) {
+          this.hotels = data['hotels'];
+          this.addHotels(data['hotels']);
+          this.createMarkers(data['hotels']);
+          this.loading = false;
         }
-      }
+      },
+      error => this.error = error
     );
   }
 
@@ -81,7 +86,9 @@ export class HotelsComponent implements OnInit {
   private addHotels(hotels: Hotel[]) {
     hotels.forEach(
       hotel => {
-          hotel.url = hotel.hotelId ? 'http://travel.aviewoncities.com/templates/430701/hotels/' + hotel.hotelId + '/overview' : null;
+        hotel.url = hotel.hotelId ?
+        'http://travel.aviewoncities.com/templates/430701/hotels/' + hotel.hotelId + '/overview'
+        : null;
       });
     this.hasHotels = hotels.length > 0;
     this.loading = false;

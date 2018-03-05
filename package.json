@@ -1,7 +1,7 @@
 {
   "name": "conferences",
   "description": "Find hotels and sights near Conference Centers",
-  "version": "1.3.0",
+  "version": "1.3.1",
   "scripts": {
     "ng": "ng",
     "start": "nodemon ./server.js",
@@ -48,7 +48,7 @@
   },
   "devDependencies": {
     "@types/jasmine": "2.5.38",
-    "codelyzer": "~2.0.0",
+    "codelyzer": "^4.2.1",
     "jasmine-core": "~2.5.2",
     "jasmine-spec-reporter": "~3.2.0",
     "karma": "~1.4.1",

@@ -1,21 +1,15 @@
 import {Injectable} from '@angular/core';
 import {Location} from '../models/location.model';
-import {Http} from '@angular/http';
+import {HttpClient} from '@angular/common/http';
 import 'rxjs/add/operator/toPromise';
+import {Observable} from 'rxjs/Rx';
 
 @Injectable()
 export class SightService {
-  constructor(private http: Http) { }
+  constructor(private http: HttpClient) { }
 
   getNearbySights(location: Location) {
-    return this.http.get('/api/sights?lon=' + location.longitude + '&lat=' + location.latitude)
-      .toPromise()
-      .then(response => response.json().sights)
-      .catch(this.handleError);
-    }
-
-  private handleError(error: any) {
-    console.error('An error occurred', error);
-    return Promise.reject(error.message || error);
+    return this.http
+    .get('/api/sights?lon=' + location.longitude + '&lat=' + location.latitude);
   }
 }

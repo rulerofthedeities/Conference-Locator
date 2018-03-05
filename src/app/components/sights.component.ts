@@ -29,6 +29,7 @@ export class SightsComponent implements OnInit {
   loading = false;
   hasSights = true;
   markers: Marker[] = [];
+  error: string;
 
   constructor(
     private sightService: SightService,
@@ -40,16 +41,20 @@ export class SightsComponent implements OnInit {
 
   getSights() {
     this.loading = true;
-    this.sightService.getNearbySights(this.hotelLocation).then(
-      sights => {
-        this.sights = sights;
+    this.sightService
+    .getNearbySights(this.hotelLocation)
+    .subscribe(
+      data => {
+        this.sights = data['sights'];
+        let domain = 'http://www.aviewoncities.com/';
         this.sights.forEach(sight => {
-            sight.url = sight.published ? sight.url = 'http://www.aviewoncities.com/' + sight.cityAlias + '/' + sight.alias + '.htm' : null;
+          sight.url = sight.published ? domain + sight.cityAlias + '/' + sight.alias + '.htm' : null;
         });
         this.loading = false;
-        this.hasSights = sights.length > 0;
-        this.createMarkers(sights);
-      }
+        this.hasSights = this.sights.length > 0;
+        this.createMarkers(this.sights);
+      },
+      error => this.error = error
     );
   }
 

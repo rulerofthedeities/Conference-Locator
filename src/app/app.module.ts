@@ -1,7 +1,7 @@
 import {NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
 import {FormsModule} from '@angular/forms';
-import {HttpModule} from '@angular/http';
+import {HttpClientModule} from '@angular/common/http';
 import {AgmCoreModule} from '@agm/core';
 
 import {APPCONFIG} from './data/config';
@@ -36,7 +36,7 @@ import {ItemComponent} from './components/item.component';
   imports: [
     BrowserModule,
     FormsModule,
-    HttpModule,
+    HttpClientModule,
     AgmCoreModule.forRoot({
       apiKey: APPCONFIG.mapApi
     })

@@ -11,16 +11,16 @@ import {environment} from '../../environments/environment';
   template: `
     <div class="container">
       <div class="row">
-        <km-city-filter 
+        <km-city-filter
           (selectedCity)="onSelectedCity($event)">
         </km-city-filter>
       </div>
       <div class="row panel panel-default" *ngIf="selectedCity">
-        <km-loading-indicator 
+        <km-loading-indicator
           [isLoading]="loading"
           message="Loading conference centers">
         </km-loading-indicator>
-        <km-conference-list 
+        <km-conference-list
           [facilities]="conferenceSites"
           [markers] = "markers"
           [city]="selectedCity">
@@ -30,8 +30,13 @@ import {environment} from '../../environments/environment';
     </div>
     <div class="version">{{appVersion}} Angular 5</div>`,
   styles: [`
-    .panel {padding-top: 10px;}
-    .version {font-size: 8px; color: grey;}
+    .panel {
+      padding-top: 10px;
+    }
+    .version {
+      font-size: 8px;
+      color: grey;
+    }
   `]
 })
 
@@ -61,13 +66,16 @@ export class ConferenceAppComponent implements OnInit, OnDestroy {
 
   getConferenceSites(cityAlias) {
     this.loading = true;
-    this.conferenceService.getConferenceSites(cityAlias).then(
-      conferences => {
-        this.conferenceSites = conferences;
-        this.createMarkers(conferences);
+    this.conferenceService
+    .getConferenceSites(cityAlias)
+    .subscribe(
+      data => {
+        this.conferenceSites = data['conferences'];
+        this.createMarkers(data['conferences']);
         this.loading = false;
-      }
-    ).catch(error => this.error = error);
+      },
+      error => this.error = error
+    );
   }
 
   onSelectedCity(city: City) {
@@ -90,5 +98,4 @@ export class ConferenceAppComponent implements OnInit, OnDestroy {
     // prevent memory leak when component destroyed
     this.subscription.unsubscribe();
   }
-
 }
